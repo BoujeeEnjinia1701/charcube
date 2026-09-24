@@ -1,0 +1,17 @@
+# Card metadata consumed by https://amishchadha.com
+name: CharCube
+slug: charcube
+area: CleanTech
+status: concept          # concept | design | prototype | tested | released
+shortlisted: false
+pitch: >-
+  Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
+problem: >-
+  Crop residue gets burned in the open, releasing carbon and smoke.
+budget_usd: 300
+difficulty: 2  # 1 easiest, 5 hardest
+hero_image: media/hero.png
+licenses:
+  hardware: CERN-OHL-S-2.0
+  software: MIT
+tags: [cleantech, open-hardware, cern-ohl-s]
