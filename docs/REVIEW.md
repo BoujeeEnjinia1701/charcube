@@ -72,3 +72,69 @@ SwapCell is not used; the logger runs from a USB power bank.
 ### Recommended next step
 
 Review this note and the media, then decide items 1 and 2. If approved, run `/advance-trl3` to check the retort heat balance, gas-hole and secondary-air sizing, draft, jacket heat transfer and surface temperatures by calculation, and to produce the parametric model and drawing sheet.
+
+## Session 2026-09-25: TRL 3
+
+Amish reviewed the TRL 2 points on 2026-09-25 and wrote: "proceed with all of your recommendations across all batches. Make sure we don't proceed to TRL 4 on any of them." This session applied that to CharCube and produced the TRL 3 evidence. TRL 4 is on hold by Amish's instruction.
+
+### What was done
+
+- `docs/decisions/0001-trl2-review-decisions.md` (CCB-DDR-001 v0.1): the nine decided items, the cross-cutting approvals (SwapCell items not applicable), and the open items.
+- `docs/04-calcs/01-sizing.md` (CCB-CAL-001 v0.1) with `docs/04-calcs/sizing.py` and `docs/04-calcs/results.csv`: batch and char mass balance, charge heating time by conduction, shell loss and surface temperatures, masses and tripod buckling, energy balance and wood demand, draft, gas holes and air sizing, jacket heat transfer, sealed cooling, carbon, logger accuracy and cost, in three scenarios. The script reads `cad/src/model.py` and `bom/bom.csv`.
+- `cad/src/model.py`: parametric build123d model (all key dimensions in `PARAMS`), exporting `cad/step/` and `cad/stl/` `charcube-assembly`, `charcube-kiln`, `charcube-heat-recovery-unit` and `charcube-retort`.
+- `cad/src/sheets.py` and `cad/drawings/CCB-DWG-001` (SVG, PDF, PNG): general arrangement at Rev P1, 1:30, "PRELIMINARY, NOT FOR FABRICATION". The concept sheet keeps CCB-DWG-010.
+- `bom/bom.csv`: 14 lines, all priced by supplier type, total $298; `bom/bom-notes.md` lists the required safety kit ($40) outside the budget.
+- `cad/src/concept_media.py` now builds from the model; all media refreshed (hero, blueprint, cutaway, exploded, flow, GLB viewer) and checked by eye. Temporary view folders deleted.
+- CCB-PRB-001, CCB-PRC-001 and CCB-REQ-001 moved to v0.3 with the decisions and CCB-CAL-001 numbers; `README.md` updated; `project.yaml` set to `trl: 3`, `trl_target: 3` with the evidence list.
+
+### Requirements (CCB-CAL-001, central estimates)
+
+5 met, 3 at risk, 1 not verifiable at TRL 3, **3 not met**.
+
+| ID | Status | Value | Target |
+| --- | --- | --- | --- |
+| R5 | **Not met** | Burn 4.5 h (3.4 to 7.0 h); unload about 8 h after lighting | 4 h; 16 h |
+| R6 | **Not met** | 6.4 MJ into water (4.9 to 9.2 MJ), about 25 K rise | 10 MJ |
+| R8 | **Not met** | 5.8 kg wood (2.9 to 13.9 kg); light-up alone 1.7 kg | 5 kg |
+| R2 | At risk | 28 % yield (20 to 35 %), 2.96 kg char | 25 % |
+| R3 | At risk | Core at 450 °C about 4.0 h after lighting | 450 °C, 30 min |
+| R9 | At risk | ±3.4 °C to 700 °C with class 1 probes; amplifier unspecified above 700 °C | ±5 °C to 1,000 °C |
+| R4 | Not verifiable at TRL 3 | Gas route closed; draft 16.9 Pa, margin 3.2; throat holes 27.1 cm² against 23.6 needed | CH₄ below 24 g/kg |
+| R1, R7, R10, R11, R12 | Met | 12.0 kg batch; open jacket; $298; lift 21.6 kg each for two; outlet 2.70 m | |
+
+Other key numbers: heat released 190 MJ per batch; shell loss 5.7 kW (blanket surface 125 °C, bare lid 257 °C); kiln about 91 kg dry; net removal 2.8 kg CO₂e per batch, about 0.70 t CO₂e a year.
+
+Numbers that changed from TRL 2: char 3.4 to 2.96 kg (ash now carried in the char, and 12 kg is air-dry, not dry); hot water about 15 to 6.4 MJ (a plain sleeve gives about 4 to 5 W/m²K, not 15); burn 2.5 to 3.5 h to about 4.5 h; wood 5 to 5.8 kg; draft 19 to 16.9 Pa; lift unit 36 to 43 kg; cost $299 to $298. The 25 mm secondary air ring would have needed about 46 Pa against about 8 Pa available, so the model uses an air shroud.
+
+### Decisions recorded (CCB-DDR-001)
+
+Decided by Amish, 2026-09-25, go with recommendation: (1) open-vented annular water jacket; (2) keep `budget_usd: 300` for kiln parts, safety kit required and separate (budget kept; its scope is written into R10); (3) nested-drum retort; (4) bundled straw and mixed stalks and cobs first (R1 redefined); (5) burner throat with preheated secondary air; (6) logger as standard; (7) ceramic fibre blanket; (8) tripod support; (10) keep the name. Pitch and problem lines had no recommended rewording and are unchanged. Cross-cutting SwapCell items do not apply (no SwapCell pack).
+
+### Still awaiting Amish
+
+- Item 9: first region, residue and partner (no recommendation; partners are chosen per area later).
+- Item 11: accept the air shroud in place of the 25 mm ring (recommended).
+- Item 12: R6 shortfall. Recommended: spiral baffle insert plus a jacket blanket (about 13.9 MJ on paper, about $15), or relax R6 to 5 MJ, or drop the jacket.
+- Item 13: R8 shortfall. Recommended: blanket the lid (about $6, saves about 1.4 kW) and keep the 5 kg target until batches are logged.
+- Item 14: R5 shortfall. Recommended: relax R5 to 5 h.
+- Item 15: restate R9 as ±5 °C to 700 °C and indicative above.
+- Item 16: the safety kit requirement lives in R10 and the BOM notes, not in build notes (which are TRL 4).
+- Items 12 and 13 together would take the BOM over $300 unless a line is cut.
+
+### Safety concerns
+
+- Fire, hot surfaces (125 to 260 °C average outside, hotter locally) and hot char for hours; flammable, toxic pyrolysis gas; flare risk if opened hot.
+- The jacket must stay open-vented. It does not boil with the plain sleeve, but it could with a baffle insert on a long burn.
+- Tar and condensate will deposit on the jacket sleeve, which runs far below the tar dew point.
+- Two-person lift of the 43 kg unit near hot steel; a full jacket (83 kg) must never be moved.
+- Used drums, no galvanized parts, char dust and blanket fibres (dust mask).
+
+### Problems and notes
+
+- No TRL 4 material exists in the repo; `build-log/README.md` is the kit scaffold and was not extended. Firmware is not started.
+- Citations: the TRL 2 note listed no unchecked citations. New sources in CCB-CAL-001 (Channiwala and Parikh 2002; the MAX31855 datasheet) were found by web search; the IEC 60584 thermocouple tolerances used in section 10 are quoted from general knowledge and were not checked against the standard.
+- The heating-time model (a solid bed with fixed conductivity) is the largest uncertainty; it drives R3, R5 and R8.
+
+### Recommended next step
+
+Decide items 11 to 16, above all whether to relax R5, R6 and R8 or add the lid blanket and jacket insert. Any design change can be re-run through `sizing.py` and the model at TRL 3. TRL 4 is on hold by Amish's instruction. For reference only, TRL 4 would need: a built kiln, weighed and logged batches (core temperature, wood, char yield, water temperature), lab analysis of the char (H/Corg), smoke and ideally methane measurement with a partner lab, a test report (TST, `environment: lab`) and build log entries.

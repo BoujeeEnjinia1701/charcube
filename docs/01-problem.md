@@ -3,7 +3,7 @@ doc_id: CCB-PRB-001
 title: CharCube problem statement
 project: CharCube
 doc_type: Problem statement
-version: "0.2"
+version: "0.3"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -17,6 +17,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Populate to TRL 2 (problem, users, context, constraints, out of scope, prior work with sources)
+- version: "0.3"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Record Amish's 2026-09-25 decisions (CCB-DDR-001) on feedstock, budget and co-design partners; scale figures from CCB-CAL-001
 ---
 
 # CharCube problem statement
@@ -52,17 +56,17 @@ Three gaps remain for smallholders:
 
 ## Constraints
 
-- Garage-buildable prototype, concept budget about $300 USD for parts.
+- Garage-buildable prototype, concept budget $300 USD for kiln parts. The safety kit (about $40) is required and listed separately, outside that budget (decided by Amish, 2026-09-25, CCB-DDR-001 item 2).
 - Built from standard 200 L (55 US gal) and 114 L (30 US gal) open-head steel drums, plain (not galvanized) steel pipe and bought fittings.
 - Outdoor, batch operation by one or two adults, one batch a day, with cooling overnight.
 - No electricity needed to run the kiln. The temperature logger may use a small USB power bank.
 - Must burn its pyrolysis gas under all normal operating conditions; smoke only during light-up.
 - Hot water circuit open to the air (unpressurized) so it cannot build pressure.
-- Feedstock is low-density crop residue: loose rice straw is only 13 to 18 kg/m³ dry ([Van Hung et al. 2020](https://link.springer.com/chapter/10.1007/978-3-030-32373-8_1)) and chopped wheat straw about 36 to 43 kg/m³ ([Chevanan et al. 2010, *Bioresource Technology*](https://www.academia.edu/6707237/Bulk_density_and_compaction_behavior_of_knife_mill_chopped_switchgrass_wheat_straw_and_corn_stover)), so it must be packed, bundled or mixed with denser stalks and cobs to fill a drum usefully.
+- Feedstock is low-density crop residue: loose rice straw is only 13 to 18 kg/m³ dry ([Van Hung et al. 2020](https://link.springer.com/chapter/10.1007/978-3-030-32373-8_1)) and chopped wheat straw about 36 to 43 kg/m³ ([Chevanan et al. 2010, *Bioresource Technology*](https://www.academia.edu/6707237/Bulk_density_and_compaction_behavior_of_knife_mill_chopped_switchgrass_wheat_straw_and_corn_stover)), so it must be packed, bundled or mixed with denser stalks and cobs to fill a drum usefully. Decided by Amish, 2026-09-25 (CCB-DDR-001 item 4): the design targets bundled straw and mixed stalks and cobs first; loose straw needs a press, which is a separate project.
 
 ## Out of scope
 
-- Clearing a whole field in one season. At about 12 kg per batch, one kiln handles about 3 t of dry residue a year; a hectare of rice leaves several tonnes of straw. CharCube serves a household's or a trial plot's residue, and a cooperative would need several kilns. This scale gap is stated plainly in CCB-REQ-001.
+- Clearing a whole field in one season. At 12.0 kg per batch (CCB-CAL-001), one kiln handles about 3.0 t of air-dry residue a year; a hectare of rice leaves several tonnes of straw. CharCube serves a household's or a trial plot's residue, and a cooperative would need several kilns. This scale gap is stated plainly in CCB-REQ-001.
 - Selling charcoal for cooking fuel.
 - Certified carbon credits. Certification (for example the [European Biochar Certificate](https://www.european-biochar.org/en)) needs lab analysis and audited records beyond this project; the logger only supports it.
 - Pressurized hot water, space heating or connection to household plumbing.
@@ -78,9 +82,9 @@ Three gaps remain for smallholders:
 
 ## Open questions
 
-- Which region and residue first: paddy straw in northwest India, maize and cotton stalks in East Africa, or another? Proposed, awaiting Amish.
+- Which region and residue first: paddy straw in northwest India, maize and cotton stalks in East Africa, or another? Proposed, awaiting Amish. The partner is chosen per area later (portfolio decision by Amish, 2026-09-25).
 - Is hot water valued enough to justify the water jacket, or would users rather have a lower-cost kiln without it?
-- How will users pack straw: hand bundles, a simple press, or mixing with stalks? A press is a separate project.
+- How will users bundle straw by hand, and how much stalk or cob must be mixed in to reach about 120 kg/m³? A press is a separate project.
 - Where will the char go: own fields, a cooperative's compost, or a buyer?
 - Do local open-burning rules restrict running a kiln during burning bans?
 
@@ -88,7 +92,7 @@ Three gaps remain for smallholders:
 
 This design is for communities the author is not part of, so requirements come from the people who will use it.
 
-- [ ] Identify a local partner organization (Helpful Engineering network, NGO or university)
+- [ ] Identify a local partner organization (Helpful Engineering network, NGO or university); chosen per area later, by Amish
 - [ ] Run co-design sessions with intended users; record who, where and what was learned
 - [ ] Validate load, distance, terrain and cost assumptions in the field
 - [ ] Revise requirements (REQ) from findings before freezing the design
