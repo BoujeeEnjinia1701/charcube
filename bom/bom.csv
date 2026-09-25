@@ -1,6 +1,15 @@
 item,qty,spec,supplier,unit_cost_usd,make_buy,notes
-Nested steel barrel pair,,,,,,
-Flue pipe,,,,,,
-Secondary air manifold,,,,,,
-Copper coil heat exchanger,,,,,,
-Thermocouple logger,,,,,,
+1 Outer drum (firebox shell),1,"200 L (55 US gal) open-head steel drum, about 572 mm diameter x 851 mm, with lid and locking ring; four 40 x 110 mm primary air ports cut near the base with sliding steel dampers",Drum reconditioner or scrap dealer,20.00,make,Indicative price; used drum that held a non-flammable non-toxic product only; burn off paint outdoors before use
+2 Outer lid with flue collar,1,"Drum lid from item 1 with a 160 mm steel collar, ceramic gasket rope seal",Local fabricator,10.00,make,Indicative price for collar and gasket
+3 Inner retort,1,"114 L (30 US gal) open-head steel drum with bolt-ring lid, about 463 mm diameter x 737 mm; eight 20 mm gas holes in the base",Drum reconditioner or scrap dealer,25.00,make,Indicative price; consumable part (estimate 50 to 100 batches)
+4 Firebrick standoffs,3,"Half firebricks, about 114 x 64 x 60 mm",Building supplier,2.00,buy,Indicative price
+5 Secondary air manifold,1,"25 mm plain steel pipe ring around the throat base, inlet pipe and sliding damper",Local fabricator,12.00,make,Indicative price; hole size to be set at TRL 3
+6 Burner throat (afterburner),1,"160 mm plain steel pipe, 400 mm long, ring of 10 mm air holes, fixed to the lid collar",Steel stockist,15.00,make,Indicative price
+7 Flue pipe with rain cap,1,"160 mm plain (not galvanized) steel pipe, 1.2 m, with rain cap on a post",Steel stockist,30.00,buy,Indicative price; outlet about 2.7 m above ground
+8 Water jacket,1,"Annular steel tank, 420 mm outside diameter x 600 mm, about 60 L, welded water-tight around a 160 mm flue sleeve; open top with loose lid and vent pipe",Local fabricator,55.00,make,Indicative price; the only welded part; must never be sealed
+9 Draw-off tap,1,"1/2 in brass ball valve, nipple and socket welded to the jacket base",Hardware shop,12.00,buy,Indicative price
+10 Jacket support tripod,1,"Three legs of 40 x 40 x 4 mm steel angle or 27 mm pipe with a ring seat for the jacket, feet at about 720 mm radius",Local fabricator,20.00,make,Indicative price
+11 Insulation blanket,1,"25 mm ceramic fibre blanket, about 1.9 x 0.7 m, held by stainless or plain steel wire mesh; air ports left clear",Refractory or kiln supplier,35.00,buy,Indicative price; clay and ash render is a cheaper alternative (about $10)
+12 Plinth,1,"Four 390 x 190 x 190 mm concrete blocks and a 760 x 600 mm steel ash pan",Building supplier,12.00,buy,Indicative price
+13 Thermocouple logger,1,"Two type K probes (stainless sheath, 300 mm), two MAX31855 amplifiers, small microcontroller with microSD, weatherproof box, USB power bank",Electronics distributor,32.00,buy,Indicative price; firmware is a TRL 3 or later item
+14 Hardware and consumables,1,"Bolts, washers, ceramic gasket rope, high-temperature sealant, wire",Hardware shop,15.00,buy,Indicative price; no exploded-view callout
