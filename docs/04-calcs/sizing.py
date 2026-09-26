@@ -7,6 +7,10 @@ docs/04-calcs/results.csv (one row per requirement).
 Geometry comes from PARAMS in cad/src/model.py and prices from bom/bom.csv,
 so the model, the drawing CCB-DWG-001 and the note agree. Everything here is
 a paper estimate for TRL 3; nothing is measured.
+
+v0.2 (DDR-002, 2026-09-25): spiral baffle insert and jacket blanket (item 12),
+lid and top band blanket (item 13), R5 relaxed to 5 h (item 14), R9 restated
+to 700 °C (item 15).
 """
 import csv
 import math
@@ -84,6 +88,9 @@ CHAR_C, CHAR_H, CHAR_N = 55.0, 2.5, 1.0                    # wt %, O by differen
 WOOD = dict(c=50.0, h=6.0, o=43.2, n=0.3, a=0.5)
 WOOD_MOIST = 0.12
 F_PERM = 0.80           # IPCC 2019 medium-temperature (450 to 600 °C) permanence factor
+H_MULT_BAFFLE = 3.0     # gas-side convection multiplier of the spiral baffle insert (assumption, DDR-002 item 12)
+K_BAFFLE = 4.0          # extra velocity heads lost across the insert (friction and swirl; assumption)
+K_WOOL = 0.05           # W/m K, mineral wool on the jacket shell (water side below 100 °C)
 CH4_PER_CHAR = 0.024    # kg CH4 per kg char, retort field average (Sparrevik et al. 2015)
 GWP_CH4 = 28.0
 BATCHES = 250
@@ -183,17 +190,24 @@ a_top = math.pi * P["OUT_D"] / 1000 * P["INS_TOP_GAP"] / 1000 + math.pi * (ro + 
 a_thr = math.pi * P["FLUE_D"] / 1000 * P["THROAT_H"] / 1000
 q_ins, ts_ins = surface(T_ANN, h_ann, P["INS_T"] / 1000 / K_BLANKET, a_ins)
 q_bot, ts_bot = surface(350.0, 15.0, 0.0, a_bot)            # port band, cooled by incoming air
-q_top, ts_top = surface(T_ANN, 15.0, 0.0, a_top)            # bare lid and top band
+R_LID = P["LID_INS_T"] / 1000 / K_BLANKET
+a_lid_bare = math.pi * (((P["SHROUD_D"] / 2 + 25) / 1000) ** 2 - (P["FLUE_D"] / 2000) ** 2)   # left clear under the shroud
+q_top_bare, ts_top_bare = surface(T_ANN, 15.0, 0.0, a_top)  # lid and top band bare (v0.1 design)
+q_t1, ts_top = surface(T_ANN, 15.0, R_LID, a_top - a_lid_bare)   # lid blanket (DDR-002 item 13)
+q_t2, ts_under = surface(T_ANN, 15.0, 0.0, a_lid_bare)
+q_top = q_t1 + q_t2
 q_thr, ts_thr = surface(T_EX, 12.0, 0.0, a_thr)             # bare throat
 q_ins_bare, ts_bare = surface(T_ANN, h_ann, 0.0, a_ins)     # the same band without the blanket
 P_SHELL = q_ins + q_bot + q_top + q_thr
 for lab, q, ts, a in [("insulated side", q_ins, ts_ins, a_ins), ("port band (bare)", q_bot, ts_bot, a_bot),
-                      ("lid and top band (bare)", q_top, ts_top, a_top), ("burner throat (bare)", q_thr, ts_thr, a_thr)]:
+                      ("lid and top band (blanketed)", q_t1, ts_top, a_top - a_lid_bare),
+                      ("lid under the shroud (bare)", q_t2, ts_under, a_lid_bare), ("burner throat (bare)", q_thr, ts_thr, a_thr)]:
     pr(f"{lab}: area, surface °C, loss", f"{a:.2f} m2, {ts:.0f} °C, {q / 1000:.2f} kW")
 pr("total shell loss while burning", P_SHELL / 1000, "kW")
 pr("side band without blanket: surface °C, loss", f"{ts_bare:.0f} °C, {q_ins_bare / 1000:.1f} kW")
-q_lid_ins, ts_lid_ins = surface(T_ANN, 15.0, P["INS_T"] / 1000 / K_BLANKET, a_top)
-pr("lid and top band if blanketed (not in design): loss", q_lid_ins / 1000, "kW")
+pr("lid and top band if left bare (v0.1): surface °C, loss", f"{ts_top_bare:.0f} °C, {q_top_bare / 1000:.2f} kW")
+pr("saving from the lid blanket", (q_top_bare - q_top) / 1000, "kW")
+P_SHELL_V01 = P_SHELL - q_top + q_top_bare
 
 # ---------------------------------------------------------------- 6. masses (R11) and stored heat
 head("6. Masses (R11) and heat stored in the structure")
@@ -215,6 +229,10 @@ m_shr = RHO_STEEL * 1.5 * mm * (cyl_area(P["SHROUD_D"] * mm, P["SHROUD_H"] * mm)
                                  + cyl_area(P["SHROUD_D"] * mm, 0.04))
 m_bricks = 3 * 0.114 * 0.064 * P["STANDOFF"] * mm * 2000
 m_blanket = 128 * a_ins * P["INS_T"] * mm
+m_lidins = 128 * (a_top - a_lid_bare) * P["LID_INS_T"] * mm + 0.1                     # plus wire
+d_bore0 = (P["SLEEVE_D"] - 2 * P["SLEEVE_T"]) * mm
+m_baffle = RHO_STEEL * P["BAFFLE_T"] * mm * P["BAFFLE_W"] * mm * (P["JKT_H"] - 10) * mm + RHO_STEEL * 1e-4 * P["FLUE_D"] * mm
+m_jins = 100 * cyl_area((P["JKT_D"] + P["JKT_INS_T"]) * mm, (P["JKT_H"] - 60) * mm) * P["JKT_INS_T"] * mm + 0.3   # rock wool, wire
 m_jkt = RHO_STEEL * (P["JKT_T"] * mm * (cyl_area(P["JKT_D"] * mm, P["JKT_H"] * mm) + disc(P["JKT_D"] * mm, P["SLEEVE_D"] * mm))
                      + P["SLEEVE_T"] * mm * cyl_area(P["SLEEVE_D"] * mm, (P["JKT_H"] + 2 * P["SOCKET"]) * mm)
                      + 1.0 * mm * disc((P["JKT_D"] + 10) * mm, P["SLEEVE_D"] * mm)) + 0.3                         # loose lid, vent
@@ -223,15 +241,16 @@ m_flue = RHO_STEEL * P["FLUE_T"] * mm * cyl_area(P["FLUE_D"] * mm, (P["FLUE_ABOV
 rseat = (P["JKT_D"] / 2 + 12) * mm
 leg = math.hypot(P["FOOT_R"] * mm - rseat, (L["z_jkt"] - 12) * mm)
 m_tripod = 3 * leg * 2.42 + 2 * math.pi * rseat * 1.88 + 3 * 0.4                                                   # 40x40x4 angle, 40x6 flat ring, feet
-m_unit = m_jkt + m_tap + m_flue + m_tripod
+m_unit = m_jkt + m_tap + m_flue + m_tripod + m_baffle + m_jins
 v_water = math.pi / 4 * ((P["JKT_D"] - 2 * P["JKT_T"]) ** 2 - P["SLEEVE_D"] ** 2) * mm ** 2 * P["WATER_H"] * mm
 m_water = v_water * 1000
 for lab, m in [("outer drum with hoops and ring", m_outer), ("outer lid with collar", m_lid), ("retort with lid", m_ret),
                ("burner throat", m_thr), ("air shroud and damper", m_shr), ("firebricks (3)", m_bricks),
-               ("blanket", m_blanket), ("water jacket, empty", m_jkt), ("flue with cap", m_flue),
+               ("blanket", m_blanket), ("lid and top band blanket", m_lidins), ("water jacket, empty", m_jkt),
+               ("spiral baffle insert", m_baffle), ("jacket shell blanket", m_jins), ("flue with cap", m_flue),
                ("tripod", m_tripod), ("tap", m_tap)]:
     pr(lab, m, "kg", "{:.1f}")
-m_total = m_outer + m_lid + m_ret + m_thr + m_shr + m_bricks + m_blanket + m_unit + 1.5   # logger, hardware
+m_total = m_outer + m_lid + m_ret + m_thr + m_shr + m_bricks + m_blanket + m_lidins + m_unit + 1.5   # logger, hardware
 pr("kiln total without plinth and water", m_total, "kg", "{:.0f}")
 pr("water in jacket at WATER_H", v_water * 1000, "L", "{:.1f}")
 pr("jacket full", m_jkt + m_water, "kg", "{:.0f}")
@@ -241,14 +260,14 @@ m_ret_full = m_ret + m_char
 pr("retort with char, one person", m_ret_full, "kg", "{:.1f}")
 # stored heat at the end of the burn, MJ
 q_struct = (m_outer * 0.5 * (450 - T_AMB) + (m_lid + m_thr + m_shr) * 0.5 * (450 - T_AMB)
-            + m_bricks * 0.9 * (500 - T_AMB) + m_blanket * 1.0 * (330 - T_AMB)) / 1000
+            + m_bricks * 0.9 * (500 - T_AMB) + (m_blanket + m_lidins) * 1.0 * (330 - T_AMB)) / 1000
 pr("heat stored in drum, lid, throat, bricks and blanket", q_struct, "MJ", "{:.1f}")
 # tripod leg buckling, pinned-pinned, 40x40x4 angle
 A_ang, r_min = 308e-6, 7.8e-3
 slender = leg / r_min
 p_cr = math.pi ** 2 * 210e9 * A_ang * r_min ** 2 / leg ** 2
 cos_leg = (L["z_jkt"] - 12) * mm / leg
-p_leg = (m_jkt + m_water + m_flue + m_tap + 2 * math.pi * rseat * 1.88) * G / 3 / cos_leg
+p_leg = (m_jkt + m_water + m_flue + m_tap + m_baffle + m_jins + 2 * math.pi * rseat * 1.88) * G / 3 / cos_leg
 pr("tripod leg: length, slenderness", f"{leg:.2f} m, {slender:.0f}")
 pr("tripod leg: load full / Euler load / factor", f"{p_leg:.0f} N / {p_cr / 1000:.1f} kN / {p_cr / p_leg:.0f}")
 
@@ -278,7 +297,7 @@ for name, sc in SCEN.items():
     per_kg_w = sc["ce"] * lhv_wood_ad - gas_w * h_ann_gas
     m_wood_bal = max(need / per_kg_w, 0.0)
     # minimum wood for light-up only: warm the steel, bricks and outer half of the charge, 35 % of wood heat retained
-    q_warm = ((m_ret + m_outer + m_lid + m_thr) * 0.5 * 280 + m_bricks * 0.9 * 280 + m_blanket * 150
+    q_warm = ((m_ret + m_outer + m_lid + m_thr) * 0.5 * 280 + m_bricks * 0.9 * 280 + (m_blanket + m_lidins) * 150
               + m_dry / 2 * CP_BIO * 130 + m_h2o / 2 * (CP_W * 80 + EVAP * 1000)) / 1000
     m_wood_min = q_warm / (0.35 * lhv_wood_ad)
     m_wood = max(m_wood_bal, m_wood_min)
@@ -327,7 +346,7 @@ MU_G = 3.6e-5
 K_G = 0.058
 
 
-def jacket_rate(m_dot, t_in, t_w, h_mult=1.0):
+def jacket_rate(m_dot, t_in, t_w, h_mult=H_MULT_BAFFLE):
     """Heat to water (W) and gas outlet temperature for mean flow m_dot through the jacket sleeve."""
     re = 4 * m_dot / (math.pi * d_bore * MU_G)
     f = (0.79 * math.log(re) - 1.64) ** -2
@@ -352,7 +371,7 @@ pr("available draft (central temperatures)", draft, "Pa", "{:.1f}")
 # losses at peak flow
 rho_thr = rho_gas(C["t_ex"])
 v_thr = m_gas_peak / rho_thr / a_flue
-k_sum = 0.5 + 0.045 * (P["THROAT_H"] + P["JKT_H"] + P["FLUE_ABOVE"]) / 1000 / d_flue_i + 1.0 + 1.0 + 1.0   # entry, friction, air mixing, exit, cap
+k_sum = 0.5 + 0.045 * (P["THROAT_H"] + P["JKT_H"] + P["FLUE_ABOVE"]) / 1000 / d_flue_i + 1.0 + 1.0 + 1.0 + K_BAFFLE   # entry, friction, air mixing, exit, cap, baffle
 dp_flow = k_sum * 0.5 * rho_thr * v_thr ** 2
 a_ports = P["N_PORTS"] * P["PORT_W"] * P["PORT_H"] * 1e-6
 m_air_peak = m_gas_peak * 0.6 * C["lam"] / (C["lam"] + 0.1)
@@ -367,7 +386,7 @@ m_sec_peak = SEC * C["lam"] * C["air_v"] / (t_pyro * 3600) * PEAK
 z_holes = L["z_thr"] + P["SHROUD_Z"] + 75
 above = [(max(a, z_holes), b, t) for a, b, t in segs if b > z_holes]
 draft_above = sum(G * (b - a) / 1000 * (rho_a - rho_gas(t)) for a, b, t in above)
-dp_down = (1.0 + 1.0 + 0.045 * (L["z_out"] - z_holes) / 1000 / d_flue_i) * 0.5 * rho_thr * v_thr ** 2
+dp_down = (1.0 + 1.0 + K_BAFFLE + 0.045 * (L["z_out"] - z_holes) / 1000 / d_flue_i) * 0.5 * rho_thr * v_thr ** 2
 dp_sec = draft_above - dp_down
 rho_sec = rho_gas(200.0)
 v_hole = 0.62 * math.sqrt(2 * dp_sec / rho_sec)
@@ -389,7 +408,10 @@ a_jkt_out = cyl_area(P["JKT_D"] / 1000, P["JKT_H"] / 1000) + disc(P["JKT_D"] / 1
 cap = m_water * CP_W * (100 - T_AMB) / 1000
 
 
-def water_heat(r, h_mult=1.0, r_jkt=0.0):
+R_JINS = P["JKT_INS_T"] / 1000 / K_WOOL
+
+
+def water_heat(r, h_mult=H_MULT_BAFFLE, r_jkt=R_JINS):
     """Net heat to water per batch (MJ). h_mult scales gas-side convection (flue insert);
     r_jkt is an insulation resistance on the jacket shell (m2 K/W). Iterates on the mean water temperature."""
     md = r["m_gas"] / (r["t_b"] * 3600)
@@ -405,6 +427,7 @@ def water_heat(r, h_mult=1.0, r_jkt=0.0):
 for name, r in RES.items():
     net, q, loss, tout, re, hc, hr, ua, eff, tw = water_heat(r)
     r["q_water"] = min(net, cap)
+    r["boils"] = net > cap
     print(f"  [{name}] Re {re:.0f}, h_conv {hc:.1f}, h_rad {hr:.1f} W/m2 K, UA {ua:.2f} W/K, effectiveness {eff:.2f}")
     pr("    heat to water rate / jacket shell loss (mean water °C)", f"{q / 1000:.2f} / {loss / 1000:.2f} kW ({tw:.0f} °C)")
     pr("    net heat to water per batch", net, "MJ", "{:.1f}")
@@ -412,10 +435,10 @@ for name, r in RES.items():
 pr("heat to bring the water from 20 °C to boiling", cap, "MJ", "{:.1f}")
 pr("central temperature rise of the water", RES["central"]["q_water"] * 1000 / (m_water * CP_W), "K", "{:.0f}")
 pr("TRL 2 estimate for comparison (U 15 W/m2 K assumed)", "about 15 MJ")
-print("  options not in the design (proposed, central case):")
-R_BLK = P["INS_T"] / 1000 / 0.05
-for lab, hm, rj in [("25 mm blanket on the jacket shell", 1.0, R_BLK), ("spiral baffle insert in the sleeve (h_conv x 3)", 3.0, 0.0),
-                    ("both", 3.0, R_BLK)]:
+pr("scenarios where the water reaches boiling", ", ".join(k for k, r in RES.items() if r["boils"]) or "none")
+print("  comparison, central case (flue temperatures as the design):")
+for lab, hm, rj in [("plain sleeve, bare jacket (v0.1 design)", 1.0, 0.0), ("jacket blanket only", 1.0, R_JINS),
+                    ("baffle insert only (h_conv x 3)", H_MULT_BAFFLE, 0.0), ("both (design, DDR-002 item 12)", H_MULT_BAFFLE, R_JINS)]:
     net = water_heat(RES["central"], hm, rj)[0]
     pr(f"    {lab}", net, "MJ", "{:.1f}")
 pr("sleeve wall temperature (water side 20 to 100 °C)", "below tar dew point: tar and soot will deposit")
@@ -424,8 +447,8 @@ pr("vent pipe bore / open area", "24 mm / always open (R7)")
 
 # cooling after the burn (R5, second part)
 head("9a. Sealed cooling (R5)")
-c_kiln = (m_char * 1.0 + m_ret * 0.5 + m_outer * 0.5 + m_bricks * 0.9 + (m_lid + m_thr + m_shr) * 0.5 + m_blanket * 1.0) * 1000
-ua_cool = (a_ins / (P["INS_T"] / 1000 / K_BLANKET + 1 / 10.0) + (a_top + a_bot + a_thr) * 12.0)
+c_kiln = (m_char * 1.0 + m_ret * 0.5 + m_outer * 0.5 + m_bricks * 0.9 + (m_lid + m_thr + m_shr) * 0.5 + (m_blanket + m_lidins) * 1.0) * 1000
+ua_cool = ((a_ins + a_top - a_lid_bare) / (P["INS_T"] / 1000 / K_BLANKET + 1 / 10.0) + (a_lid_bare + a_bot + a_thr) * 12.0)
 tau = c_kiln / ua_cool / 3600
 t_lump = tau * math.log((500 - T_AMB) / (60 - T_AMB))
 rho_char_bed = m_char / (v_fill * 0.6)
@@ -467,6 +490,7 @@ tc_cls1 = max(1.5, 0.004 * 1000)
 tc_cls2_700 = max(2.5, 0.0075 * 700)
 pr("type K class 2 at 700 °C / class 1 at 700 °C", f"±{tc_cls2_700:.1f} / ±{0.004 * 700:.1f} °C")
 pr("RSS with MAX31855 ±2 °C (to 700 °C): class 2 / class 1", f"±{math.hypot(tc_cls2_700, 2):.1f} / ±{math.hypot(0.004 * 700, 2):.1f} °C")
+pr("R9 as restated (DDR-002 item 15): ±5 °C to 700 °C, indicative above", "met with class 1 probes")
 pr("class 1 at 1,000 °C (amplifier not specified above 700 °C)", f"±{tc_cls1:.1f} °C plus amplifier")
 e_log = 0.25 * 24
 pr("logger energy for 24 h at 0.25 W / usable bank (10 Ah, 3.7 V, 85 %)", f"{e_log:.0f} / {10 * 3.7 * 0.85:.0f} Wh")
@@ -477,7 +501,10 @@ head("12. Cost (R10)")
 rows = list(csv.DictReader((ROOT / "bom/bom.csv").open()))
 total = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows)
 pr("BOM lines / total", f"{len(rows)} / ${total:.0f}")
-pr("budget_usd / margin", f"$300 / ${300 - total:.0f}")
+BUDGET = 300.0          # project.yaml budget_usd, kiln parts only (DDR-001 item 2)
+pr("budget_usd / margin", f"${BUDGET:.0f} / ${BUDGET - total:.0f}")
+added = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows if r["item"].split()[0] in ("15", "16", "17"))
+pr("of which DDR-002 lines 15 to 17", f"${added:.0f}")
 galv = [r["item"] for r in rows if "galvanized" in (r["spec"] + r["notes"]).lower() and "not galvanized" not in (r["spec"] + r["notes"]).lower()]
 pr("BOM lines calling for galvanized parts", len(galv), "", "{:d}")
 
@@ -489,12 +516,12 @@ rq = [
     ("R2", "Biochar 25 % or more of dry feed", f"{C['y']:.0%} ({U['y']:.0%} to {F['y']:.0%}); {C['m_char']:.2f} kg", ">= 25 %", "at risk"),
     ("R3", "Core 450 °C or more for 30 min, logged", f"core at 450 °C {C['t_b'] - 0.5:.1f} h after lighting ({F['t_b'] - 0.5:.1f} to {U['t_b'] - 0.5:.1f} h) if the annulus is held at 650 °C", "450 °C, 30 min", "at risk"),
     ("R4", "Burn the gas; smoke limits; CH4 below 24 g/kg char", f"routing closed by design; draft margin {draft / (dp_flow + dp_port + dp_gh):.1f}; emissions not calculable", "< 24 g/kg", "not verifiable at TRL 3"),
-    ("R5", "Light to end of flaming 4 h or less; unload within 16 h", f"burn {C['t_b']:.1f} h ({F['t_b']:.1f} to {U['t_b']:.1f} h); unload after about {C['t_b'] + t_cool:.0f} h", "<= 4 h; <= 16 h", "not met" if C["t_b"] > 4 else "at risk"),
-    ("R6", "10 MJ or more into water per batch", f"{C['q_water']:.1f} MJ ({min(F['q_water'], U['q_water']):.1f} to {max(F['q_water'], U['q_water']):.1f} MJ)", ">= 10 MJ", "met" if min(F['q_water'], U['q_water']) >= 10 else ("at risk" if C['q_water'] >= 10 else "not met")),
+    ("R5", "Light to end of flaming 5 h or less (relaxed, DDR-002); unload within 16 h", f"burn {C['t_b']:.1f} h ({F['t_b']:.1f} to {U['t_b']:.1f} h); unload after about {C['t_b'] + t_cool:.0f} h", "<= 5 h; <= 16 h", "met" if U["t_b"] <= 5 else ("at risk" if C["t_b"] <= 5 else "not met")),
+    ("R6", "10 MJ or more into water per batch", f"{C['q_water']:.1f} MJ with baffle insert and jacket blanket ({min(F['q_water'], U['q_water']):.1f} to {max(F['q_water'], U['q_water']):.1f} MJ)", ">= 10 MJ", "met" if min(F['q_water'], U['q_water']) >= 10 else ("at risk" if C['q_water'] >= 10 else "not met")),
     ("R7", "Water circuit open to air, no sealing valve, tap at base, jacket on tripod", "open vent and loose lid; tripod-carried", "by design", "met"),
     ("R8", "5 kg or less of dry wood per batch", f"{C['m_wood']:.1f} kg ({F['m_wood']:.1f} to {U['m_wood']:.1f}); light-up alone {C['m_wood_min']:.1f} kg", "<= 5 kg", "not met" if C["m_wood"] > 5 else ("at risk" if U["m_wood"] > 5 else "met")),
-    ("R9", "2 x type K, 0 to 1,000 °C, ±5 °C, 10 s, 24 h on a power bank", f"±{math.hypot(0.004 * 700, 2):.1f} °C to 700 °C with class 1 probes; above 700 °C unspecified; {e_log:.0f} of {10 * 3.7 * 0.85:.0f} Wh", "±5 °C", "at risk"),
-    ("R10", "Parts $300 or less; safety kit listed separately (decided)", f"${total:.0f}", "<= $300", "met" if total <= 300 else "not met"),
+    ("R9", "2 x type K, ±5 °C to 700 °C and indicative to 1,000 °C (restated, DDR-002), 10 s, 24 h on a power bank", f"±{math.hypot(0.004 * 700, 2):.1f} °C to 700 °C with class 1 probes; {e_log:.0f} of {10 * 3.7 * 0.85:.0f} Wh", "±5 °C to 700 °C", "met"),
+    ("R10", "Parts $300 or less; safety kit listed separately (decided)", f"${total:.0f} (lines 15 to 17 add ${added:.0f})", "<= $300", "met" if total <= BUDGET else "not met"),
     ("R11", "Hand tools, one welded part, no lift above 25 kg per person", f"unit {m_unit:.1f} kg for two ({m_unit / 2:.1f} kg each); retort with char {m_ret_full:.1f} kg", "<= 25 kg", "met" if m_unit / 2 <= 25 and m_ret_full <= 25 else "not met"),
     ("R12", "Outlet 2.5 m or more; 5 m clearance; no galvanized hot parts", f"outlet {L['z_out'] / 1000:.2f} m; {len(galv)} galvanized lines", ">= 2.5 m", "met" if L["z_out"] >= 2500 and not galv else "not met"),
 ]

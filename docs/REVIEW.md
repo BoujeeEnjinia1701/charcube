@@ -41,6 +41,8 @@ Requirements not met or not yet shown:
 
 ### Proposed, awaiting Amish
 
+Status update: items 1 to 8 and 10 were decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-001). Item 9 had no recommendation and remains proposed, awaiting Amish.
+
 1. **Heat recovery type (changes a listed component).** The scaffold listed a copper coil heat exchanger. Options: (a) open-vented annular water jacket around the flue, about 60 L; (b) copper coil in the flue feeding a separate tank by thermosiphon (tank about 2 m high) or pump; (c) no heat recovery, saving about $87. Recommendation: (a), because it needs no pump or raised tank and cannot build pressure. The README key components now describe (a) and say it is proposed.
 2. **Budget.** Parts are about $299 against $300, excluding about $40 of safety equipment. Options: (a) keep $300 and list safety equipment separately; (b) raise `budget_usd` to $350 to include it; (c) use a clay and ash render in place of the blanket to save about $25 and fit most of the safety kit. Recommendation: (a) for the kiln budget, with the safety kit stated as required in the build notes at TRL 3. `project.yaml` is unchanged.
 3. **Kiln type.** Nested-drum retort (recommended) rather than a Kon-Tiki flame-curtain kiln, which is cheaper and needs no start-up wood but is open and cannot feed a water jacket.
@@ -113,12 +115,12 @@ Decided by Amish, 2026-09-25, go with recommendation: (1) open-vented annular wa
 ### Still awaiting Amish
 
 - Item 9: first region, residue and partner (no recommendation; partners are chosen per area later).
-- Item 11: accept the air shroud in place of the 25 mm ring (recommended).
-- Item 12: R6 shortfall. Recommended: spiral baffle insert plus a jacket blanket (about 13.9 MJ on paper, about $15), or relax R6 to 5 MJ, or drop the jacket.
-- Item 13: R8 shortfall. Recommended: blanket the lid (about $6, saves about 1.4 kW) and keep the 5 kg target until batches are logged.
-- Item 14: R5 shortfall. Recommended: relax R5 to 5 h.
-- Item 15: restate R9 as ±5 °C to 700 °C and indicative above.
-- Item 16: the safety kit requirement lives in R10 and the BOM notes, not in build notes (which are TRL 4).
+- Item 11: accept the air shroud in place of the 25 mm ring (recommended). Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002).
+- Item 12: R6 shortfall. Recommended: spiral baffle insert plus a jacket blanket (about 13.9 MJ on paper, about $15), or relax R6 to 5 MJ, or drop the jacket. Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002).
+- Item 13: R8 shortfall. Recommended: blanket the lid (about $6, saves about 1.4 kW) and keep the 5 kg target until batches are logged. Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002).
+- Item 14: R5 shortfall. Recommended: relax R5 to 5 h. Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002).
+- Item 15: restate R9 as ±5 °C to 700 °C and indicative above. Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002).
+- Item 16: the safety kit requirement lives in R10 and the BOM notes, not in build notes (which are TRL 4). Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002).
 - Items 12 and 13 together would take the BOM over $300 unless a line is cut.
 
 ### Safety concerns
@@ -138,3 +140,68 @@ Decided by Amish, 2026-09-25, go with recommendation: (1) open-vented annular wa
 ### Recommended next step
 
 Decide items 11 to 16, above all whether to relax R5, R6 and R8 or add the lid blanket and jacket insert. Any design change can be re-run through `sizing.py` and the model at TRL 3. TRL 4 is on hold by Amish's instruction. For reference only, TRL 4 would need: a built kiln, weighed and logged batches (core temperature, wood, char yield, water temperature), lab analysis of the char (H/Corg), smoke and ideally methane measurement with a partner lab, a test report (TST, `environment: lab`) and build log entries.
+
+## Session 2026-09-25: recommendations accepted
+
+Amish wrote on 2026-09-25: "i accept all your recommendations, go with them across all repos." Every open item with a recommendation is now decided by Amish, 2026-09-25: go with recommendation. They are recorded in `docs/decisions/0002-recommendations-accepted.md` (CCB-DDR-002 v0.1). TRL 4 remains on hold by Amish's instruction.
+
+### Decisions applied and what changed
+
+| # | Decision | Change in the repo | Before | After |
+| --- | --- | --- | --- | --- |
+| 11 | Air shroud in place of the 25 mm ring | Wording only; throat air holes raised to keep up with the baffle's resistance | 24 holes, 27.1 cm² (23.6 needed) | 30 holes, 33.9 cm² (28.5 needed) |
+| 12 | Spiral baffle insert and jacket blanket | New parts 15 and 16 in the model, BOM ($7 and $8), drawing and media | Hot water 6.4 MJ, 25 K rise; R6 not met | 11.5 MJ (9.0 to 19.1), 45 K rise; R6 at risk |
+| 13 | Lid and top band blanket, R8 target kept at 5 kg | New part 17 in the model, BOM ($6), drawing and media | Shell loss 5.69 kW; wood 5.8 kg; R8 not met | 4.47 kW; wood 3.7 kg (1.7 to 9.8); R8 at risk |
+| 14 | Relax R5 to 5 h | CCB-REQ-001 R5 | Target 4 h; not met | Target 5 h; burn 4.5 h (3.4 to 7.0); at risk |
+| 15 | Restate R9 to ±5 °C to 700 °C, indicative above | CCB-REQ-001 R9 | At risk | Met (±3.4 °C) |
+| 16 | Safety kit stated in R10 and BOM notes, not build notes | CCB-REQ-001 R10 and `bom/bom-notes.md` wording | | |
+
+Knock-on numbers (central): BOM 14 lines $298 to 17 lines $319; draft 16.9 to 16.7 Pa and margin 3.2 to 2.4; kiln 91 to 96 kg; lift unit 43.3 to 46.6 kg (23.3 kg each for two); heat released 190 to 160 MJ; sealed cooling 3.2 to 3.6 h; unfavourable hot water 19.1 MJ against 20.6 MJ to boiling.
+
+Files changed: `cad/src/model.py` (parts 15 to 17, `N_AIR_HOLES` 30; STEP and STL re-exported), `cad/src/sheets.py` and `cad/drawings/CCB-DWG-001` (Rev P1 to P2), `cad/src/concept_media.py` and `media/` (concept sheet CCB-DWG-010 Rev P2; hero, blueprint, cutaway, exploded, flow, GLB viewer regenerated and checked by eye; temporary view folders deleted), `bom/bom.csv`, `bom/bom-notes.md`, `docs/04-calcs/sizing.py` and `results.csv` (re-run), CCB-CAL-001 v0.1 to v0.2, CCB-REQ-001 v0.3 to v0.4, CCB-PRC-001 v0.3 to v0.4, CCB-DDR-001 v0.1 to v0.2, new CCB-DDR-002 v0.1, `README.md` (concept numbers, key components and the four new write-up sections), `project.yaml` (DDR-002 added to the TRL evidence). `budget_usd` stays at 300 and `trl: 3`, `trl_target: 3` are unchanged. The pitch and problem lines had no recommended rewording and are unchanged. CCB-PRB-001 did not attribute the idea to any review session and is unchanged. All PDFs, drawings and media were re-rendered so none shows the old personal-site domain.
+
+### Requirement status (CCB-CAL-001 v0.2, central estimates)
+
+1 not met, 5 at risk, 1 not verifiable at TRL 3, 5 met.
+
+| ID | Status | Value | Target |
+| --- | --- | --- | --- |
+| R10 | **Not met** | $319 | $300 kiln parts |
+| R2 | At risk | 28 % (20 to 35 %), 2.96 kg | 25 % |
+| R3 | At risk | Core at 450 °C about 4.0 h after lighting | 450 °C, 30 min |
+| R5 | At risk | Burn 4.5 h (3.4 to 7.0 h) | 5 h (relaxed) |
+| R6 | At risk | 11.5 MJ (9.0 to 19.1 MJ) | 10 MJ |
+| R8 | At risk | 3.7 kg (1.7 to 9.8 kg) | 5 kg |
+| R4 | Not verifiable at TRL 3 | Draft margin 2.4; 30 throat holes with 19 % spare area | CH₄ below 24 g/kg |
+| R1, R7, R9, R11, R12 | Met | 12.0 kg batch; open jacket; ±3.4 °C to 700 °C; 23.3 kg each for two; outlet 2.70 m | |
+
+### Still awaiting Amish
+
+- Item 9: first region, residue and partner (no recommendation; partners are chosen per area later).
+- Item 17 (new): R10 is over budget after items 12 and 13 ($319 against $300). Options: (a) raise `budget_usd` to $320 for kiln parts; (b) cut a line, for example clay and ash render instead of the side blanket; (c) drop the jacket blanket. Recommendation: (a), since (b) and (c) undo part of a decided item. Not applied, because raising a budget needs Amish's decision.
+
+### Cross-repo actions
+
+None. CharCube does not use SwapCell or any other portfolio module, and no decision here needs a change in another repo.
+
+### Safety concerns
+
+- The baffle and jacket blanket bring the water close to boiling on a long burn (19.1 MJ against 20.6 MJ). The vent must never be closed and the jacket must be kept at least three-quarters full.
+- Tar and soot collect on the baffle; it lifts out with the flue only when cool.
+- The lid blanket must stay clear of the air shroud intake, or the throat will starve of secondary air.
+- The lift unit is now 46.6 kg (23.3 kg each for two people), close to the 25 kg per person limit.
+- Ceramic fibre and mineral wool need a dust mask when cut.
+
+### Problems and notes
+
+- The factor of 3 on gas-side convection and the 4 velocity heads of loss for the baffle insert are assumptions, not sourced figures; they need measurement.
+- The lid blanket saves 1.22 kW, a little less than the 1.4 kW estimated in CCB-CAL-001 v0.1, because the lid under the shroud stays bare.
+- The 30-hole throat is a consequence of item 12, not a separate decision; it is recorded in CCB-DDR-002 under item 11.
+
+### TRL 4
+
+TRL 4 remains on hold by Amish's instruction. No build, test, purchase, PCB or firmware work was done. For reference, TRL 4 would measure the baffle's heat transfer and fouling, wood use, char yield and emissions on logged batches.
+
+### Recommended next step
+
+Decide item 17 (budget). Item 9 stays open until co-design partners are chosen per area.

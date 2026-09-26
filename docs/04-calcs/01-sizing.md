@@ -3,7 +3,7 @@ doc_id: CCB-CAL-001
 title: CharCube sizing and first-principles checks
 project: CharCube
 doc_type: Calculation note
-version: "0.1"
+version: "0.2"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -13,11 +13,15 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: First TRL 3 sizing note (batch, char, heating time, shell loss, masses, energy balance, draft and air, jacket, cooling, carbon, logger, cost) against every requirement
+- version: "0.2"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002); baffle insert, jacket and lid blankets, 30 throat air holes, R5 at 5 h, R9 to 700 °C; all tables re-run
 ---
 
 # CharCube sizing and first-principles checks
 
-On paper the nested-drum retort works as a kiln, but it is weaker as a water heater and hungrier for wood than the TRL 2 estimates said. Five of the twelve requirements are met, three are at risk and one cannot be verified at TRL 3. Three are **not met** on the central estimate: R5 (burn about 4.5 h against 4 h, because heat conducts slowly into the packed charge), R6 (about 6.4 MJ into the water against 10 MJ, because a plain flue sleeve transfers only about 4 to 5 W/m²K) and R8 (about 5.8 kg of wood against 5 kg, because the burn is long and the shell loses about 5.7 kW). The 25 mm secondary air ring of TRL 2 would have starved the burner throat; the model now uses an air shroud.
+On paper the nested-drum retort works as a kiln, and with the changes Amish accepted on 2026-09-25 (CCB-DDR-002) it now also works as a water heater. Five of the twelve requirements are met, five are at risk and one cannot be verified at TRL 3. One is **not met**: R10, because the spiral baffle insert, jacket blanket and lid blanket take the kiln parts to $319 against the $300 budget. The baffle and jacket blanket raise the heat into the water from 6.4 MJ to about 11.5 MJ (R6 at risk), the lid blanket cuts the wood from 5.8 kg to about 3.7 kg (R8 at risk), and R5 was relaxed to 5 h (at risk). The 25 mm secondary air ring of TRL 2 would have starved the burner throat; the model uses an air shroud with 30 air holes.
 
 Every number in this note is printed by `docs/04-calcs/sizing.py` (run from the repo root: `python docs/04-calcs/sizing.py`), which also writes `docs/04-calcs/results.csv`. The script reads the geometry from `PARAMS` in `cad/src/model.py` and the prices from `bom/bom.csv`, so the model, the drawing CCB-DWG-001 and this note agree. All values are first-principles estimates; nothing here is measured.
 
@@ -28,6 +32,7 @@ Every number in this note is printed by `docs/04-calcs/sizing.py` (run from the 
 | Input | Value | Basis |
 | --- | --- | --- |
 | Kiln, jacket, throat, logger, blanket, tripod | As decided | CCB-DDR-001 items 1 to 8 |
+| Air shroud, baffle insert, jacket and lid blankets | As decided | CCB-DDR-002 items 11 to 13 |
 | Feedstock | Bundled straw, maize or cotton stalks and cobs, packed to 120 kg/m³ air-dry at 12 % moisture (wet basis) | Decided feedstock, CCB-DDR-001 item 4; density as TRL 2 |
 | Feed, dry ultimate analysis | C 45, H 5.8, O 40.4, N 0.8, ash 8.0 % | Typical for maize and cotton stalks; straw-rich loads have more ash |
 | Char | C 55, H 2.5, N 1.0 %, ash from a mass balance, O by difference | Yield 28 % of dry feed (20 to 35 %), as TRL 2 |
@@ -37,7 +42,8 @@ Every number in this note is printed by `docs/04-calcs/sizing.py` (run from the 
 | Charge | Effective heat capacity 2.72 kJ/kg K per kg dry (sensible, drying and 0.4 MJ/kg net pyrolysis heat); bed conductivity 0.20, 0.35 or 0.50 W/m K | Packed straw is about 0.1 W/m K cold; radiation in the pores raises it when hot |
 | Air | Overall excess air ratio 1.6, 2.0 or 2.4; 40 % of the air enters as secondary air at the throat; 15 % of the volatiles burn in the throat | Small batch kilns run lean; damper setting |
 | Combustion efficiency | 95, 90 or 85 % of the lower heating value | Allows for CO, methane, tar and soot |
-| Blanket | 25 mm ceramic fibre, 128 kg/m³, 0.09 W/m K at a mean of about 350 °C | Supplier data typical; air ports, lid and throat bare |
+| Blankets | 25 mm ceramic fibre, 128 kg/m³, 0.09 W/m K at a mean of about 350 °C, on the side and on the lid and top band; 25 mm mineral wool, 0.05 W/m K, on the jacket shell | Supplier data typical; air ports, throat and the lid under the shroud bare |
+| Spiral baffle insert | Gas-side convection in the sleeve multiplied by 3; 4 extra velocity heads of pressure loss | Assumption for a twisted strip in laminar and transitional flow; to be measured (TRL 4, on hold) |
 | Outside surfaces | Emissivity 0.9, still air at 20 °C | Worst case for surface temperature is sun and no wind |
 | Carbon | 100-year permanence factor 0.80 (IPCC medium temperature); methane 24 g per kg of char at GWP100 28 | As CCB-PRC-001 v0.2, with sources there |
 
@@ -63,7 +69,7 @@ The burn is set by heat conduction into the packed charge, not by the fire. A on
 | Central | 0.35 W/m K | 4.0 h | **4.5 h** |
 | Unfavourable | 0.20 W/m K | 6.5 h | 7.0 h |
 
-The times include 0.5 h of warm-up and a 30 min hold at 450 °C for R3. R3 is **at risk**: it is reachable if the annulus is held hot long enough, which is what drives the wood demand in section 5. R5 is **not met** on the central estimate. Sealed cooling (section 8) is short enough for the 16 h unload limit.
+The times include 0.5 h of warm-up and a 30 min hold at 450 °C for R3. R3 is **at risk**: it is reachable if the annulus is held hot long enough, which is what drives the wood demand in section 5. R5, relaxed to 5 h by Amish's decision (CCB-DDR-002 item 14), is met on the central estimate but **at risk** because the unfavourable case takes 7.0 h. The blankets do not change the burn time, which conduction into the charge sets. Sealed cooling (section 8) is short enough for the 16 h unload limit.
 
 ## 4. Shell loss, surfaces and masses (R11, R12)
 
@@ -73,11 +79,12 @@ The times include 0.5 h of warm-up and a 30 min hold at 450 °C for R3. R3 is **
 | --- | --- | --- | --- |
 | Blanketed side | 1.33 m² | 125 °C | 2.20 kW |
 | Port band, bare | 0.25 m² | 168 °C | 0.69 kW |
-| Lid and top band, bare | 0.32 m² | 257 °C | 1.90 kW |
+| Lid and top band, blanketed | 0.28 m² | 120 °C | 0.43 kW |
+| Lid under the air shroud, bare | 0.04 m² | 257 °C | 0.24 kW |
 | Burner throat, bare | 0.20 m² | 223 °C | 0.91 kW |
-| **Total** | | | **5.69 kW** |
+| **Total** | | | **4.47 kW** |
 
-Without the blanket the side would run at about 311 °C and lose 11.3 kW, so the blanket (decided, item 7) roughly halves the loss. A blanket on the lid and top band (not in the design) would cut that part from 1.90 to 0.50 kW; see CCB-DDR-001 item 13.
+Without the side blanket the side would run at about 311 °C and lose 11.3 kW, so the side blanket (decided, item 7) roughly halves the loss. The lid and top band blanket (CCB-DDR-002 item 13) cuts that part from 1.90 kW (257 °C, v0.1) to 0.67 kW, a saving of **1.22 kW**, a little less than the 1.4 kW estimated in v0.1 because the lid under the shroud stays bare so the secondary air is not blocked.
 
 *Table 4. Masses.*
 
@@ -87,21 +94,22 @@ Without the blanket the side would run at about 311 °C and lose 11.3 kW, so the
 | Outer lid with collar | 3.4 kg |
 | Retort with lid | 12.3 kg |
 | Burner throat; air shroud | 3.2 kg; 1.9 kg |
-| Firebricks (3); blanket | 2.6 kg; 4.3 kg |
+| Firebricks (3); side blanket; lid blanket | 2.6 kg; 4.3 kg; 1.0 kg |
 | Water jacket, empty | 21.3 kg |
+| Spiral baffle insert; jacket shell blanket | 1.2 kg; 2.2 kg |
 | Flue with cap; tripod; tap | 6.5 kg; 14.8 kg; 0.6 kg |
-| **Kiln without plinth and water** | **91 kg** |
-| Heat-recovery lift unit (tripod, drained jacket, flue, tap) | 43.3 kg: 21.6 kg each for two people |
+| **Kiln without plinth and water** | **96 kg** |
+| Heat-recovery lift unit (tripod, drained jacket with baffle and blanket, flue, tap) | 46.6 kg: 23.3 kg each for two people |
 | Retort with char | 15.2 kg: one person |
 | Jacket full (61.4 L at 540 mm depth) | 83 kg, never moved full |
 
-R11 is **met**: no lift exceeds 25 kg per person, but only if the jacket is drained and two people lift the unit. The only welded part is the jacket; the collar, shroud and tripod are riveted or bolted. Each tripod leg (40 x 40 x 4 mm angle, 1.52 m, slenderness 195) carries about 320 N with a full jacket against an Euler load of 16.9 kN, a factor of about 53.
+R11 is **met**: no lift exceeds 25 kg per person, but only if the jacket is drained and two people lift the unit, and the margin is now 1.7 kg per person. The only welded part is the jacket; the collar, shroud, baffle and tripod are riveted, bolted or folded. Each tripod leg (40 x 40 x 4 mm angle, 1.52 m, slenderness 195) carries about 332 N with a full jacket against an Euler load of 16.9 kN, a factor of about 51.
 
 R12 is **met**: the flue outlet is 2.70 m above the ground and no BOM line calls for galvanized parts. The 5 m clearance is an operating rule (CCB-PRC-001, Safety).
 
 ## 5. Energy balance and start-up wood (R8)
 
-Wood makes up whatever the burning volatiles cannot supply while the annulus is held at 650 °C for the whole burn. The sinks are the retort charge and steel (19 MJ), the stored heat in the drum, lid, throat, bricks and blanket (8 MJ), the shell loss over the burn, and the heat carried out by the annulus gas.
+Wood makes up whatever the burning volatiles cannot supply while the annulus is held at 650 °C for the whole burn. The sinks are the retort charge and steel (19 MJ), the stored heat in the drum, lid, throat, bricks and blankets (9 MJ), the shell loss over the burn, and the heat carried out by the annulus gas.
 
 *Table 5. Energy per batch.*
 
@@ -110,13 +118,13 @@ Wood makes up whatever the burning volatiles cannot supply while the annulus is 
 | Burn time | 3.4 h | 4.5 h | 7.0 h |
 | Volatiles, lower heating value | 104 MJ | 117 MJ | 132 MJ |
 | Energy left in the char | 73 MJ | 60 MJ | 45 MJ |
-| Shell loss over the burn | 70 MJ | 91 MJ | 144 MJ |
-| **Wood needed (R8)** | 2.9 kg | **5.8 kg** | 13.9 kg |
-| Heat released in the kiln | 143 MJ | 190 MJ | 303 MJ |
-| Flue gas per batch | 89 kg | 152 kg | 301 kg |
-| Gas leaving the throat (jacket inlet) | 465 °C | 430 °C | 400 °C |
+| Shell loss over the burn | 55 MJ | 72 MJ | 113 MJ |
+| **Wood needed (R8)** | 1.7 kg | **3.7 kg** | 9.8 kg |
+| Heat released in the kiln | 125 MJ | 160 MJ | 247 MJ |
+| Flue gas per batch | 79 kg | 128 kg | 246 kg |
+| Gas leaving the throat (jacket inlet) | 471 °C | 432 °C | 396 °C |
 
-Light-up alone needs about 1.7 kg of wood. The rest keeps the annulus hot while conduction does its work. R8 is **not met** on the central estimate. Excess air matters as much as burn time: every kilogram of surplus air leaves at 650 °C. Figure 2 in CCB-PRC-001 shows the central energy flow: 286 MJ in (residue at its higher heating value, wood at its lower), 60 MJ kept in the char, 36 MJ as latent heat and unburned gas, 190 MJ released, 118 MJ to the charge, structure and shell, and 71 MJ in the flue gas at the jacket.
+Light-up alone needs about 1.7 kg of wood; in the favourable case that is all the wood needed. R8 is met on the central estimate (3.7 kg against 5 kg) but **at risk**, because a long burn with a poorly conducting charge needs about 9.8 kg. Excess air matters as much as burn time: every kilogram of surplus air leaves at 650 °C. Figure 2 in CCB-PRC-001 shows the central energy flow: 253 MJ in (residue at its higher heating value, wood at its lower), 60 MJ kept in the char, 33 MJ as latent heat and unburned gas, 160 MJ released, 99 MJ to the charge, structure and shell, and 60 MJ in the flue gas at the jacket, of which 11.5 MJ goes into the water.
 
 ## 6. Gas flow, draft and air (R4)
 
@@ -126,40 +134,40 @@ Light-up alone needs about 1.7 kg of wood. The rest keeps the annulus hot while 
 | --- | --- |
 | Volatiles leaving the retort, mean and peak | 0.73 and 1.46 g/s |
 | Eight 20 mm gas holes (25.1 cm²) at peak | 1.3 m/s, 1.0 Pa: little back-pressure in the retort |
-| Flue gas, mean and peak | 9.5 and 18.9 g/s |
-| Draft, air ports to outlet (2.43 m) | 16.9 Pa |
-| Losses at peak: flue path and primary ports | 3.9 and 0.24 Pa; margin 3.2 |
-| Throat velocity at peak; flue velocity above the jacket | 2.0 m/s; 0.94 m/s |
+| Flue gas, mean and peak | 8.0 and 15.9 g/s |
+| Draft, air ports to outlet (2.43 m) | 16.7 Pa |
+| Losses at peak: flue path (including 4 velocity heads for the baffle) and primary ports | 5.6 and 0.17 Pa; margin 2.4 |
+| Throat velocity at peak; flue velocity above the jacket | 1.69 m/s; 0.75 m/s |
 | Secondary air at peak (40 % of air) | 4.88 g/s |
-| Suction at the throat air holes at peak | 7.6 Pa |
-| Secondary hole area needed and provided | 23.6 and 27.1 cm² (24 x 12 mm in two rings, 42 mm pitch) |
+| Suction at the throat air holes at peak | 5.2 Pa |
+| Secondary hole area needed and provided | 28.5 and 33.9 cm² (30 x 12 mm in two rings, 34 mm pitch) |
 | TRL 2 25 mm inlet pipe at the same flow | 7.2 m/s and about 46 Pa: **would not work** |
 | Air shroud intake (230 mm sleeve, 204 cm²) | 0.20 m/s |
 
-The draft is enough, with a margin of about 3 at peak, and the throat holes pass the peak secondary air with about 15 % spare area. The TRL 2 pipe ring could not have admitted the air, so the model uses a shroud around the throat; this is open item 11 in CCB-DDR-001. R4 is **not verifiable at TRL 3**: the gas route is closed by design and the air paths are sized, but smoke and methane depend on mixing and temperature and need measurement.
+The draft is enough, with a margin of about 2.4 at peak (3.2 before the baffle). The baffle's resistance lowers the suction at the throat holes from 7.6 to 5.2 Pa, so the 24 holes of v0.1 (27.1 cm²) would have been about 5 % short; the model now has 30 holes with about 19 % spare area. The air shroud was accepted by Amish (CCB-DDR-002 item 11). R4 is **not verifiable at TRL 3**: the gas route is closed by design and the air paths are sized, but smoke and methane depend on mixing and temperature and need measurement.
 
 ## 7. Water jacket (R6, R7)
 
-The 600 mm flue sleeve (164 mm bore, 0.31 m² wetted) sees gas at 400 to 465 °C and a Reynolds number of about 1,600 to 2,600, which is laminar or transitional. Convection gives only about 1 to 3 W/m²K and gas radiation about 2 to 2.5 W/m²K, so the sleeve takes only 11 to 13 % of the gas heat.
+The 600 mm flue sleeve (164 mm bore, 0.31 m² wetted) sees gas at 396 to 471 °C and a Reynolds number of about 1,400 to 2,100, which is laminar or transitional. A plain sleeve gives only about 1 to 3 W/m²K by convection and 2 to 2.5 W/m²K by gas radiation. The spiral baffle insert (CCB-DDR-002 item 12) is taken to triple the convection, to about 4 to 7 W/m²K, so the sleeve takes about 21 to 24 % of the gas heat, and the mineral wool blanket keeps most of it in the water.
 
 *Table 7. Heat into the water per batch (61.4 L, starting at 20 °C).*
 
 | Case | Heat to water | Water temperature rise |
 | --- | --- | --- |
-| Favourable (short burn) | 4.9 MJ | |
-| **Central** | **6.4 MJ** | about 25 K |
-| Unfavourable (long burn) | 9.2 MJ | |
-| Central with 25 mm blanket on the jacket shell | 7.6 MJ | |
-| Central with a spiral baffle insert (convection x 3) | 11.4 MJ | |
-| Central with both | 13.9 MJ | |
+| Favourable (short burn) | 9.0 MJ | |
+| **Central, design (baffle and jacket blanket)** | **11.5 MJ** | about 45 K |
+| Unfavourable (long burn) | 19.1 MJ | |
+| Central, plain sleeve and bare jacket (v0.1 design) | 5.6 MJ | |
+| Central, jacket blanket only | 6.7 MJ | |
+| Central, baffle insert only | 9.5 MJ | |
 
-R6 is **not met**: the TRL 2 estimate of about 15 MJ assumed 15 W/m²K, about three times what a plain sleeve gives. The options are open item 12 in CCB-DDR-001. The water does not boil in any scenario (boiling needs 20.6 MJ), but a baffle insert on a long burn could approach it, so R7 (open vent, loose lid, no sealing valve) stays essential. R7 is **met** by design.
+The comparison rows use the v0.2 flue gas flow, which is lower than in v0.1 because less wood is burned; that is why the plain sleeve now gives 5.6 MJ, not 6.4 MJ. R6 is **at risk**: the central case meets 10 MJ, but a short burn gives about 9.0 MJ, and the factor of 3 for the insert is an assumption until measured. The water does not boil in any scenario (boiling needs 20.6 MJ), but the long burn reaches 19.1 MJ, so R7 (open vent, loose lid, no sealing valve) is essential. R7 is **met** by design.
 
-The sleeve wall runs close to the water temperature, far below the tar dew point, so any tar that escapes the throat will deposit there and cut heat transfer further. While the water is below about 41 °C, water vapor from the flue gas condenses on the sleeve and will drip back into the throat.
+The sleeve wall and the baffle run close to the water temperature, far below the tar dew point, so any tar that escapes the throat will deposit there and cut heat transfer. The baffle hangs from the foot of the flue and lifts out with it for cleaning. While the water is below about 41 °C, water vapor from the flue gas condenses on the sleeve and will drip back into the throat.
 
 ## 8. Cooling and unloading (R5)
 
-With the ports and damper closed, the kiln and char (29 kJ/K) lose heat through a shell conductance of about 12.8 W/K, a time constant of about 0.6 h, so the shell falls to 60 °C in about 1.6 h. The char core then needs about 1.6 h more by conduction. The sum, about **3.2 h**, puts unloading at about 8 h after lighting in the central case, inside the 16 h limit. The char should still be left sealed overnight, because air reaching hot char can reignite it (CCB-PRC-001, Safety).
+With the ports and damper closed, the kiln and char (30 kJ/K) lose heat through a shell conductance of about 10.2 W/K (lower than v0.1 because the lid is blanketed), a time constant of about 0.8 h, so the shell falls to 60 °C in about 2.1 h. The char core then needs about 1.6 h more by conduction. The sum, about **3.6 h**, puts unloading at about 8 h after lighting in the central case, inside the 16 h limit. The char should still be left sealed overnight, because air reaching hot char can reignite it (CCB-PRC-001, Safety).
 
 ## 9. Carbon
 
@@ -175,36 +183,37 @@ At 250 batches a year the central case makes about 740 kg of char and a net remo
 
 ## 10. Logger (R9)
 
-A type K class 2 probe is good to ±5.2 °C at 700 °C; with the MAX31855 amplifier (±2 °C from −200 to 700 °C, [datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/max31855.pdf)) the combined error is about ±5.6 °C, just outside the ±5 °C target. Class 1 (special limits) probes give about ±3.4 °C to 700 °C, so the BOM now calls for class 1. Above 700 °C the amplifier accuracy is not specified, so R9 is **at risk** over the full 0 to 1,000 °C range (open item 15). A 0.25 W logger uses about 6 Wh in 24 h against about 31 Wh usable from a 10,000 mAh power bank, and writes about 276 kB a day.
+A type K class 2 probe is good to ±5.2 °C at 700 °C; with the MAX31855 amplifier (±2 °C from −200 to 700 °C, [datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/max31855.pdf)) the combined error is about ±5.6 °C, just outside ±5 °C. Class 1 (special limits) probes give about ±3.4 °C to 700 °C. R9 was restated by Amish's decision (CCB-DDR-002 item 15) as ±5 °C from 0 to 700 °C and indicative above, so it is **met** with class 1 probes. A 0.25 W logger uses about 6 Wh in 24 h against about 31 Wh usable from a 10,000 mAh power bank, and writes about 276 kB a day.
 
 ## 11. Cost (R10)
 
-The 14 BOM lines total **$298** against the $300 budget, a margin of $2. The safety kit (about $40) is required and listed separately in `bom/bom-notes.md`, outside the kiln budget (CCB-DDR-001 item 2). R10 is **met**, with almost no room for the jacket improvements in open item 12 (about $15) or a lid blanket (about $6).
+The 17 BOM lines total **$319** against the $300 budget, $19 over. Lines 15 to 17 (baffle insert $7, jacket blanket $8, lid blanket $6; $21 in all) were added by Amish's decisions on items 12 and 13 (CCB-DDR-002). The safety kit (about $40) is required and listed separately in `bom/bom-notes.md`, outside the kiln budget (CCB-DDR-001 item 2). R10 is **not met**. Whether to raise the kiln budget to $320 or cut a line is proposed, awaiting Amish (CCB-DDR-002 item 17).
 
 ## 12. Results against requirements
 
-*Table 9. Every requirement in CCB-REQ-001 v0.3. Also written to `docs/04-calcs/results.csv`.*
+*Table 9. Every requirement in CCB-REQ-001 v0.4. Also written to `docs/04-calcs/results.csv`.*
 
 | ID | Requirement (short) | Value (central, range) | Target | Status |
 | --- | --- | --- | --- | --- |
-| R5 | Light to end of flaming; unload | Burn 4.5 h (3.4 to 7.0 h); unload after about 8 h | 4 h or less; 16 h or less | **Not met** |
-| R6 | Heat into water per batch | 6.4 MJ (4.9 to 9.2 MJ) | 10 MJ or more | **Not met** |
-| R8 | Start-up wood per batch | 5.8 kg (2.9 to 13.9 kg); light-up alone 1.7 kg | 5 kg or less | **Not met** |
+| R10 | Kiln parts cost | $319 (lines 15 to 17 add $21) | $300 or less | **Not met** |
 | R2 | Char yield | 28 % (20 to 35 %); 2.96 kg | 25 % or more | At risk |
 | R3 | Core 450 °C for 30 min | Core at 450 °C 4.0 h after lighting (2.9 to 6.5 h) if the annulus is held at 650 °C | 450 °C, 30 min | At risk |
-| R9 | Logger accuracy and endurance | ±3.4 °C to 700 °C with class 1 probes; unspecified above 700 °C; 6 of 31 Wh | ±5 °C, 0 to 1,000 °C | At risk |
-| R4 | Burn the gas; smoke; methane | Route closed by design; draft margin 3.2; air holes sized | Methane below 24 g/kg | Not verifiable at TRL 3 |
+| R5 | Light to end of flaming; unload | Burn 4.5 h (3.4 to 7.0 h); unload after about 8 h | 5 h or less (relaxed); 16 h or less | At risk |
+| R6 | Heat into water per batch | 11.5 MJ (9.0 to 19.1 MJ) with baffle and jacket blanket | 10 MJ or more | At risk |
+| R8 | Start-up wood per batch | 3.7 kg (1.7 to 9.8 kg); light-up alone 1.7 kg | 5 kg or less | At risk |
+| R4 | Burn the gas; smoke; methane | Route closed by design; draft margin 2.4; air holes sized | Methane below 24 g/kg | Not verifiable at TRL 3 |
 | R1 | Batch size, decided feedstock | 12.0 kg packed (loose straw 4.0 kg, excluded) | 10 kg or more | Met |
 | R7 | Open water circuit | Open vent, loose lid, tap at base, tripod-carried | By design | Met |
-| R10 | Kiln parts cost | $298 | $300 or less | Met |
-| R11 | Crew and lifts | 21.6 kg each for two; retort with char 15.2 kg | 25 kg per person or less | Met |
+| R9 | Logger accuracy and endurance | ±3.4 °C to 700 °C with class 1 probes; 6 of 31 Wh | ±5 °C to 700 °C (restated) | Met |
+| R11 | Crew and lifts | 23.3 kg each for two; retort with char 15.2 kg | 25 kg per person or less | Met |
 | R12 | Outlet height; no galvanized hot parts | 2.70 m; none | 2.5 m or more | Met |
 
 ## 13. Limits of this note
 
 - The heating-time model treats the charge as a solid with a fixed effective conductivity. Real beds shrink, crack and release gas, which can speed or slow heating; the three scenarios bracket this but do not replace logged batches.
+- The baffle insert's heat transfer gain (x3) and pressure loss (4 velocity heads) are assumptions; fouling will reduce the gain over a season.
 - Surface coefficients assume still air. Wind raises the shell loss and the wood demand.
 - The methane figure is a literature average, not a prediction for this design.
 - Nothing here has been measured. Checking these numbers against logged batches is TRL 4 work, which is on hold by Amish's instruction.
 
-> **Safety:** These are paper estimates for a fire that produces flammable, toxic gas and hot water. The surface temperatures in Table 3 (125 to 257 °C on the shell, higher on the flue) burn skin on contact. The water jacket must stay open-vented whatever changes are made to raise its heat transfer. See CCB-PRC-001, Safety.
+> **Safety:** These are paper estimates for a fire that produces flammable, toxic gas and hot water. The surface temperatures in Table 3 (120 to 257 °C on the shell, higher on the flue) burn skin on contact. With the baffle and jacket blanket a long batch brings the water within about 1.5 MJ of boiling, so the water jacket must stay open-vented and at least three-quarters full. See CCB-PRC-001, Safety.

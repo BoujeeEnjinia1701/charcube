@@ -27,6 +27,9 @@ STYLE = {   # bom: (colour, exploded-view offset in mm)
     11: ("#E5E7EB", (0, -800, 0)),
     12: ("#9CA3AF", (0, 0, -350)),
     13: ("#7C3AED", (2000, 300, 200)),
+    15: ("#78716C", (-700, 0, 2000)),
+    16: ("#FDE68A", (700, -300, 1900)),
+    17: ("#F3F4F6", (0, 0, 850)),
 }
 
 model = build_parts()
@@ -34,17 +37,17 @@ parts = [Part(name, shape, STYLE[k][0], k, STYLE[k][1]) for k, (name, shape) in 
 
 if __name__ == "__main__":
     render_all(
-        parts, project="CharCube", title="Retort kiln with heat recovery", dwg_no="CCB-DWG-010",
+        parts, project="CharCube", title="Retort kiln with heat recovery", dwg_no="CCB-DWG-010", rev="P2", date="2026-09-25",
         key_figures=["200 L outer drum, 114 L retort; flue outlet 2.70 m above ground",
                      "12.0 kg air-dry feed per batch; about 3.0 kg biochar (28 %, estimate)",
-                     "Burn about 4.5 h with about 5.8 kg of wood (CCB-CAL-001, estimate)",
-                     "Hot water about 6 MJ per batch, 61 L raised about 25 K (below R6)",
-                     "Parts $298 against a $300 budget (indicative)"],
+                     "Burn about 4.5 h with about 3.7 kg of wood (CCB-CAL-001, estimate)",
+                     "Hot water about 11.5 MJ per batch, 61 L raised about 45 K",
+                     "Parts $319 against a $300 budget (indicative; R10 open)"],
         cut=True, cut_exclude=("Jacket support tripod", "Thermocouple logger and probes"),
-        flow={"title": "energy per batch, MJ (CCB-CAL-001 central estimates: 12.0 kg residue, 5.8 kg wood)",
+        flow={"title": "energy per batch, MJ (CCB-CAL-001 v0.2 central estimates: 12.0 kg residue, 3.7 kg wood)",
               "unit": "MJ",
-              "stages": [("Residue and wood", 286), ("Heat released in kiln", 190),
-                         ("Flue gas at jacket", 71), ("Hot water", 6)],
-              "losses": [(0, "Biochar 60, latent heat 36", 96), (1, "Retort, structure, shell", 118),
-                         (2, "Up the stack", 65)]},
+              "stages": [("Residue and wood", 253), ("Heat released in kiln", 160),
+                         ("Flue gas at jacket", 60), ("Hot water", 12)],
+              "losses": [(0, "Biochar 60, latent heat 33", 93), (1, "Retort, structure, shell", 100),
+                         (2, "Up the stack", 48)]},
     )

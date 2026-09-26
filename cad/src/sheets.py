@@ -1,4 +1,4 @@
-"""CharCube general arrangement drawing CCB-DWG-001 (Rev P1).
+"""CharCube general arrangement drawing CCB-DWG-001 (Rev P2).
 
 Run from the repo root:  python cad/src/sheets.py
 Builds cad/drawings/CCB-DWG-001.svg, .pdf and .png from the parametric model.
@@ -24,9 +24,10 @@ work = ROOT / "cad/drawings/_views"
 views = project_views(asm, work)
 
 s = Sheet(project="CharCube", title="General arrangement, TRL 3 model", dwg_no="CCB-DWG-001",
-          rev="P1", author="Amish Chadha", date="2026-09-25", concept=True, scale=1 / 30,
+          rev="P2", author="Amish Chadha", date="2026-09-25", concept=True, scale=1 / 30,
           material="Plain carbon steel drums, sheet and pipe; no galvanized parts. See bom/bom.csv",
-          revisions=[("P1", "Preliminary GA from the TRL 3 model (CCB-CAL-001)", "2026-09-25", "AC")])
+          revisions=[("P1", "Preliminary GA from the TRL 3 model (CCB-CAL-001)", "2026-09-25", "AC"),
+                     ("P2", "DDR-002: baffle insert, jacket and lid blankets, 30 air holes", "2026-09-25", "AC")])
 s.add_ortho(views, ["front", "top", "right"])
 s.add_svg(views["iso"], 276, 30, 140, 80, label="Isometric view", sublabel="Not to scale")
 s.add_notes("Key dimensions (mm) and data", [
@@ -38,11 +39,13 @@ s.add_notes("Key dimensions (mm) and data", [
     f"Throat {P['FLUE_D']:.0f} x {P['FLUE_T']:.0f} x {P['THROAT_H']:.0f}; {P['N_AIR_HOLES']} x {P['AIR_HOLE_D']:.0f} air holes, 2 rings",
     f"Air shroud {P['SHROUD_D']:.0f} dia x {P['SHROUD_H']:.0f}, open bottom, band damper",
     f"Jacket {P['JKT_D']:.0f} dia x {P['JKT_H']:.0f}, sleeve {P['SLEEVE_D']:.0f}; 61 L at {P['WATER_H']:.0f} deep",
+    f"Spiral baffle {P['BAFFLE_W']:.0f} wide in sleeve, hung from flue foot; {P['JKT_INS_T']:.0f} mm wool on jacket",
+    f"{P['LID_INS_T']:.0f} mm ceramic fibre on lid and top band, clear of shroud",
     f"Jacket underside {L['z_jkt']:.0f}; flue outlet {L['z_out']:.0f} above ground",
     f"Tripod feet on {2 * P['FOOT_R']:.0f} circle; 40 x 40 x 4 angle legs",
     "Jacket OPEN-VENTED: never fit a sealed lid, valve or plug",
-    "Kiln about 91 kg dry; lift unit 43 kg, two people (CCB-CAL-001)",
-    "Not met at TRL 3: R5, R6, R8. See CCB-CAL-001",
+    "Kiln about 96 kg dry; lift unit 47 kg, two people (CCB-CAL-001)",
+    "Not met at TRL 3: R10 (cost $319). See CCB-CAL-001 v0.2",
     "PRELIMINARY, NOT FOR FABRICATION",
 ], x=276, y=124, width=140)
 s.save(ROOT / "cad/drawings/CCB-DWG-001")

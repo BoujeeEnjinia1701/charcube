@@ -3,7 +3,7 @@ doc_id: CCB-DDR-001
 title: CharCube TRL 2 review decisions
 project: CharCube
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -13,12 +13,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record Amish's 2026-09-25 decisions on the TRL 2 review and the items that remain open
+- version: "0.2"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002); items 11 to 16 decided, item 9 stays open
 ---
 
 # 0001: TRL 2 review decisions
 
 - **Date:** 2026-09-25
-- **Status:** accepted (items 1 to 8 and 10); item 9 and the new TRL 3 items 11 to 16 remain proposed, awaiting Amish
+- **Status:** accepted (items 1 to 8 and 10; items 11 to 16 accepted on 2026-09-25 and recorded in CCB-DDR-002); item 9 remains proposed, awaiting Amish
 
 ## Context
 
@@ -56,17 +60,17 @@ Cross-cutting approvals from the same instruction, recorded here:
 
 ### Items that remain open
 
-*Table 2. Open items, proposed, awaiting Amish.*
+*Table 2. Items open at v0.1. Items 11 to 16 were decided by Amish on 2026-09-25 (see CCB-DDR-002); item 9 remains open.*
 
 | # | Item | Status and recommendation |
 | --- | --- | --- |
 | 9 | First region, residue and partner for co-design | Proposed, awaiting Amish. No recommendation was made (the review gave examples only: paddy straw in northwest India, or maize and cotton stalks in East Africa). Portfolio rule: partners are chosen per area later |
-| 11 | Secondary air manifold form | Proposed, awaiting Amish. CCB-CAL-001 shows the TRL 2 25 mm pipe ring would need about 46 Pa to pass the peak secondary air against about 8 Pa of available suction. The TRL 3 model uses a 230 mm sleeve (shroud) around the throat with an open bottom and band damper, and 24 holes of 12 mm. Recommendation: accept the shroud |
-| 12 | R6 hot water shortfall (6.4 MJ against 10 MJ) | Proposed, awaiting Amish. Options: (a) add a spiral baffle insert in the jacket sleeve and 25 mm of blanket on the jacket shell (about 13.9 MJ on paper, about $15 more); (b) relax R6 to 5 MJ; (c) drop the jacket, as TRL 2 option (c). Recommendation: (a), checked at TRL 4 if Amish lifts the hold, since the insert also adds tar and soot fouling to clean |
-| 13 | R8 start-up wood (5.8 kg central against 5 kg) | Proposed, awaiting Amish. Options: blanket the lid and top band (saves about 1.4 kW of loss), run at lower excess air, or relax R8 to 8 kg. Recommendation: blanket the lid (about $6) and keep the 5 kg target until batches are logged |
-| 14 | R5 burn time (4.5 h central against 4 h) | Proposed, awaiting Amish. Heat conduction into the packed charge sets the burn time. Options: relax R5 to 5 h, or reduce the conduction path with a perforated central tube in the retort. Recommendation: relax R5 to 5 h light to end of flaming; the 16 h unload limit is met |
-| 15 | R9 accuracy above 700 °C | Proposed, awaiting Amish. The MAX31855 accuracy is specified to 700 °C. Recommendation: keep class 1 probes and restate R9 as ±5 °C to 700 °C and indicative above |
-| 16 | Kiln operating notes versus build notes | Proposed, awaiting Amish. The TRL 2 review said the safety kit would be "stated as required in the build notes at TRL 3". Build notes are TRL 4 material, so the requirement is stated in CCB-REQ-001 R10 and `bom/bom-notes.md` instead. Recommendation: accept |
+| 11 | Secondary air manifold form | Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002). CCB-CAL-001 shows the TRL 2 25 mm pipe ring would need about 46 Pa to pass the peak secondary air against about 8 Pa of available suction. The TRL 3 model uses a 230 mm sleeve (shroud) around the throat with an open bottom and band damper, and 24 holes of 12 mm. Recommendation: accept the shroud |
+| 12 | R6 hot water shortfall (6.4 MJ against 10 MJ) | Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002). Options: (a) add a spiral baffle insert in the jacket sleeve and 25 mm of blanket on the jacket shell (about 13.9 MJ on paper, about $15 more); (b) relax R6 to 5 MJ; (c) drop the jacket, as TRL 2 option (c). Recommendation: (a), checked at TRL 4 if Amish lifts the hold, since the insert also adds tar and soot fouling to clean |
+| 13 | R8 start-up wood (5.8 kg central against 5 kg) | Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002). Options: blanket the lid and top band (saves about 1.4 kW of loss), run at lower excess air, or relax R8 to 8 kg. Recommendation: blanket the lid (about $6) and keep the 5 kg target until batches are logged |
+| 14 | R5 burn time (4.5 h central against 4 h) | Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002). Heat conduction into the packed charge sets the burn time. Options: relax R5 to 5 h, or reduce the conduction path with a perforated central tube in the retort. Recommendation: relax R5 to 5 h light to end of flaming; the 16 h unload limit is met |
+| 15 | R9 accuracy above 700 °C | Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002). The MAX31855 accuracy is specified to 700 °C. Recommendation: keep class 1 probes and restate R9 as ±5 °C to 700 °C and indicative above |
+| 16 | Kiln operating notes versus build notes | Decided by Amish, 2026-09-25: go with recommendation (CCB-DDR-002). The TRL 2 review said the safety kit would be "stated as required in the build notes at TRL 3". Build notes are TRL 4 material, so the requirement is stated in CCB-REQ-001 R10 and `bom/bom-notes.md` instead. Recommendation: accept |
 
 ## Consequences
 

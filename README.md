@@ -2,13 +2,53 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** CleanTech · **TRL:** 3 of 9 (proof of concept on paper; TRL 4 on hold) · **Prototype budget:** about $300 USD · **Difficulty:** 2 of 5
+**Area:** CleanTech · **TRL:** 3 of 9 (proof of concept on paper; TRL 4 on hold) · **Prototype budget:** about $300 USD (kiln parts now estimated at $319; see the review note) · **Difficulty:** 2 of 5
 
 Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
 
 ![CharCube concept](media/hero.png)
 
 [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement CCB-DWG-001 (PDF)](cad/drawings/CCB-DWG-001.pdf) · [Calculations CCB-CAL-001](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
+
+## Concept rationale
+
+A retort keeps air away from the residue, so it chars instead of burning, and the gas it gives off is burned in the kiln rather than vented. Nesting one steel drum inside another is the simplest way to build that: the gas fire in the gap heats the retort, a burner throat cleans up what is left, and the same flue heats water in an open jacket. Drums, plain pipe, bolts and one welded tank are available almost anywhere crops are grown, so the design can be copied by a village fabricator or a college workshop.
+
+Publishing it as open hardware matters because low-cost kilns rarely come with numbers. CharCube publishes its model, calculations and a temperature logger, so users and researchers can check whether a batch reached the temperatures that make stable char, and improve the design where it falls short.
+
+## Burning platform
+
+In India alone, farms generate about 500 Mt of crop residue a year and burn about 100 Mt of it in the field; that smoke was linked to an estimated 44,000 to 98,000 premature deaths a year between 2003 and 2019 ([Lan et al. 2022, *Nature Communications*](https://www.nature.com/articles/s41467-022-34093-z)). Worldwide, the WHO estimates that outdoor air pollution caused 4.2 million premature deaths in 2019, when 99 % of the world's population lived where its air quality guideline levels were not met ([WHO fact sheet](https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health)).
+
+Making char badly is not the answer either. Field measurements found about 54 g of methane per kilogram of charcoal from traditional kilns and about 24 g/kg from improved retorts ([Sparrevik et al. 2015, *Biomass and Bioenergy*](https://www.sciencedirect.com/science/article/abs/pii/S0961953414005170)), and methane at that rate cancels a large part of the carbon the char stores. The gas has to be burned, and the heat is worth using.
+
+## Where it could be used
+
+### By industry
+
+| Industry | Use |
+| --- | --- |
+| Smallholder farming | Turn stalks, cobs and bundled straw into biochar for the farm's own soil instead of burning them in the field |
+| Farmer cooperatives and agricultural NGOs | Shared kilns with logged batches, as a residue service between harvests |
+| Agricultural research and extension | A cheap, repeatable kiln with temperature records for feedstock and char quality trials |
+| Orchards, vineyards and nurseries | Char prunings on site and use the hot water for cleaning |
+| Carbon removal pilots | Small, documented batches as a starting point for biochar measurement and reporting |
+| Education and makerspaces | A teaching example of pyrolysis, heat transfer and emissions control |
+
+### By country or region
+
+| Country or region | Why it matters there |
+| --- | --- |
+| India (Punjab, Haryana, Uttar Pradesh) | About 100 Mt of residue burned a year; these three states account for 67 to 90 % of the linked deaths ([Lan et al. 2022](https://www.nature.com/articles/s41467-022-34093-z)) |
+| Vietnam and Southeast Asia | Rice straw is burned where crops follow quickly; world rice straw production is about 370 to 520 Mt a year ([Van Hung et al. 2020](https://link.springer.com/chapter/10.1007/978-3-030-32373-8_1)) |
+| Kenya and East Africa | Maize and cotton stalks; low-cost retort kilns have already been piloted in East Africa ([Adam 2009](https://ideas.repec.org/a/eee/renene/v34y2009i8p1923-1925.html)) |
+| Brazil (São Paulo) | State Law 11,241 of 2002 phases out pre-harvest sugarcane straw burning by 2031 ([Instituto Escolhas](https://escolhas.org/en/escolhas-chair-article-analyzes-the-effectiveness-of-the-law-against-burning-sugarcane-plantations-in-sao-paulo/)), so growers need other uses for residue |
+| United States (California) | Rice straw burning in the Sacramento Valley has been capped since 2001 at 25 % of each grower's planted acres ([Health and Safety Code 41865](https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-41865/)) |
+| Europe (Switzerland, Germany) | The [European Biochar Certificate](https://www.european-biochar.org/en) sets standards for char quality and production records that a logged kiln can help research groups work toward |
+
+## What sparked the idea
+
+The idea traces back to the Improved Charcoal Production System, or Adam retort, a low-cost retort kiln piloted in India and East Africa and described by J. C. Adam in *Renewable Energy* in 2009 ([Adam 2009](https://ideas.repec.org/a/eee/renene/v34y2009i8p1923-1925.html)). It burns the harmful volatiles in a hot chamber instead of releasing them and uses the heat of that flare to speed carbonization, reaching 30 to 42 % efficiency against 10 to 22 % for earth mounds and cutting emissions by up to 75 %. It is a masonry kiln for wood charcoal, and its surplus heat goes to waste. CharCube asks whether the same principle can be shrunk to two steel drums for crop residue, with the leftover heat sent into water.
 
 ## Problem
 
@@ -18,16 +58,17 @@ Crop residue gets burned in the open, releasing carbon and smoke. India alone bu
 
 Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
 
-A 114 L steel drum packed with 12.0 kg of bundled residue sits inside a 200 L drum. Gas from the heated residue burns in the gap between the drums and again in a burner throat fed by an air shroud, then heats about 61 L of water in an open-vented jacket around the flue. The TRL 3 calculations (CCB-CAL-001, central estimates) give about 3.0 kg of biochar per batch in a burn of about 4.5 h with about 5.8 kg of wood, and only about 6.4 MJ of hot water, for $298 in kiln parts. Burn time, hot water and start-up wood miss their targets on paper; the options are in the review note. Nothing is measured yet.
+A 114 L steel drum packed with 12.0 kg of bundled residue sits inside a 200 L drum. Gas from the heated residue burns in the gap between the drums and again in a burner throat fed by an air shroud, then passes a spiral baffle inside an open-vented, blanketed jacket that holds about 61 L of water. The TRL 3 calculations (CCB-CAL-001 v0.2, central estimates) give about 3.0 kg of biochar per batch in a burn of about 4.5 h with about 3.7 kg of wood, and about 11.5 MJ of hot water, for $319 in kiln parts. Cost is over the $300 kiln budget, and burn time, hot water and start-up wood are at risk; the options are in the review note. Nothing is measured yet.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
 ## Key components
 
 - Nested steel drum pair: 200 L outer drum and 114 L inner retort
-- Burner throat with secondary air shroud
+- Burner throat with secondary air shroud (30 air holes)
 - Flue pipe with rain cap
-- Open-vented water jacket around the flue (replaces the copper coil in the first sketch; decided by Amish, 2026-09-25)
+- Open-vented water jacket around the flue (replaces the copper coil in the first sketch; decided by Amish, 2026-09-25), with a spiral baffle insert and a mineral wool blanket (decided by Amish, 2026-09-25)
+- Ceramic fibre blankets on the outer drum, lid and top band
 - Two-channel thermocouple logger
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv). The parametric model is [cad/src/model.py](cad/src/model.py), with STEP and STL exports in `cad/step/` and `cad/stl/`.
@@ -59,4 +100,4 @@ Controlled documents follow the portfolio [documentation standard](.kit/STANDARD
 - **Hardware** (CAD, drawings, BOM, electronics): [CERN-OHL-S v2](LICENSE)
 - **Software** (firmware, scripts, notebooks): [MIT](LICENSE-SOFTWARE)
 
-Part of the open hardware portfolio at [amishchadha.com](https://amishchadha.com).
+A project of the [Design Molecule](https://designmolecule.com) lab.

@@ -1,4 +1,4 @@
-"""CharCube parametric model (build123d), TRL 3.
+"""CharCube parametric model (build123d), TRL 3 (DDR-002: baffle insert, jacket and lid blankets).
 
 Run from the repo root:  python cad/src/model.py
 Exports STEP and STL of the assembly and its three lift units into cad/step and cad/stl.
@@ -33,7 +33,7 @@ PARAMS = {
     "THROAT_H": 400.0,
     # 5 secondary air shroud (sized in CCB-CAL-001; replaces the 25 mm pipe ring of TRL 2)
     "SHROUD_D": 230.0, "SHROUD_H": 150.0, "SHROUD_Z": 40.0,   # bottom edge above the lid top
-    "AIR_HOLE_D": 12.0, "N_AIR_HOLES": 24, "AIR_RINGS": 2,
+    "AIR_HOLE_D": 12.0, "N_AIR_HOLES": 30, "AIR_RINGS": 2,   # 24 to 30 holes with the baffle (DDR-002)
     # 8 water jacket (annular tank with an integral flue sleeve)
     "JKT_D": 420.0, "JKT_H": 600.0, "JKT_T": 2.0,
     "SLEEVE_D": 168.0, "SLEEVE_T": 2.0, "SOCKET": 50.0,      # sleeve slips over the throat and takes the flue
@@ -44,6 +44,12 @@ PARAMS = {
     "FOOT_R": 720.0, "LEG_ANGLE_B": 40.0, "LEG_ANGLE_T": 4.0,
     # 11 insulation
     "INS_T": 25.0, "INS_BOTTOM": 140.0, "INS_TOP_GAP": 30.0,
+    # 15 spiral baffle insert in the jacket sleeve (DDR-002, item 12): twisted steel strip, lifts out for cleaning
+    "BAFFLE_W": 150.0, "BAFFLE_T": 1.5, "BAFFLE_PITCH": 300.0, "BAFFLE_SEGS": 24,
+    # 16 jacket shell blanket (DDR-002, item 12): mineral wool held by wire, tap and vent left clear
+    "JKT_INS_T": 25.0,
+    # 17 lid and top band blanket (DDR-002, item 13): ceramic fibre, clear of the air shroud intake
+    "LID_INS_T": 25.0,      # skirt covers the bare top band (INS_TOP_GAP) and the locking ring
 }
 P = PARAMS
 
@@ -194,12 +200,37 @@ def build_parts(p=PARAMS):
               + _tube((lx - 120, ly, z_lid + 120), (70, 60, z_thr + 140), 3)
               + _tube((lx - 120, ly, z_lid + 120), (rf + 60, 0, z_jkt - 40), 3))
     parts[13] = ("Thermocouple logger and probes", logger)
+
+    # 15 Spiral baffle insert: a twisted strip in the jacket sleeve, hung from a cross bar that sits in
+    #    notches at the foot of the flue pipe, so it lifts out with the flue for cleaning
+    zb0, hb = z_jkt + 10, p["JKT_H"] - 10
+    n = p["BAFFLE_SEGS"]
+    dz = hb / n
+    baffle = None
+    for k in range(n):
+        ang = 180.0 * (k + 0.5) * dz / p["BAFFLE_PITCH"]          # half a turn per pitch, as a twisted tape
+        seg = Pos(0, 0, zb0 + (k + 0.5) * dz) * Rot(0, 0, ang) * Box(p["BAFFLE_W"], p["BAFFLE_T"], dz + 0.5)
+        baffle = seg if baffle is None else baffle + seg
+    baffle = baffle + Pos(0, 0, L["z_jtop"] + 5) * Box(p["FLUE_D"] - 4, 10, 10)
+    parts[15] = ("Spiral baffle insert", baffle)
+
+    # 16 Jacket shell blanket: wrap on the jacket side, tap left clear
+    tj = p["JKT_INS_T"]
+    jins = _shell(rj + tj, rj + 0.5, p["JKT_H"] - 60, z_jkt + 60)
+    parts[16] = ("Jacket shell blanket", jins)
+
+    # 17 Lid and top band blanket: annular disc on the lid, clear of the shroud intake, and a short skirt
+    ti = p["LID_INS_T"]
+    lidins = (_zcyl(ro + p["INS_T"], ti, z_thr) - _zcyl(rs + 25, ti + 2, z_thr - 1))
+    skirt = p["INS_TOP_GAP"] + p["LID_T"]
+    lidins = lidins + _shell(ro + p["INS_T"], ro + 6.5, skirt, z_thr - skirt)
+    parts[17] = ("Lid and top band blanket", lidins)
     return parts
 
 
 UNITS = {
-    "charcube-kiln": (1, 2, 3, 4, 5, 6, 11),            # drums, lid, throat, shroud, bricks, blanket
-    "charcube-heat-recovery-unit": (7, 8, 9, 10),        # lifted aside as one unit for loading
+    "charcube-kiln": (1, 2, 3, 4, 5, 6, 11, 17),        # drums, lid, throat, shroud, bricks, blankets
+    "charcube-heat-recovery-unit": (7, 8, 9, 10, 15, 16),  # lifted aside as one unit for loading
     "charcube-retort": (3,),
 }
 
