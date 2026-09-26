@@ -2,7 +2,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** CleanTech · **TRL:** 3 of 9 (proof of concept on paper; TRL 4 on hold) · **Prototype budget:** about $300 USD (kiln parts now estimated at $319; see the review note) · **Difficulty:** 2 of 5
+**Area:** CleanTech · **TRL:** 3 of 9 (proof of concept on paper; TRL 4 on hold) · **Prototype budget:** $320 USD (kiln parts estimated at $319; safety kit listed separately) · **Difficulty:** 2 of 5
 
 Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
 
@@ -40,15 +40,15 @@ Making char badly is not the answer either. Field measurements found about 54 g 
 | Country or region | Why it matters there |
 | --- | --- |
 | India (Punjab, Haryana, Uttar Pradesh) | About 100 Mt of residue burned a year; these three states account for 67 to 90 % of the linked deaths ([Lan et al. 2022](https://www.nature.com/articles/s41467-022-34093-z)) |
-| Vietnam and Southeast Asia | Rice straw is burned where crops follow quickly; world rice straw production is about 370 to 520 Mt a year ([Van Hung et al. 2020](https://link.springer.com/chapter/10.1007/978-3-030-32373-8_1)) |
-| Kenya and East Africa | Maize and cotton stalks; low-cost retort kilns have already been piloted in East Africa ([Adam 2009](https://ideas.repec.org/a/eee/renene/v34y2009i8p1923-1925.html)) |
-| Brazil (São Paulo) | State Law 11,241 of 2002 phases out pre-harvest sugarcane straw burning by 2031 ([Instituto Escolhas](https://escolhas.org/en/escolhas-chair-article-analyzes-the-effectiveness-of-the-law-against-burning-sugarcane-plantations-in-sao-paulo/)), so growers need other uses for residue |
-| United States (California) | Rice straw burning in the Sacramento Valley has been capped since 2001 at 25 % of each grower's planted acres ([Health and Safety Code 41865](https://codes.findlaw.com/ca/health-and-safety-code/hsc-sect-41865/)) |
-| Europe (Switzerland, Germany) | The [European Biochar Certificate](https://www.european-biochar.org/en) sets standards for char quality and production records that a logged kiln can help research groups work toward |
+| Southeast Asia | The region produces about 100 to 140 Mt of rice straw a year; with two or three crops a year there is little time for straw to decompose, and open-field burning has risen despite bans ([Van Hung et al. 2020](https://link.springer.com/chapter/10.1007/978-3-030-32373-8_1)) |
+| East Africa | Pilot units of a low-cost retort kiln have already been established in East Africa ([Adam 2009, *Renewable Energy*](https://doi.org/10.1016/j.renene.2008.12.009)), so local fabricators and users have seen the principle work |
+| Brazil (São Paulo) | [State Law 11,241 of 2002](https://www.al.sp.gov.br/repositorio/legislacao/lei/2002/lei-11241-19.09.2002.html) phases out pre-harvest sugarcane straw burning, by 2021 on land that can be harvested by machine and by 2031 on the rest ([Instituto de Economia Agrícola, 2014](https://iea.agricultura.sp.gov.br/ftpiea/AIA/AIA-31-2014.pdf)), so growers need other uses for residue |
+| United States (California) | Rice straw burning in the Sacramento Valley has been capped since 2001 at 25 % of each grower's planted acres ([Health and Safety Code 41865](https://www.countyofglenn.net/sites/default/files/Air_Pollution_Control_District/CARSRA%20%20HSC%2041865.pdf), as published by the Glenn County Air Pollution Control District) |
+| Europe | The [European Biochar Certificate](https://www.european-biochar.org/en) sets standards for char quality and production records that a logged kiln can help research groups work toward |
 
 ## What sparked the idea
 
-The idea traces back to the Improved Charcoal Production System, or Adam retort, a low-cost retort kiln piloted in India and East Africa and described by J. C. Adam in *Renewable Energy* in 2009 ([Adam 2009](https://ideas.repec.org/a/eee/renene/v34y2009i8p1923-1925.html)). It burns the harmful volatiles in a hot chamber instead of releasing them and uses the heat of that flare to speed carbonization, reaching 30 to 42 % efficiency against 10 to 22 % for earth mounds and cutting emissions by up to 75 %. It is a masonry kiln for wood charcoal, and its surplus heat goes to waste. CharCube asks whether the same principle can be shrunk to two steel drums for crop residue, with the leftover heat sent into water.
+The idea traces back to the Improved Charcoal Production System, or Adam retort, a low-cost retort kiln piloted in India and East Africa and described by J. C. Adam in *Renewable Energy* in 2009 ([Adam 2009](https://doi.org/10.1016/j.renene.2008.12.009)). It burns the harmful volatiles in a hot chamber instead of releasing them and uses the heat of that flare to speed carbonization, reaching 30 to 42 % efficiency against 10 to 22 % for earth mounds and cutting emissions by up to 75 %. It was built for wood charcoal. CharCube asks whether the same principle can be shrunk to two steel drums for crop residue, with the leftover heat sent into water.
 
 ## Problem
 
@@ -58,7 +58,7 @@ Crop residue gets burned in the open, releasing carbon and smoke. India alone bu
 
 Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
 
-A 114 L steel drum packed with 12.0 kg of bundled residue sits inside a 200 L drum. Gas from the heated residue burns in the gap between the drums and again in a burner throat fed by an air shroud, then passes a spiral baffle inside an open-vented, blanketed jacket that holds about 61 L of water. The TRL 3 calculations (CCB-CAL-001 v0.2, central estimates) give about 3.0 kg of biochar per batch in a burn of about 4.5 h with about 3.7 kg of wood, and about 11.5 MJ of hot water, for $319 in kiln parts. Cost is over the $300 kiln budget, and burn time, hot water and start-up wood are at risk; the options are in the review note. Nothing is measured yet.
+A 114 L steel drum packed with 12.0 kg of bundled residue sits inside a 200 L drum. Gas from the heated residue burns in the gap between the drums and again in a burner throat fed by an air shroud, then passes a spiral baffle inside an open-vented, blanketed jacket that holds about 61 L of water. The TRL 3 calculations (CCB-CAL-001 v0.3, central estimates) give about 3.0 kg of biochar per batch in a burn of about 4.5 h with about 3.7 kg of wood, and about 11.5 MJ of hot water, for $319 in kiln parts. Cost is within the $320 kiln budget (topped up from $300 by Amish on 2026-09-26) with only $1 to spare, and burn time, hot water and start-up wood are at risk. Nothing is measured yet.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
@@ -94,6 +94,12 @@ The priced bill of materials is in [bom/bom.csv](bom/bom.csv). The parametric mo
 ## Documentation
 
 Controlled documents follow the portfolio [documentation standard](.kit/STANDARDS.md). Each carries a document ID (CCB-PRC-001 for the precis), a version and a revision history. Branded PDFs are built with `python .kit/render.py` and attached to GitHub Releases when a document is tagged, for example `CCB-PRC-001/v1.0`.
+
+## Credits
+
+Designed by Amish Chadha. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for roles. To cite this design, use [CITATION.cff](CITATION.cff) (GitHub shows it as "Cite this repository").
+
+AI assistance (Claude) was used to accelerate concept renders, prototype documentation and first-pass sizing calculations. Design direction and all decisions are Amish Chadha's, recorded in this repository's decision records (`docs/decisions/`).
 
 ## Licenses
 

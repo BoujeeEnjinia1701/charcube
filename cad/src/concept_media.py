@@ -37,14 +37,14 @@ parts = [Part(name, shape, STYLE[k][0], k, STYLE[k][1]) for k, (name, shape) in 
 
 if __name__ == "__main__":
     render_all(
-        parts, project="CharCube", title="Retort kiln with heat recovery", dwg_no="CCB-DWG-010", rev="P2", date="2026-09-25",
+        parts, project="CharCube", title="Retort kiln with heat recovery", dwg_no="CCB-DWG-010", rev="P3", date="2026-09-26",
         key_figures=["200 L outer drum, 114 L retort; flue outlet 2.70 m above ground",
                      "12.0 kg air-dry feed per batch; about 3.0 kg biochar (28 %, estimate)",
                      "Burn about 4.5 h with about 3.7 kg of wood (CCB-CAL-001, estimate)",
                      "Hot water about 11.5 MJ per batch, 61 L raised about 45 K",
-                     "Parts $319 against a $300 budget (indicative; R10 open)"],
+                     "Parts $319 against a $320 budget (indicative; R10 met)"],
         cut=True, cut_exclude=("Jacket support tripod", "Thermocouple logger and probes"),
-        flow={"title": "energy per batch, MJ (CCB-CAL-001 v0.2 central estimates: 12.0 kg residue, 3.7 kg wood)",
+        flow={"title": "energy per batch, MJ (CCB-CAL-001 v0.3 central estimates: 12.0 kg residue, 3.7 kg wood)",
               "unit": "MJ",
               "stages": [("Residue and wood", 253), ("Heat released in kiln", 160),
                          ("Flue gas at jacket", 60), ("Hot water", 12)],

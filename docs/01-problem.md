@@ -3,9 +3,9 @@ doc_id: CCB-PRB-001
 title: CharCube problem statement
 project: CharCube
 doc_type: Problem statement
-version: "0.3"
+version: "0.4"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -21,6 +21,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record Amish's 2026-09-25 decisions (CCB-DDR-001) on feedstock, budget and co-design partners; scale figures from CCB-CAL-001
+- version: "0.4"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: Stronger sources; kiln budget $320 (budget top-up approved by Amish)
 ---
 
 # CharCube problem statement
@@ -56,7 +60,7 @@ Three gaps remain for smallholders:
 
 ## Constraints
 
-- Garage-buildable prototype, concept budget $300 USD for kiln parts. The safety kit (about $40) is required and listed separately, outside that budget (decided by Amish, 2026-09-25, CCB-DDR-001 item 2).
+- Garage-buildable prototype, concept budget $320 USD for kiln parts (raised from $300 by the budget top-up approved by Amish, 2026-09-26, CCB-DDR-002 item 17). The safety kit (about $40) is required and listed separately, outside that budget (decided by Amish, 2026-09-25, CCB-DDR-001 item 2).
 - Built from standard 200 L (55 US gal) and 114 L (30 US gal) open-head steel drums, plain (not galvanized) steel pipe and bought fittings.
 - Outdoor, batch operation by one or two adults, one batch a day, with cooling overnight.
 - No electricity needed to run the kiln. The temperature logger may use a small USB power bank.
@@ -74,7 +78,7 @@ Three gaps remain for smallholders:
 
 ## Prior work
 
-- **Adam retort (Improved Charcoal Production System).** A brick retort that burns its volatiles in a separate chamber and uses the heat to speed carbonization; reported conversion efficiency of 30 to 42 % against 10 to 22 % for earth mounds, up to 75 % lower emissions and a 12 h cycle ([Adam 2009, *Renewable Energy*](https://ideas.repec.org/a/eee/renene/v34y2009i8p1923-1925.html)).
+- **Adam retort (Improved Charcoal Production System).** A brick retort that burns its volatiles in a separate chamber and uses the heat to speed carbonization; reported conversion efficiency of 30 to 42 % against 10 to 22 % for earth mounds, up to 75 % lower emissions and a 12 h cycle ([Adam 2009, *Renewable Energy*](https://doi.org/10.1016/j.renene.2008.12.009)).
 - **Field emissions of retort kilns.** Retorts cut methane by about 56 % and carbon monoxide by about 67 % against traditional kilns, but yield was not significantly higher, partly because start-up needs extra wood ([Sparrevik et al. 2015](https://www.sciencedirect.com/science/article/abs/pii/S0961953414005170)). CharCube's start-up fuel is therefore counted in its energy budget.
 - **Kon-Tiki flame-curtain kilns.** Open cone kilns that need no start-up fuel; measured char yield of 22 ± 5 % on a dry mass basis, 76 ± 9 % carbon, methane 30 ± 60 g/kg and CO 54 ± 35 g/kg of biochar ([Cornelissen et al. 2016, *PLOS ONE*](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0154617); [Schmidt and Taylor 2014, *the Biochar Journal*](https://www.biochar-journal.org/itjo/media/doc/1437139451142.pdf)). They are the main low-cost alternative to CharCube.
 - **Nested-drum retorts.** Two-drum retorts with the gas vented from the inner drum into a fire in the annulus are widely built by hobbyists and extension projects. Specific published designs were not verified for this note and are not cited.

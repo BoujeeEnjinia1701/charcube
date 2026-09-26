@@ -2,11 +2,11 @@
 
 Prices are indicative USD estimates for TRL 3, priced by supplier type (drum reconditioner or scrap dealer, local fabricator, steel stockist, hardware shop, refractory supplier, electronics distributor). Named suppliers depend on the first region, which is still open (CCB-DDR-001 item 9). Item numbers match the exploded view (`media/exploded.png`), the components table in `docs/02-concept.md` and the drawing CCB-DWG-001. Item 14 is in the BOM but not modelled.
 
-The 17 lines total **$319**, $19 over the $300 kiln budget (checked by `docs/04-calcs/sizing.py`, CCB-CAL-001 v0.2 section 11). Lines 15 to 17 ($21) were added when Amish accepted the recommendations for R6 and R8 on 2026-09-25 (CCB-DDR-002 items 12 and 13). Whether to raise the kiln budget to $320 or cut a line is proposed, awaiting Amish (CCB-DDR-002 item 17); `budget_usd` stays at 300 until then.
+The 17 lines total **$319**, $1 under the $320 kiln budget (topped up from $300, decided by Amish, 2026-09-26, CCB-DDR-002 item 17; checked by `docs/04-calcs/sizing.py`, CCB-CAL-001 v0.3 section 11). Lines 15 to 17 ($21) were added when Amish accepted the recommendations for R6 and R8 on 2026-09-25 (CCB-DDR-002 items 12 and 13).
 
 ## Safety kit (required, outside the kiln budget)
 
-Decided by Amish, 2026-09-25 (CCB-DDR-001 item 2): the $300 budget covers kiln parts only, and the safety kit is required and listed separately. Decided by Amish, 2026-09-25 (CCB-DDR-002 item 16): this table and CCB-REQ-001 R10 are where the safety kit requirement is stated, since build notes are TRL 4 material.
+Decided by Amish, 2026-09-25 (CCB-DDR-001 item 2): the kiln budget ($300, raised to $320 on 2026-09-26) covers kiln parts only, and the safety kit is required and listed separately. Decided by Amish, 2026-09-25 (CCB-DDR-002 item 16): this table and CCB-REQ-001 R10 are where the safety kit requirement is stated, since build notes are TRL 4 material.
 
 | Item | Indicative cost (USD) |
 | --- | --- |

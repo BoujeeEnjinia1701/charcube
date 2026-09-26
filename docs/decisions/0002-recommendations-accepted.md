@@ -3,9 +3,9 @@ doc_id: CCB-DDR-002
 title: CharCube recommendations accepted
 project: CharCube
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,12 +13,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record Amish's acceptance of all open recommendations (items 11 to 16) and what changed in the repo; list the items still open
+- version: "0.2"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: Budget top-up approved by Amish (item 17, $320)
 ---
 
 # 0002: Recommendations accepted
 
 - **Date:** 2026-09-25
-- **Status:** accepted (items 11 to 16); item 9 remains proposed, awaiting Amish; new item 17 (budget) proposed, awaiting Amish
+- **Status:** accepted (items 11 to 16; item 17 decided 2026-09-26); item 9 remains proposed, awaiting Amish
 
 ## Context
 
@@ -43,7 +47,7 @@ The options for each item are in CCB-DDR-001 (Table 2) and `docs/REVIEW.md` (TRL
 
 Knock-on changes from items 12 and 13, all at TRL 3 and inside this repo:
 
-- **Cost.** The BOM grows from 14 to 17 lines and from $298 to $319, over the $300 kiln budget. `budget_usd` stays at 300, the figure Amish decided in CCB-DDR-001 item 2. R10 is now **not met**; see open item 17.
+- **Cost.** The BOM grows from 14 to 17 lines and from $298 to $319, over the $300 kiln budget. `budget_usd` stays at 300, the figure Amish decided in CCB-DDR-001 item 2. R10 was then **not met**; see item 17 below, decided 2026-09-26.
 - **Draft.** The insert adds about four velocity heads of loss. Draft margin at peak falls from 3.2 to 2.4; available draft 16.9 to 16.7 Pa; suction at the throat holes 7.6 to 5.2 Pa.
 - **Mass.** Kiln 91 to 96 kg dry; heat-recovery lift unit 43.3 to 46.6 kg (21.6 to 23.3 kg each for two people). R11 still met, with less margin.
 - **Heat released.** 190 to 160 MJ per batch (central), because less wood is burned; flue gas 152 to 128 kg per batch.
@@ -53,6 +57,12 @@ Knock-on changes from items 12 and 13, all at TRL 3 and inside this repo:
 
 The pitch and problem lines had no recommended rewording and are unchanged.
 
+*Table 1a. Item decided by Amish, 2026-09-26.* On 2026-09-26 Amish wrote: "I am ok with the budget top ups."
+
+| # | Item | Decision | What changed in the repo |
+| --- | --- | --- | --- |
+| 17 | R10 budget after items 12 and 13 ($319 against $300) | Budget top-up to $320: decided by Amish, 2026-09-26. Option (a): `budget_usd` raised to $320 for kiln parts; the safety kit (about $40) stays required and listed separately | `project.yaml` `budget_usd` 300 to 320; CCB-REQ-001 v0.5 (R10 target $320, met); `sizing.py` now reads the budget from `project.yaml`, re-run; CCB-CAL-001 v0.3 (R10 met, $1 margin; six met, five at risk, one not verifiable); CCB-PRC-001 v0.5; README budget line |
+
 ## Items still open
 
 *Table 2. Proposed, awaiting Amish.*
@@ -60,10 +70,10 @@ The pitch and problem lines had no recommended rewording and are unchanged.
 | # | Item | Status |
 | --- | --- | --- |
 | 9 | First region, residue and partner for co-design | Proposed, awaiting Amish. No recommendation was made; the portfolio rule is that partners are chosen per area later |
-| 17 | R10 budget after items 12 and 13 ($319 against $300) | Proposed, awaiting Amish. Options: (a) raise `budget_usd` to $320 for kiln parts, safety kit still separate; (b) cut a line, for example clay and ash render in place of the side blanket (TRL 2 option, about $25 less but a hotter shell and more wood); (c) drop the jacket blanket and accept a lower R6. Recommendation: (a), because (b) and (c) each undo part of a decided item. `project.yaml` is unchanged until Amish decides |
+| 17 | R10 budget after items 12 and 13 ($319 against $300) | Decided by Amish, 2026-09-26: budget top-up to $320 (option (a)); see Table 1a |
 
 ## Consequences
 
-- R10 is the one requirement not met on paper; R2, R3, R5, R6 and R8 are at risk; R4 is not verifiable at TRL 3.
+- After the 2026-09-26 budget top-up, R10 is met with a $1 margin and no requirement is not met on paper; R2, R3, R5, R6 and R8 are at risk; R4 is not verifiable at TRL 3.
 - The spiral insert collects tar and soot; it lifts out with the flue for cleaning. How fast it fouls is a TRL 4 question.
 - TRL 4 (building, logging batches, measuring the insert's heat transfer and emissions, purchasing) remains on hold by Amish's instruction.

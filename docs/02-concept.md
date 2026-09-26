@@ -3,9 +3,9 @@ doc_id: CCB-PRC-001
 title: CharCube design precis
 project: CharCube
 doc_type: Design precis
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-26'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,11 +25,15 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002); spiral baffle insert, jacket blanket and lid blanket added, 30 throat air holes, numbers from CCB-CAL-001 v0.2, CCB-DWG-001 Rev P2
+- version: "0.5"
+  date: '2026-09-26'
+  author: Amish Chadha
+  change: Budget top-up approved by Amish ($320, CCB-DDR-002 item 17); R10 met
 ---
 
 # CharCube design precis
 
-CharCube is a batch retort kiln made from a 114 L (30 US gal) steel drum sealed inside a 200 L (55 US gal) drum. Crop residue packed into the inner drum (the retort) is heated without air; the gas it gives off escapes through holes in the retort base and burns in the gap between the drums, which keeps the process going. The flame and any unburned gas then pass through a burner throat fed with secondary air, and the hot flue gas rises past a spiral baffle through an open-vented, blanketed water jacket of about 61 L before leaving a flue 2.70 m above the ground. The TRL 3 calculations (CCB-CAL-001 v0.2) give, for the central case: 12.0 kg of air-dry residue per batch makes about 3.0 kg of biochar in a burn of about 4.5 h using about 3.7 kg of wood, and heats the water by about 45 K (11.5 MJ). The kiln parts cost $319 against the $300 budget, so cost (R10) is the one requirement not met on paper; burn time, hot water and start-up wood (R5, R6, R8) are at risk.
+CharCube is a batch retort kiln made from a 114 L (30 US gal) steel drum sealed inside a 200 L (55 US gal) drum. Crop residue packed into the inner drum (the retort) is heated without air; the gas it gives off escapes through holes in the retort base and burns in the gap between the drums, which keeps the process going. The flame and any unburned gas then pass through a burner throat fed with secondary air, and the hot flue gas rises past a spiral baffle through an open-vented, blanketed water jacket of about 61 L before leaving a flue 2.70 m above the ground. The TRL 3 calculations (CCB-CAL-001 v0.3) give, for the central case: 12.0 kg of air-dry residue per batch makes about 3.0 kg of biochar in a burn of about 4.5 h using about 3.7 kg of wood, and heats the water by about 45 K (11.5 MJ). The kiln parts cost $319 against the $320 budget, topped up from $300 by Amish on 2026-09-26, so cost (R10) is met with a $1 margin; burn time, hot water and start-up wood (R5, R6, R8) are at risk.
 
 ![Hero render](../media/hero.png)
 
@@ -103,7 +107,7 @@ Table 2. Batch, energy, carbon and cost.
 | Net removal | 2.8 kg CO₂e per batch (2.0 to 3.5); 0.70 t CO₂e and about 740 kg of char a year at 250 batches; about 3.0 t of residue kept out of open burning | |
 | Mass | About 96 kg without plinth and water; lift unit (tripod, drained jacket with baffle and blanket, flue) 46.6 kg for two people; retort with char 15.2 kg; full jacket 83 kg | R11 met |
 | Height | Flue outlet 2.70 m; footprint about 1.44 m across the tripod feet | R12 met |
-| Parts cost | $319 against $300 (lines 15 to 17 add $21); safety kit (about $40) listed separately | R10 **not met** |
+| Parts cost | $319 against $320 (lines 15 to 17 add $21); safety kit (about $40) listed separately | R10 met ($1 margin) |
 
 The main changes from TRL 2: the char carries its ash, so its mass and heating value are lower; the burn is set by conduction into the charge and is longer; a longer burn needs more wood; and the plain jacket sleeve transfers about a third of the heat assumed at TRL 2. The changes accepted on 2026-09-25 (CCB-DDR-002) recover most of that: the baffle and jacket blanket take hot water from 6.4 to 11.5 MJ, and the lid blanket takes wood from 5.8 to 3.7 kg, at a cost of $21 and a lower draft margin.
 
@@ -119,7 +123,7 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 - **Temperature logging as standard.** Decided by Amish, 2026-09-25. Class 1 probes meet the restated R9, ±5 °C to 700 °C and indicative above (CCB-DDR-002 item 15).
 - **Insulation blanket.** Decided by Amish, 2026-09-25: ceramic fibre for the prototype, now also on the lid and top band (CCB-DDR-002 item 13), which saves 1.22 kW.
 - **Burn time target.** Decided by Amish, 2026-09-25: R5 relaxed to 5 h (CCB-DDR-002 item 14).
-- **Budget.** Decided by Amish, 2026-09-25: $300 covers the kiln parts; the safety kit is required and listed separately. With lines 15 to 17 the parts total $319; raising the budget to $320 or cutting a line is proposed, awaiting Amish (CCB-DDR-002 item 17).
+- **Budget.** Decided by Amish, 2026-09-25: $300 covers the kiln parts; the safety kit is required and listed separately. With lines 15 to 17 the parts total $319; budget top-up to $320: decided by Amish, 2026-09-26 (CCB-DDR-002 item 17).
 - **Name.** Decided by Amish, 2026-09-25: keep CharCube.
 
 ![Exploded view](../media/exploded.png)
@@ -145,7 +149,6 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 
 The TRL 3 open questions on gas holes, secondary air, draft, jacket heat transfer and surface temperatures are answered in CCB-CAL-001. What remains:
 
-- Raise the kiln budget to $320, or cut a line to get back to $300? Proposed, awaiting Amish (CCB-DDR-002 item 17).
 - How much does the spiral insert really raise heat transfer, and how fast does it foul? The factor of 3 is an assumption.
 - Is the 47 kg two-person lift acceptable to users, or is a swinging arm needed?
 - How fast does tar foul the jacket sleeve, and how is it cleaned?

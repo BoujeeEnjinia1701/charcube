@@ -178,7 +178,7 @@ Files changed: `cad/src/model.py` (parts 15 to 17, `N_AIR_HOLES` 30; STEP and ST
 ### Still awaiting Amish
 
 - Item 9: first region, residue and partner (no recommendation; partners are chosen per area later).
-- Item 17 (new): R10 is over budget after items 12 and 13 ($319 against $300). Options: (a) raise `budget_usd` to $320 for kiln parts; (b) cut a line, for example clay and ash render instead of the side blanket; (c) drop the jacket blanket. Recommendation: (a), since (b) and (c) undo part of a decided item. Not applied, because raising a budget needs Amish's decision.
+- Item 17 (new), **decided by Amish, 2026-09-26: budget top-up to $320** (see Session 2026-09-26 below): R10 is over budget after items 12 and 13 ($319 against $300). Options: (a) raise `budget_usd` to $320 for kiln parts; (b) cut a line, for example clay and ash render instead of the side blanket; (c) drop the jacket blanket. Recommendation: (a), since (b) and (c) undo part of a decided item. Not applied, because raising a budget needs Amish's decision.
 
 ### Cross-repo actions
 
@@ -204,4 +204,26 @@ TRL 4 remains on hold by Amish's instruction. No build, test, purchase, PCB or f
 
 ### Recommended next step
 
-Decide item 17 (budget). Item 9 stays open until co-design partners are chosen per area.
+Decide item 17 (budget); decided 2026-09-26. Item 9 stays open until co-design partners are chosen per area.
+
+## Session 2026-09-26: sources strengthened
+
+Amish asked on 2026-09-26 to "fix the weaker sources" and wrote "I am ok with the budget top ups."
+
+### Sources replaced
+
+| Item | Old source | New source |
+| --- | --- | --- |
+| Brazil (São Paulo) row | Instituto Escolhas article (NGO summary) | Text of State Law 11,241 of 2002 on the Assembleia Legislativa do Estado de São Paulo site, plus the state Instituto de Economia Agrícola (2014) for the 2021 and 2031 deadlines, which the row now states |
+| United States (California) row | FindLaw copy of Health and Safety Code 41865 | Statute text as published by the Glenn County Air Pollution Control District (subdivisions (c)(4) and (i): 25 % of planted acres from 2001) |
+| East Africa row and What sparked the idea | IDEAS/RePEc listing of Adam (2009) | Publisher DOI 10.1016/j.renene.2008.12.009 (Elsevier, *Renewable Energy* 34(8)); also in CCB-PRB-001 (v0.3 to v0.4) |
+| Kenya and East Africa row | Uncited "maize and cotton stalks" claim | Row renamed East Africa and limited to what Adam (2009) supports (pilot units in East Africa) |
+| Vietnam and Southeast Asia row | Van Hung et al. (2020), kept | Row renamed Southeast Asia and reworded to what the chapter supports (100 to 140 Mt of straw a year in the region, short turnaround, burning despite bans) |
+| Europe row | "(Switzerland, Germany)" uncited | Label shortened to Europe; European Biochar Certificate link kept |
+| What sparked the idea | "masonry kiln ... surplus heat goes to waste" not in the source | Replaced by "It was built for wood charcoal" |
+
+Checked and kept: Lan et al. (2022, *Nature Communications*), the WHO ambient air quality fact sheet, Sparrevik et al. (2015, *Biomass and Bioenergy*) and Van Hung et al. (2020). The European Biochar Certificate page is the program's own site; it could not be re-fetched this session. The inspiration event (Adam retort) is unchanged, now linked to the publisher's DOI.
+
+### Budget change
+
+Budget top-up to $320: decided by Amish, 2026-09-26 (CCB-DDR-002 v0.2, item 17). `project.yaml` `budget_usd` 300 to 320. `docs/04-calcs/sizing.py` now reads the budget from `project.yaml`; re-run, `results.csv` updated. R10 is met with a $1 margin ($319 against $320); requirement status is now 6 met, 5 at risk, 1 not verifiable at TRL 3, none not met. Documents: CCB-REQ-001 v0.4 to v0.5, CCB-CAL-001 v0.2 to v0.3, CCB-PRC-001 v0.4 to v0.5, CCB-DDR-002 v0.1 to v0.2, CCB-PRB-001 v0.3 to v0.4 (sources). README budget line and concept paragraph updated; `bom/bom-notes.md` updated. The budget note on CCB-DWG-001 and the key figures on the concept sheet CCB-DWG-010 were updated in `cad/src/sheets.py` and `cad/src/concept_media.py` (both Rev P2 to P3) and all drawings and media regenerated; temporary view folders deleted. `trl: 3` and `trl_target: 3` unchanged.

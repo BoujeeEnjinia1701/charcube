@@ -501,7 +501,8 @@ head("12. Cost (R10)")
 rows = list(csv.DictReader((ROOT / "bom/bom.csv").open()))
 total = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows)
 pr("BOM lines / total", f"{len(rows)} / ${total:.0f}")
-BUDGET = 300.0          # project.yaml budget_usd, kiln parts only (DDR-001 item 2)
+BUDGET = next(float(l.split(":")[1].split("#")[0]) for l in (ROOT / "project.yaml").read_text().splitlines()
+              if l.startswith("budget_usd:"))   # project.yaml budget_usd, kiln parts only ($320, DDR-002 item 17)
 pr("budget_usd / margin", f"${BUDGET:.0f} / ${BUDGET - total:.0f}")
 added = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows if r["item"].split()[0] in ("15", "16", "17"))
 pr("of which DDR-002 lines 15 to 17", f"${added:.0f}")
@@ -521,7 +522,7 @@ rq = [
     ("R7", "Water circuit open to air, no sealing valve, tap at base, jacket on tripod", "open vent and loose lid; tripod-carried", "by design", "met"),
     ("R8", "5 kg or less of dry wood per batch", f"{C['m_wood']:.1f} kg ({F['m_wood']:.1f} to {U['m_wood']:.1f}); light-up alone {C['m_wood_min']:.1f} kg", "<= 5 kg", "not met" if C["m_wood"] > 5 else ("at risk" if U["m_wood"] > 5 else "met")),
     ("R9", "2 x type K, ±5 °C to 700 °C and indicative to 1,000 °C (restated, DDR-002), 10 s, 24 h on a power bank", f"±{math.hypot(0.004 * 700, 2):.1f} °C to 700 °C with class 1 probes; {e_log:.0f} of {10 * 3.7 * 0.85:.0f} Wh", "±5 °C to 700 °C", "met"),
-    ("R10", "Parts $300 or less; safety kit listed separately (decided)", f"${total:.0f} (lines 15 to 17 add ${added:.0f})", "<= $300", "met" if total <= BUDGET else "not met"),
+    ("R10", f"Parts ${BUDGET:.0f} or less (top-up, DDR-002 item 17); safety kit listed separately (decided)", f"${total:.0f} (lines 15 to 17 add ${added:.0f})", f"<= ${BUDGET:.0f}", "met" if total <= BUDGET else "not met"),
     ("R11", "Hand tools, one welded part, no lift above 25 kg per person", f"unit {m_unit:.1f} kg for two ({m_unit / 2:.1f} kg each); retort with char {m_ret_full:.1f} kg", "<= 25 kg", "met" if m_unit / 2 <= 25 and m_ret_full <= 25 else "not met"),
     ("R12", "Outlet 2.5 m or more; 5 m clearance; no galvanized hot parts", f"outlet {L['z_out'] / 1000:.2f} m; {len(galv)} galvanized lines", ">= 2.5 m", "met" if L["z_out"] >= 2500 and not galv else "not met"),
 ]
