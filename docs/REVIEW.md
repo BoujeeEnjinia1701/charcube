@@ -227,3 +227,39 @@ Checked and kept: Lan et al. (2022, *Nature Communications*), the WHO ambient ai
 ### Budget change
 
 Budget top-up to $320: decided by Amish, 2026-09-26 (CCB-DDR-002 v0.2, item 17). `project.yaml` `budget_usd` 300 to 320. `docs/04-calcs/sizing.py` now reads the budget from `project.yaml`; re-run, `results.csv` updated. R10 is met with a $1 margin ($319 against $320); requirement status is now 6 met, 5 at risk, 1 not verifiable at TRL 3, none not met. Documents: CCB-REQ-001 v0.4 to v0.5, CCB-CAL-001 v0.2 to v0.3, CCB-PRC-001 v0.4 to v0.5, CCB-DDR-002 v0.1 to v0.2, CCB-PRB-001 v0.3 to v0.4 (sources). README budget line and concept paragraph updated; `bom/bom-notes.md` updated. The budget note on CCB-DWG-001 and the key figures on the concept sheet CCB-DWG-010 were updated in `cad/src/sheets.py` and `cad/src/concept_media.py` (both Rev P2 to P3) and all drawings and media regenerated; temporary view folders deleted. `trl: 3` and `trl_target: 3` unchanged.
+
+## Session 2026-09-26: product appearance model and photoreal renders
+
+Amish chose this repo for the first batch of product renders on 2026-09-26. This session adds an appearance model for photoreal renders; no design, sizing or BOM content changed.
+
+### What was done
+
+- `cad/src/product_model.py` (new): `product_parts()` returns 49 parts (47 product parts in the shell and internal groups, 2 context parts) with colour, material, BOM line, group and explode offset, plus `TITLE` and `RENDER_VIEWS` (hero, exploded and a detail view without the ground and person). It imports `PARAMS`, `levels()` and `build_parts()` from `cad/src/model.py`, so every main dimension, height and interface is unchanged. It adds:
+  - outer drum chimes and rolling hoops, and sliding port dampers with knobs on the four primary air ports;
+  - the drum blanket with a wire mesh, overlap flap, a teal name band and a hot-surface label; the lid blanket with tie wires;
+  - riveted lid collar with a rolled edge, a band damper handle on the air shroud, a rolled flue outlet and a conical rain cap on the three posts;
+  - the water jacket painted in the kit accent, with its loose lid, open vent rim, mineral wool blanket with tie wires and a second hot-surface label, and a brass ball-valve tap with a lever;
+  - tripod legs drawn as 40 x 40 x 4 mm angle on a flat-bar ring seat, with bolted gussets, foot plates and ground pins;
+  - retort rolling hoops, lid swages and a bolt-ring clamp bolt; chamfered firebricks; block joints and an ash pan lip on the plinth;
+  - the logger as a weatherproof box with a clear window over its board, modules and power bank, a lit green status light, cable glands, straps to the leg, probe cables and type K probes;
+  - context: a compact paved ground patch and the shared clay mannequin (1.75 m, "stand") beside the kiln.
+- `README.md`: hero image now `media/render-hero.png`, with a link to `media/render-exploded.png`. The render files are produced later by the orchestrator.
+- Self-check previews (matplotlib, clear parts omitted) were made outside the repo.
+
+### Differences from model.py
+
+Each is an appearance choice only; model.py, the drawing and the BOM are unchanged.
+
+1. **Rain cap shape.** model.py draws a 260 mm square plate; the appearance model draws a 260 mm conical cap on the same three posts at the same height. Proposed, awaiting Amish. Recommendation: adopt the conical cap in model.py and CCB-DWG-001 at the next model update, since the BOM does not fix the shape and a cone sheds rain better.
+2. **Tripod leg and ring seat sections.** model.py draws round stand-ins (28 mm round legs and a 20 mm round ring seat); the appearance model draws the BOM section: 40 x 40 x 4 mm angle legs, a flat-bar ring seat just under the jacket, and bolted gussets. Foot and top points are unchanged. Proposed, awaiting Amish. Recommendation: carry the angle section into model.py so drawings and renders agree.
+3. **Logger position.** model.py centres the logger box on the tripod leg, so the leg passes through it; the appearance model puts the box on the front face of the same leg, 62 mm toward -Y, strapped to it, at the same height. Proposed, awaiting Amish. Recommendation: move the box in model.py to the same position.
+4. **Tap lever.** model.py draws the handle as a 90 mm bar above the valve; the appearance model draws a ball-valve lever across the pipe (closed position) at the valve body. Proposed, awaiting Amish. Recommendation: keep the model.py envelope for drawings; no action needed.
+5. **Added detail not in model.py** (port dampers, name band, hot-surface labels, rivets, bolts, logger internals, straps): all belong to existing BOM lines (1, 13 and 14). The name band and labels are not priced in the BOM. Proposed, awaiting Amish. Recommendation: add hot-surface labels to line 14 (hardware and consumables) when the BOM is next revised; they cost little and support the safety section.
+
+### Safety
+
+The renders show hot-surface labels on the drum blanket and the jacket blanket and the open, uncapped jacket vent, consistent with the safety section of the design precis. They are illustrative; the labels are not a specified safety sign set.
+
+### TRL
+
+This is an appearance model only, with no tolerances or fabrication detail. `trl: 3` and `trl_target: 3` are unchanged, and TRL 4 remains on hold by Amish's instruction.
