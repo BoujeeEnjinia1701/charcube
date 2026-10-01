@@ -2,7 +2,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![DOI](https://zenodo.org/badge/1386351149.svg)](https://zenodo.org/badge/latestdoi/1386351149) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/charcube/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/charcube/actions/workflows/reuse.yml) [![Archived in Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/BoujeeEnjinia1701/charcube/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/BoujeeEnjinia1701/charcube)
 
-**Area:** CleanTech · **TRL:** 3 of 9 (proof of concept on paper; TRL 4 on hold) · **Prototype budget:** $320 USD (kiln parts estimated at $319; safety kit listed separately) · **Difficulty:** 2 of 5
+**Area:** CleanTech · **TRL:** 3 of 9 (proof of concept on paper; TRL 4 on hold) · **Value-engineering target:** $320 USD (hypothetical control target; estimated cost of the kiln parts $319, $1 under; safety kit listed separately) · **Difficulty:** 2 of 5
 
 Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
 
@@ -58,7 +58,7 @@ Crop residue gets burned in the open, releasing carbon and smoke. India alone bu
 
 Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
 
-A 114 L steel drum packed with 12.0 kg of bundled residue sits inside a 200 L drum. Gas from the heated residue burns in the gap between the drums and again in a burner throat fed by an air shroud, then passes a spiral baffle inside an open-vented, blanketed jacket that holds about 61 L of water. The TRL 3 calculations (CCB-CAL-001 v0.3, central estimates) give about 3.0 kg of biochar per batch in a burn of about 4.5 h with about 3.7 kg of wood, and about 11.5 MJ of hot water, for $319 in kiln parts. Cost is within the $320 kiln budget (topped up from $300 by Amish on 2026-09-26) with only $1 to spare, and burn time, hot water and start-up wood are at risk. Nothing is measured yet.
+A 114 L steel drum packed with 12.0 kg of bundled residue sits inside a 200 L drum. Gas from the heated residue burns in the gap between the drums and again in a burner throat fed by an air shroud, then passes a spiral baffle inside an open-vented, blanketed jacket that holds about 61 L of water. The TRL 3 calculations (CCB-CAL-001 v0.3, central estimates) give about 3.0 kg of biochar per batch in a burn of about 4.5 h with about 3.7 kg of wood, and about 11.5 MJ of hot water, for $319 in kiln parts. Estimated cost is within the $320 value-engineering target (a hypothetical control target, not a limit) by $1, before the parts added for construction are priced, and burn time, hot water and start-up wood are at risk. Nothing is measured yet.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 

@@ -2,11 +2,11 @@
 
 Prices are indicative USD estimates for TRL 3, priced by supplier type (drum reconditioner or scrap dealer, local fabricator, steel stockist, hardware shop, refractory supplier, electronics distributor). Named suppliers depend on the first region, which is still open (CCB-DDR-001 item 9). Item numbers match the exploded view (`media/exploded.png`), the components table in `docs/02-concept.md` and the drawing CCB-DWG-001. Item 14 is in the BOM but not modelled.
 
-The 17 lines total **$319**, $1 under the $320 kiln budget (topped up from $300, decided by Amish, 2026-09-26, CCB-DDR-002 item 17; checked by `docs/04-calcs/sizing.py`, CCB-CAL-001 v0.3 section 11). Lines 15 to 17 ($21) were added when Amish accepted the recommendations for R6 and R8 on 2026-09-25 (CCB-DDR-002 items 12 and 13).
+The 17 lines total **$319**, $1 under the $320 value-engineering target (a hypothetical control target, not a limit; checked by `docs/04-calcs/sizing.py`, CCB-CAL-001 v0.3 section 11). Lines 15 to 17 ($21) were added when Amish accepted the recommendations for R6 and R8 on 2026-09-25 (CCB-DDR-002 items 12 and 13).
 
-## Safety kit (required, outside the kiln budget)
+## Safety kit (required, outside the kiln parts target)
 
-Decided by Amish, 2026-09-25 (CCB-DDR-001 item 2): the kiln budget ($300, raised to $320 on 2026-09-26) covers kiln parts only, and the safety kit is required and listed separately. Decided by Amish, 2026-09-25 (CCB-DDR-002 item 16): this table and CCB-REQ-001 R10 are where the safety kit requirement is stated, since build notes are TRL 4 material.
+Decided by Amish, 2026-09-25 (CCB-DDR-001 item 2): the kiln parts value-engineering target ($320) covers kiln parts only, and the safety kit is required and listed separately. Decided by Amish, 2026-09-25 (CCB-DDR-002 item 16): this table and CCB-REQ-001 R10 are where the safety kit requirement is stated, since build notes are TRL 4 material.
 
 | Item | Indicative cost (USD) |
 | --- | --- |
@@ -32,7 +32,7 @@ Decided by Amish, 2026-09-25 (CCB-DDR-001 item 2): the kiln budget ($300, raised
 
 ## Changes for construction (CCB-DDR-003, 2026-09-30, Draft)
 
-Made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review. Prices are unchanged, so the total stays $319, but the added parts are not yet priced (see the design decisions register, CCB-DEC-001, open decision 2).
+Made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review. Prices are unchanged, so the total stays $319, but the added parts are not yet priced (see the Value engineering section of the design decisions register, CCB-DEC-001).
 
 - Line 1: sliding port dampers now held in riveted guide strips; 10 mm core probe hole.
 - Line 2: 150 mm lid hole; collar rolled to the throat and riveted on by six tabs.

@@ -3,9 +3,9 @@ doc_id: CCB-PRC-001
 title: CharCube design precis
 project: CharCube
 doc_type: Design precis
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,11 +33,15 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Design made constructable (CCB-DDR-003, Draft); components table, masses and probe routes updated; build plan CCB-BLD-001
+- version: "0.7"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # CharCube design precis
 
-CharCube is a batch retort kiln made from a 114 L (30 US gal) steel drum sealed inside a 200 L (55 US gal) drum. Crop residue packed into the inner drum (the retort) is heated without air; the gas it gives off escapes through holes in the retort base and burns in the gap between the drums, which keeps the process going. The flame and any unburned gas then pass through a burner throat fed with secondary air, and the hot flue gas rises past a spiral baffle through an open-vented, blanketed water jacket of about 61 L before leaving a flue 2.70 m above the ground. The TRL 3 calculations (CCB-CAL-001 v0.4) give, for the central case: 12.0 kg of air-dry residue per batch makes about 3.0 kg of biochar in a burn of about 4.5 h using about 3.7 kg of wood, and heats the water by about 45 K (11.5 MJ). The kiln parts cost $319 against the $320 budget, topped up from $300 by Amish on 2026-09-26, so cost (R10) is met with a $1 margin; burn time, hot water and start-up wood (R5, R6, R8) are at risk.
+CharCube is a batch retort kiln made from a 114 L (30 US gal) steel drum sealed inside a 200 L (55 US gal) drum. Crop residue packed into the inner drum (the retort) is heated without air; the gas it gives off escapes through holes in the retort base and burns in the gap between the drums, which keeps the process going. The flame and any unburned gas then pass through a burner throat fed with secondary air, and the hot flue gas rises past a spiral baffle through an open-vented, blanketed water jacket of about 61 L before leaving a flue 2.70 m above the ground. The TRL 3 calculations (CCB-CAL-001 v0.4) give, for the central case: 12.0 kg of air-dry residue per batch makes about 3.0 kg of biochar in a burn of about 4.5 h using about 3.7 kg of wood, and heats the water by about 45 K (11.5 MJ). Against the $320 value-engineering target (a hypothetical control target), the estimated cost of the kiln parts is $319, $1 under the target, so cost (R10) is within the target; burn time, hot water and start-up wood (R5, R6, R8) are at risk.
 
 ![Hero render](../media/hero.png)
 
@@ -127,7 +131,7 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 - **Temperature logging as standard.** Decided by Amish, 2026-09-25. Class 1 probes meet the restated R9, ±5 °C to 700 °C and indicative above (CCB-DDR-002 item 15).
 - **Insulation blanket.** Decided by Amish, 2026-09-25: ceramic fibre for the prototype, now also on the lid and top band (CCB-DDR-002 item 13), which saves 1.22 kW.
 - **Burn time target.** Decided by Amish, 2026-09-25: R5 relaxed to 5 h (CCB-DDR-002 item 14).
-- **Budget.** Decided by Amish, 2026-09-25: $300 covers the kiln parts; the safety kit is required and listed separately. With lines 15 to 17 the parts total $319; budget top-up to $320: decided by Amish, 2026-09-26 (CCB-DDR-002 item 17).
+- **Value-engineering target.** Value-engineering target: $320 (a hypothetical control target, not a limit) for the kiln parts; the safety kit is required and listed separately (decided by Amish, 2026-09-25). With lines 15 to 17 the estimated cost of the kiln parts is $319, $1 under the target.
 - **Name.** Decided by Amish, 2026-09-25: keep CharCube.
 
 ![Exploded view](../media/exploded.png)
@@ -136,7 +140,7 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 
 ## Safety
 
-> **Safety:** CharCube is a fire. CCB-CAL-001 estimates about 125 °C on the blanket and 170 to 260 °C on average over the bare port band, lid and throat, with hotter spots at gaps, the collar and the air ports; the gas inside is at 400 to 650 °C, and the char stays hot enough to reignite for many hours. Run it outdoors only, on bare soil or paving, at least 5 m from buildings, fences, dry vegetation and residue piles, never under trees or roofs, and never during a local burning ban or high wind. Keep a fire extinguisher or at least 50 L of water and a shovel at hand, keep children and animals outside a marked 3 m circle, and wear heat-resistant gloves, eye protection and closed shoes. This safety kit is required for every batch; it is listed separately from the kiln budget (CCB-REQ-001 R10).
+> **Safety:** CharCube is a fire. CCB-CAL-001 estimates about 125 °C on the blanket and 170 to 260 °C on average over the bare port band, lid and throat, with hotter spots at gaps, the collar and the air ports; the gas inside is at 400 to 650 °C, and the char stays hot enough to reignite for many hours. Run it outdoors only, on bare soil or paving, at least 5 m from buildings, fences, dry vegetation and residue piles, never under trees or roofs, and never during a local burning ban or high wind. Keep a fire extinguisher or at least 50 L of water and a shovel at hand, keep children and animals outside a marked 3 m circle, and wear heat-resistant gloves, eye protection and closed shoes. This safety kit is required for every batch; it is listed separately from the kiln parts cost (CCB-REQ-001 R10).
 
 > **Safety:** Pyrolysis gas is flammable and toxic (carbon monoxide, hydrogen, methane and tar vapor). Never open the retort or the outer lid while the kiln is hot: air entering a hot retort can ignite the gas suddenly and throw flame. Do not stand over the flue or downwind of the throat, never run the kiln in or near an enclosed space, and stop a batch that smokes heavily rather than leaving it.
 

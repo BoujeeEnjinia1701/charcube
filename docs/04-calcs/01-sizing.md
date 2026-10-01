@@ -3,9 +3,9 @@ doc_id: CCB-CAL-001
 title: CharCube sizing and first-principles checks
 project: CharCube
 doc_type: Calculation note
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,11 +25,15 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Re-run for the constructable design (CCB-DDR-003); masses, tripod legs on fins, flue length; no requirement status changed
+- version: "0.5"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # CharCube sizing and first-principles checks
 
-On paper the nested-drum retort works as a kiln, and with the changes Amish accepted on 2026-09-25 (CCB-DDR-002) it now also works as a water heater. Six of the twelve requirements are met, five are at risk and one cannot be verified at TRL 3. R10 is met after Amish approved a budget top-up to $320 on 2026-09-26 (CCB-DDR-002 item 17): the spiral baffle insert, jacket blanket and lid blanket take the kiln parts to $319. The baffle and jacket blanket raise the heat into the water from 6.4 MJ to about 11.5 MJ (R6 at risk), the lid blanket cuts the wood from 5.8 kg to about 3.7 kg (R8 at risk), and R5 was relaxed to 5 h (at risk). The 25 mm secondary air ring of TRL 2 would have starved the burner throat; the model uses an air shroud with 30 air holes.
+On paper the nested-drum retort works as a kiln, and with the changes Amish accepted on 2026-09-25 (CCB-DDR-002) it now also works as a water heater. Six of the twelve requirements are met, five are at risk and one cannot be verified at TRL 3. R10 is within the $320 value-engineering target: the spiral baffle insert, jacket blanket and lid blanket take the estimated cost of the kiln parts to $319, $1 under the target. The baffle and jacket blanket raise the heat into the water from 6.4 MJ to about 11.5 MJ (R6 at risk), the lid blanket cuts the wood from 5.8 kg to about 3.7 kg (R8 at risk), and R5 was relaxed to 5 h (at risk). The 25 mm secondary air ring of TRL 2 would have starved the burner throat; the model uses an air shroud with 30 air holes.
 
 Every number in this note is printed by `docs/04-calcs/sizing.py` (run from the repo root: `python docs/04-calcs/sizing.py`), which also writes `docs/04-calcs/results.csv`. The script reads the geometry from `PARAMS` in `cad/src/model.py` and the prices from `bom/bom.csv`, so the model, the drawing CCB-DWG-001 and this note agree. All values are first-principles estimates; nothing here is measured.
 
@@ -195,7 +199,7 @@ A type K class 2 probe is good to ±5.2 °C at 700 °C; with the MAX31855 amplif
 
 ## 11. Cost (R10)
 
-The 17 BOM lines total **$319** against the $320 budget, $1 under. Lines 15 to 17 (baffle insert $7, jacket blanket $8, lid blanket $6; $21 in all) were added by Amish's decisions on items 12 and 13 (CCB-DDR-002). The safety kit (about $40) is required and listed separately in `bom/bom-notes.md`, outside the kiln budget (CCB-DDR-001 item 2). The budget was topped up from $300 to $320 for kiln parts, decided by Amish, 2026-09-26 (CCB-DDR-002 item 17); the script reads it from `project.yaml`. R10 is **met**, with a margin of only $1.
+Value-engineering target: $320 (a hypothetical control target, not a limit). The 17 BOM lines give an estimated cost of **$319**, $1 under the target. Lines 15 to 17 (baffle insert $7, jacket blanket $8, lid blanket $6; $21 in all) were added by Amish's decisions on items 12 and 13 (CCB-DDR-002). The safety kit (about $40) is required and listed separately in `bom/bom-notes.md`, outside the kiln parts target (CCB-DDR-001 item 2). The script reads the target from `project.yaml`. R10 is **within the value-engineering target**, by only $1.
 
 ## 12. Results against requirements
 
@@ -209,7 +213,7 @@ The 17 BOM lines total **$319** against the $320 budget, $1 under. Lines 15 to 1
 | R6 | Heat into water per batch | 11.5 MJ (9.0 to 19.1 MJ) with baffle and jacket blanket | 10 MJ or more | At risk |
 | R8 | Start-up wood per batch | 3.7 kg (1.7 to 9.8 kg); light-up alone 1.7 kg | 5 kg or less | At risk |
 | R4 | Burn the gas; smoke; methane | Route closed by design; draft margin 2.4; air holes sized | Methane below 24 g/kg | Not verifiable at TRL 3 |
-| R10 | Kiln parts cost | $319 (lines 15 to 17 add $21) | $320 or less (top-up) | Met |
+| R10 | Kiln parts cost | $319 (lines 15 to 17 add $21) | $320 or less (target) | Within the value-engineering target |
 | R1 | Batch size, decided feedstock | 12.0 kg packed (loose straw 4.0 kg, excluded) | 10 kg or more | Met |
 | R7 | Open water circuit | Open vent, loose lid, tap at base, tripod-carried | By design | Met |
 | R9 | Logger accuracy and endurance | ±3.4 °C to 700 °C with class 1 probes; 6 of 31 Wh | ±5 °C to 700 °C (restated) | Met |

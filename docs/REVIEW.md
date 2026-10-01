@@ -301,11 +301,11 @@ This is an appearance model only, with no tolerances or fabrication detail. `trl
 
 - Masses (CCB-CAL-001 v0.4): kiln 97 kg (was 96 kg); lift unit 47.4 kg, 23.7 kg each for two (was 46.6 kg); retort with char 15.5 kg; full jacket 85 kg. R11 still met with 1.3 kg per person to spare. Tripod leg buckling factor 58.
 - Flue outlet stays 2.70 m. Draft margin 2.4, secondary hole area 33.9 cm² against 28.6 cm² needed. Heat to water unchanged at 11.5 MJ.
-- No requirement changed status: six met, five at risk (R2, R3, R5, R6, R8), one not verifiable at TRL 3 (R4). R10 is met only on the unchanged prices; the added parts are not priced.
+- No requirement changed status: six met, five at risk (R2, R3, R5, R6, R8), one not verifiable at TRL 3 (R4). R10 is within the $320 value-engineering target only on the unchanged prices ($319 estimated); the added parts are not priced.
 
 ### Proposed, awaiting Amish
 
-All in the design decisions register (CCB-DEC-001): accept CCB-DDR-003 (1); budget after the added parts, recommended top-up to $330 (2); concrete blocks under the hot drum floor (3); flared sleeve bottom to guide the jacket onto the throat (4); two-person lift or a swinging arm (5); first region and partner (6); conical rain cap (7); hot-surface labels in the BOM (8).
+All in the design decisions register (CCB-DEC-001): accept CCB-DDR-003 (1); concrete blocks under the hot drum floor (2); flared sleeve bottom to guide the jacket onto the throat (3); two-person lift or a swinging arm (4); first region and partner (5); conical rain cap (6); hot-surface labels in the BOM (7). The register's Value engineering section holds the $320 target, the $319 estimate and the savings worth trying.
 
 ### Safety concerns
 
@@ -323,4 +323,4 @@ The photoreal renders (`media/render-*.png`), `media/card.png`, `media/social-pr
 
 ### Recommended next step
 
-Amish to review CCB-DDR-003 and decide the open items in CCB-DEC-001, starting with the budget (2); then refresh the photoreal renders on the Mac.
+Amish to review CCB-DDR-003 and decide the open items in CCB-DEC-001; then refresh the photoreal renders on the Mac.

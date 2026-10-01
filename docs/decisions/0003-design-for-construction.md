@@ -3,9 +3,9 @@ doc_id: CCB-DDR-003
 title: CharCube design for construction
 project: CharCube
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Changes that make the concept physically buildable, with the reason for each; made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review
+- version: "0.2"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target, with cost question A1 replaced by a value-engineering note
 ---
 
 # 0003: Design for construction
@@ -54,11 +58,10 @@ The changes keep what CharCube does: the same two drums, retort fill, gas holes,
 | BOM | Lines 1 to 8, 10, 12 to 15 re-specified to the parts above; prices left as they were ($319). | Small parts were added without re-pricing; see Table 3, A1. |
 | Drawings and media | CCB-DWG-001 Rev P5; concept sheet CCB-DWG-010 Rev P4; making sketches CCB-DWG-101 to 114; STEP, STL, the interactive model and concept media regenerated. | Follows the model. |
 
-*Table 3. Proposed, awaiting Amish.*
+*Table 3. Proposed, awaiting Amish. (A1, on cost, is now a value-engineering note: the added parts are unpriced and probably add $5 to $10 to the $319 estimate against the $320 value-engineering target, and the register's Value engineering section lists the savings worth trying.)*
 
 | # | Question | Options | Recommendation |
 | --- | --- | --- | --- |
-| A1 | Cost. The parts added for construction (U-bolts, fins, foot cleats and pads, guide strips, clips, rod, bolts) are not priced; together they probably add about $5 to $10 against a $1 margin (R10). | (a) keep `budget_usd: 320` and re-price at purchase; (b) top up to $330 now; (c) find savings elsewhere (for example a cheaper logger box). | (b), since R10 is unlikely to hold once the parts are quoted. A budget change is Amish's decision. |
 | A2 | The fire under the retort heats the drum floor, which stands on a 3 mm pan on concrete blocks. Concrete can crack or spall when heated. | (a) build as modelled and measure the block surface temperature on the first burn; (b) lay a 25 mm ceramic fibre board between the pan and the blocks. | (a), with a hold point in the build plan's first checks; (b) if the blocks pass about 150 °C. |
 | A3 | The jacket sleeve must be lowered over the throat with 2 mm clear all round, by two people lifting a 47 kg unit to about 1.5 m. | (a) as modelled; (b) flare the bottom 20 mm of the sleeve out to about 190 mm so it guides itself onto the throat (a welding detail for the fabricator). | (b): it costs little at the welder and makes the lift safer. |
 

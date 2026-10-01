@@ -3,9 +3,9 @@ doc_id: CCB-REQ-001
 title: CharCube requirements
 project: CharCube
 doc_type: Requirements
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,11 +33,15 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: R11 figures from CCB-CAL-001 v0.4 (constructable design, CCB-DDR-003); no status changed
+- version: "0.7"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # CharCube requirements
 
-These are first-pass requirements for the concept. Targets are proposals for review, not user-validated needs, and will be revised after co-design sessions. R1 and R10 were redefined by Amish's decisions of 2026-09-25 (CCB-DDR-001 items 2 and 4); R5 was relaxed and R9 restated by his acceptance of the TRL 3 recommendations on the same day (CCB-DDR-002 items 14 and 15). R10's target was raised to $320 by Amish's budget top-up of 2026-09-26 (CCB-DDR-002 item 17). The status column gives the TRL 3 result from CCB-CAL-001 v0.4 (central estimate, with the range where it matters): met, not met, at risk, or not verifiable at TRL 3.
+These are first-pass requirements for the concept. Targets are proposals for review, not user-validated needs, and will be revised after co-design sessions. R1 and R10 were redefined by Amish's decisions of 2026-09-25 (CCB-DDR-001 items 2 and 4); R5 was relaxed and R9 restated by his acceptance of the TRL 3 recommendations on the same day (CCB-DDR-002 items 14 and 15). R10's value-engineering target is $320 (a hypothetical control target, not a limit; see the design decisions register). The status column gives the TRL 3 result from CCB-CAL-001 v0.4 (central estimate, with the range where it matters): met, not met, at risk, or not verifiable at TRL 3 (cost is reported against the value-engineering target).
 
 | ID | Requirement | Target | Verification (TRL 3 or later) | Status at TRL 3 (CCB-CAL-001) |
 | --- | --- | --- | --- | --- |
@@ -50,13 +54,13 @@ These are first-pass requirements for the concept. Targets are proposals for rev
 | R7 | Keep the water circuit safe | Jacket open to the air at all times; no valve or cap that can seal it; water drawn from a tap at the base; jacket kept away from the lid by a separate support | Design review and safety checklist | Met by design |
 | R8 | Use little start-up fuel | 5 kg or less of dry wood per batch | Energy balance; later weighed batches | At risk: 3.7 kg with the lid blanket (1.7 to 9.8 kg); light-up alone 1.7 kg |
 | R9 | Record each batch | Two type K channels (retort core, throat exit), class 1 probes, **±5 °C or better from 0 to 700 °C and indicative from 700 to 1,000 °C** (restated, CCB-DDR-002 item 15), logged every 10 s to removable storage, 24 h on a USB power bank | Component data; design review | Met: ±3.4 °C to 700 °C with class 1 probes; energy 6 of 31 Wh |
-| R10 | Stay within the concept budget | Kiln parts **$320** or less (topped up from $300, decided by Amish, 2026-09-26, CCB-DDR-002 item 17). **The safety kit (extinguisher or water and shovel, gloves, eye protection, dust mask, about $40) is required and listed separately, outside the kiln budget**; this requirement and `bom/bom-notes.md` are where the safety kit is stated (CCB-DDR-002 item 16) | Priced BOM | Met: $319, $1 under; the decided baffle insert, jacket blanket and lid blanket add $21 |
+| R10 | Keep the estimated cost within the value-engineering target | Kiln parts **$320** or less (a hypothetical control target, not a limit). **The safety kit (extinguisher or water and shovel, gloves, eye protection, dust mask, about $40) is required and listed separately, outside the kiln parts target**; this requirement and `bom/bom-notes.md` are where the safety kit is stated (CCB-DDR-002 item 16) | Priced BOM | Within the value-engineering target: $319, $1 under; the decided baffle insert, jacket blanket and lid blanket add $21 |
 | R11 | Be built and handled by a small crew | Built with hand tools, drill and angle grinder, with at most one welded part (the water jacket); no single lift above 25 kg per person | Masses from the model; design review | Met: lift unit 47.4 kg for two people (23.7 kg each); retort with char 15.5 kg |
 | R12 | Operate safely outdoors | Flue outlet 2.5 m or more above the ground; 5 m clear radius from structures and dry vegetation; no galvanized parts in the hot path | Model and BOM; safety checklist | Met: outlet 2.70 m; no galvanized lines |
 
-## Requirements not met or at risk
+## Requirements at risk or outside their targets
 
-- **R10 met with a $1 margin.** The kiln parts total $319 against the $320 budget after adding the decided spiral baffle insert and jacket blanket ($15, CCB-DDR-002 item 12) and lid blanket ($6, item 13). Budget top-up to $320 decided by Amish, 2026-09-26 (CCB-DDR-002 item 17); any price rise will put R10 at risk.
+- **R10 within the value-engineering target by $1.** Value-engineering target: $320 (a hypothetical control target, not a limit). Estimated cost of the kiln parts: $319 ($1 under the target) after adding the decided spiral baffle insert and jacket blanket ($15, CCB-DDR-002 item 12) and lid blanket ($6, item 13). A price rise would take the estimate over the target; the real cost is what gets accrued, and the target is there to keep the design under a value-engineering lens.
 - **R5 at risk.** The central burn (about 4.5 h) meets the relaxed 5 h target, but a poorly conducting charge could take about 7 h.
 - **R6 at risk.** The baffle insert and jacket blanket lift the central estimate to 11.5 MJ, but a short burn gives about 9.0 MJ, and the convection gain of the insert is an assumption until measured.
 - **R8 at risk.** The lid blanket brings the central wood demand to 3.7 kg, but a long burn could need about 9.8 kg.
