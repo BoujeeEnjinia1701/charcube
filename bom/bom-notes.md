@@ -30,4 +30,22 @@ Decided by Amish, 2026-09-25 (CCB-DDR-001 item 2): the kiln budget ($300, raised
 - Line 16: 25 mm mineral wool blanket on the jacket shell, $8 (item 12). Mineral wool suits the jacket because its outer face stays below 100 °C.
 - Line 17: 25 mm ceramic fibre blanket on the lid and top band, $6 (item 13), cut from the same product as line 11.
 
+## Changes for construction (CCB-DDR-003, 2026-09-30, Draft)
+
+Made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review. Prices are unchanged, so the total stays $319, but the added parts are not yet priced (see the design decisions register, CCB-DEC-001, open decision 2).
+
+- Line 1: sliding port dampers now held in riveted guide strips; 10 mm core probe hole.
+- Line 2: 150 mm lid hole; collar rolled to the throat and riveted on by six tabs.
+- Line 3: probe slot in the retort side; two M8 U-bolt handles on the lid.
+- Line 4: bricks laid round the retort's edge, clear of the gas holes.
+- Line 5: shroud riveted to the throat by six tabs; 60 mm band damper with a wing screw.
+- Line 6: probe hole; riveted to the collar.
+- Line 7: flue 650 mm (was 700 mm), resting on three riveted stop clips; rain cap on three riveted legs.
+- Line 8: three 6 mm fins welded to the jacket for the legs; loose lid located by tabs; vent nipple with locknuts.
+- Line 10: legs bolted to the jacket fins and pinned to bolted foot cleats and pads; the flat-bar ring seat is gone.
+- Line 12: blocks laid as a pinwheel.
+- Line 13: core probe 500 mm, in through the drum side; throat probe 300 mm.
+- Line 14: fasteners listed (rivets, M10 and M8 bolts, U-bolts, wing screw, hose clips).
+- Line 15: strip about 615 mm, hung on a 10 mm rod through the flue foot.
+
 The largest cost drivers are the water jacket ($60), the insulation blanket ($35), the temperature logger ($32) and the retort drum ($25). Drums are priced as used. Never use a drum that held fuel, solvent or pesticide, and never use galvanized pipe or drums in the hot path.

@@ -3,9 +3,9 @@ doc_id: CCB-CAL-001
 title: CharCube sizing and first-principles checks
 project: CharCube
 doc_type: Calculation note
-version: "0.3"
+version: "0.4"
 status: Draft
-date: '2026-09-26'
+date: '2026-09-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -21,6 +21,10 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: Budget top-up approved by Amish
+- version: "0.4"
+  date: '2026-09-30'
+  author: Amish Chadha
+  change: Re-run for the constructable design (CCB-DDR-003); masses, tripod legs on fins, flue length; no requirement status changed
 ---
 
 # CharCube sizing and first-principles checks
@@ -96,18 +100,18 @@ Without the side blanket the side would run at about 311 °C and lose 11.3 kW, s
 | --- | --- |
 | Outer drum with hoops and ring | 18.8 kg |
 | Outer lid with collar | 3.4 kg |
-| Retort with lid | 12.3 kg |
-| Burner throat; air shroud | 3.2 kg; 1.9 kg |
+| Retort with lid and U-bolt handles | 12.6 kg |
+| Burner throat; air shroud with band damper | 3.2 kg; 2.0 kg |
 | Firebricks (3); side blanket; lid blanket | 2.6 kg; 4.3 kg; 1.0 kg |
-| Water jacket, empty | 21.3 kg |
+| Water jacket, empty, with fins and loose lid | 23.3 kg |
 | Spiral baffle insert; jacket shell blanket | 1.2 kg; 2.2 kg |
-| Flue with cap; tripod; tap | 6.5 kg; 14.8 kg; 0.6 kg |
-| **Kiln without plinth and water** | **96 kg** |
-| Heat-recovery lift unit (tripod, drained jacket with baffle and blanket, flue, tap) | 46.6 kg: 23.3 kg each for two people |
-| Retort with char | 15.2 kg: one person |
-| Jacket full (61.4 L at 540 mm depth) | 83 kg, never moved full |
+| Flue with clips and cap; tripod legs, cleats and pads; tap | 6.4 kg; 13.7 kg; 0.6 kg |
+| **Kiln without plinth and water** | **97 kg** |
+| Heat-recovery lift unit (tripod, drained jacket with baffle and blanket, flue, tap) | 47.4 kg: 23.7 kg each for two people |
+| Retort with char | 15.5 kg: one person |
+| Jacket full (61.4 L at 540 mm depth) | 85 kg, never moved full |
 
-R11 is **met**: no lift exceeds 25 kg per person, but only if the jacket is drained and two people lift the unit, and the margin is now 1.7 kg per person. The only welded part is the jacket; the collar, shroud, baffle and tripod are riveted, bolted or folded. Each tripod leg (40 x 40 x 4 mm angle, 1.52 m, slenderness 195) carries about 332 N with a full jacket against an Euler load of 16.9 kN, a factor of about 51.
+R11 is **met**: no lift exceeds 25 kg per person, but only if the jacket is drained and two people lift the unit, and the margin is now 1.3 kg per person. The only welded part is the jacket, with its three leg fins; the collar, shroud, baffle and tripod are riveted, bolted or folded (CCB-DDR-003). Each tripod leg (40 x 40 x 4 mm angle bolted to a jacket fin and pinned at a foot cleat, 1.43 m between the foot pin and the lower fin bolt, slenderness 184) carries about 327 N with a full jacket against an Euler load of 18.9 kN, a factor of about 58.
 
 R12 is **met**: the flue outlet is 2.70 m above the ground and no BOM line calls for galvanized parts. The 5 m clearance is an operating rule (CCB-PRC-001, Safety).
 
@@ -128,7 +132,7 @@ Wood makes up whatever the burning volatiles cannot supply while the annulus is 
 | Flue gas per batch | 79 kg | 128 kg | 246 kg |
 | Gas leaving the throat (jacket inlet) | 471 °C | 432 °C | 396 °C |
 
-Light-up alone needs about 1.7 kg of wood; in the favourable case that is all the wood needed. R8 is met on the central estimate (3.7 kg against 5 kg) but **at risk**, because a long burn with a poorly conducting charge needs about 9.8 kg. Excess air matters as much as burn time: every kilogram of surplus air leaves at 650 °C. Figure 2 in CCB-PRC-001 shows the central energy flow: 253 MJ in (residue at its higher heating value, wood at its lower), 60 MJ kept in the char, 33 MJ as latent heat and unburned gas, 160 MJ released, 99 MJ to the charge, structure and shell, and 60 MJ in the flue gas at the jacket, of which 11.5 MJ goes into the water.
+Light-up alone needs about 1.7 kg of wood; in the favourable case that is all the wood needed. R8 is met on the central estimate (3.7 kg against 5 kg) but **at risk**, because a long burn with a poorly conducting charge needs about 9.8 kg. Excess air matters as much as burn time: every kilogram of surplus air leaves at 650 °C. Figure 2 in CCB-PRC-001 shows the central energy flow: 253 MJ in (residue at its higher heating value, wood at its lower), 60 MJ kept in the char, 33 MJ as latent heat and unburned gas, 160 MJ released, 99 MJ to the charge, structure and shell, and 61 MJ in the flue gas at the jacket, of which 11.5 MJ goes into the water.
 
 ## 6. Gas flow, draft and air (R4)
 
@@ -144,7 +148,7 @@ Light-up alone needs about 1.7 kg of wood; in the favourable case that is all th
 | Throat velocity at peak; flue velocity above the jacket | 1.69 m/s; 0.75 m/s |
 | Secondary air at peak (40 % of air) | 4.88 g/s |
 | Suction at the throat air holes at peak | 5.2 Pa |
-| Secondary hole area needed and provided | 28.5 and 33.9 cm² (30 x 12 mm in two rings, 34 mm pitch) |
+| Secondary hole area needed and provided | 28.6 and 33.9 cm² (30 x 12 mm in two rings, 34 mm pitch) |
 | TRL 2 25 mm inlet pipe at the same flow | 7.2 m/s and about 46 Pa: **would not work** |
 | Air shroud intake (230 mm sleeve, 204 cm²) | 0.20 m/s |
 
@@ -209,7 +213,7 @@ The 17 BOM lines total **$319** against the $320 budget, $1 under. Lines 15 to 1
 | R1 | Batch size, decided feedstock | 12.0 kg packed (loose straw 4.0 kg, excluded) | 10 kg or more | Met |
 | R7 | Open water circuit | Open vent, loose lid, tap at base, tripod-carried | By design | Met |
 | R9 | Logger accuracy and endurance | ±3.4 °C to 700 °C with class 1 probes; 6 of 31 Wh | ±5 °C to 700 °C (restated) | Met |
-| R11 | Crew and lifts | 23.3 kg each for two; retort with char 15.2 kg | 25 kg per person or less | Met |
+| R11 | Crew and lifts | 23.7 kg each for two; retort with char 15.5 kg | 25 kg per person or less | Met |
 | R12 | Outlet height; no galvanized hot parts | 2.70 m; none | 2.5 m or more | Met |
 
 ## 13. Limits of this note

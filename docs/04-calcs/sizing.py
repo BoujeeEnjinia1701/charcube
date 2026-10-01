@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "cad/src"))
-from model import PARAMS as P, levels  # noqa: E402
+from model import PARAMS as P, levels, tripod_geometry  # noqa: E402
 
 L = levels()
 SIGMA = 5.670e-8
@@ -223,24 +223,28 @@ mm = 1e-3
 m_outer = RHO_STEEL * P["OUT_T"] * mm * (cyl_area(P["OUT_D"] * mm, P["OUT_H"] * mm) + disc(P["OUT_D"] * mm)) + 2.0  # hoops and locking ring
 m_lid = RHO_STEEL * P["LID_T"] * mm * (disc((P["OUT_D"] + 12) * mm) + cyl_area(P["FLUE_D"] * mm, P["COLLAR_H"] * mm))
 m_ret = RHO_STEEL * P["RET_T"] * mm * (cyl_area(P["RET_D"] * mm, P["RET_H"] * mm) + disc(P["RET_D"] * mm)) \
-    + RHO_STEEL * 1.2 * mm * disc((P["RET_D"] + 20) * mm) + 0.8                                                  # lid and bolt ring
+    + RHO_STEEL * 1.2 * mm * disc((P["RET_D"] + 20) * mm) + 0.8 + 0.3                                            # lid and bolt ring; two U-bolt handles (DDR-003)
 m_thr = RHO_STEEL * P["FLUE_T"] * mm * cyl_area(P["FLUE_D"] * mm, P["THROAT_H"] * mm)
 m_shr = RHO_STEEL * 1.5 * mm * (cyl_area(P["SHROUD_D"] * mm, P["SHROUD_H"] * mm) + disc(P["SHROUD_D"] * mm, P["FLUE_D"] * mm)
-                                 + cyl_area(P["SHROUD_D"] * mm, 0.04))
+                                 + cyl_area(P["SHROUD_D"] * mm, P["BAND_H"] * mm))      # band damper (DDR-003: 60 mm)
 m_bricks = 3 * 0.114 * 0.064 * P["STANDOFF"] * mm * 2000
 m_blanket = 128 * a_ins * P["INS_T"] * mm
 m_lidins = 128 * (a_top - a_lid_bare) * P["LID_INS_T"] * mm + 0.1                     # plus wire
 d_bore0 = (P["SLEEVE_D"] - 2 * P["SLEEVE_T"]) * mm
-m_baffle = RHO_STEEL * P["BAFFLE_T"] * mm * P["BAFFLE_W"] * mm * (P["JKT_H"] - 10) * mm + RHO_STEEL * 1e-4 * P["FLUE_D"] * mm
+m_baffle = (RHO_STEEL * P["BAFFLE_T"] * mm * P["BAFFLE_W"] * mm * (P["JKT_H"] + P["ROD_Z"]) * mm          # strip up to the hanger rod
+            + RHO_STEEL * math.pi / 4 * (P["ROD_D"] * mm) ** 2 * P["ROD_L"] * mm)                     # hanger rod (DDR-003)
 m_jins = 100 * cyl_area((P["JKT_D"] + P["JKT_INS_T"]) * mm, (P["JKT_H"] - 60) * mm) * P["JKT_INS_T"] * mm + 0.3   # rock wool, wire
 m_jkt = RHO_STEEL * (P["JKT_T"] * mm * (cyl_area(P["JKT_D"] * mm, P["JKT_H"] * mm) + disc(P["JKT_D"] * mm, P["SLEEVE_D"] * mm))
                      + P["SLEEVE_T"] * mm * cyl_area(P["SLEEVE_D"] * mm, (P["JKT_H"] + 2 * P["SOCKET"]) * mm)
-                     + 1.0 * mm * disc((P["JKT_D"] + 10) * mm, P["SLEEVE_D"] * mm)) + 0.3                         # loose lid, vent
+                     + 1.5 * mm * disc(P["JKT_D"] * mm, P["JLID_HOLE_D"] * mm)                                     # loose lid
+                     + 3 * (P["FIN"][1] - P["FIN"][0]) * (P["FIN"][3] - P["FIN"][2]) * P["FIN"][4] * mm ** 3) + 0.3  # fins (DDR-003), vent
 m_tap = 0.6
-m_flue = RHO_STEEL * P["FLUE_T"] * mm * cyl_area(P["FLUE_D"] * mm, (P["FLUE_ABOVE"] + P["SOCKET"]) * mm) + 1.0      # cap
-rseat = (P["JKT_D"] / 2 + 12) * mm
-leg = math.hypot(P["FOOT_R"] * mm - rseat, (L["z_jkt"] - 12) * mm)
-m_tripod = 3 * leg * 2.42 + 2 * math.pi * rseat * 1.88 + 3 * 0.4                                                   # 40x40x4 angle, 40x6 flat ring, feet
+m_flue = RHO_STEEL * P["FLUE_T"] * mm * cyl_area(P["FLUE_D"] * mm, P["FLUE_ABOVE"] * mm) + 1.0 + 0.3      # 650 mm pipe (DDR-003), cap; clips and cap legs
+TRI = tripod_geometry()                     # DDR-003: legs bolted to fins welded on the jacket, pinned at bolted foot cleats
+leg_cut = TRI["len"] * mm                   # cut length of each 40 x 40 x 4 angle leg
+leg = (TRI["s"]["b2"] - P["FOOT_BOLT_Z"] / TRI["d"][1]) * mm   # free length, foot bolt to lower fin bolt
+m_feet = 3 * (P["CLEAT_L"] * mm * 2.42 + RHO_STEEL * (P["FOOT_PAD"][0] * mm) ** 2 * P["FOOT_PAD"][1] * mm) + 0.6  # cleats, pads, bolts
+m_tripod = 3 * leg_cut * 2.42 + m_feet                                                                         # 40x40x4 angle at 2.42 kg/m
 m_unit = m_jkt + m_tap + m_flue + m_tripod + m_baffle + m_jins
 v_water = math.pi / 4 * ((P["JKT_D"] - 2 * P["JKT_T"]) ** 2 - P["SLEEVE_D"] ** 2) * mm ** 2 * P["WATER_H"] * mm
 m_water = v_water * 1000
@@ -266,8 +270,8 @@ pr("heat stored in drum, lid, throat, bricks and blanket", q_struct, "MJ", "{:.1
 A_ang, r_min = 308e-6, 7.8e-3
 slender = leg / r_min
 p_cr = math.pi ** 2 * 210e9 * A_ang * r_min ** 2 / leg ** 2
-cos_leg = (L["z_jkt"] - 12) * mm / leg
-p_leg = (m_jkt + m_water + m_flue + m_tap + m_baffle + m_jins + 2 * math.pi * rseat * 1.88) * G / 3 / cos_leg
+cos_leg = TRI["d"][1]
+p_leg = (m_jkt + m_water + m_flue + m_tap + m_baffle + m_jins) * G / 3 / cos_leg
 pr("tripod leg: length, slenderness", f"{leg:.2f} m, {slender:.0f}")
 pr("tripod leg: load full / Euler load / factor", f"{p_leg:.0f} N / {p_cr / 1000:.1f} kN / {p_cr / p_leg:.0f}")
 

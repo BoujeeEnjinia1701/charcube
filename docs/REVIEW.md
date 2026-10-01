@@ -269,3 +269,58 @@ This is an appearance model only, with no tolerances or fabrication detail. `trl
 - Kit 1.5.0 synced: STANDARDS v1.5 (sections 12 to 15: product renders, storefront images and image quality, public release, authorship and signing), `.kit/cards.py`, `.kit/image_qc.py`, `.kit/release_gate.py`, issue templates, and the `/render-product` and `/release` commands. `CLAUDE.md` now matches `.kit/CLAUDE.md`.
 - Every `media/render-*.png` recaptioned from its original render with the new layout: the title, concept label and repository sit in a band above the render and the view note in a band below it, each line wrapped to the image width, so no text overlaps other text or the render or runs off the image. `media/card.png` and `media/social-preview.png` regenerated with the same rules.
 - `python .kit/image_qc.py` and `python .kit/release_gate.py` pass. trl stays 3.
+
+## Session 2026-09-30: design made constructable and prototype build plan (kit 1.7.0)
+
+### What was done
+
+- Kit 1.7.0 installed (`.kit/`, `.claude/commands/`); `CLAUDE.md` now matches `.kit/CLAUDE.md`.
+- Constructability review of every component with build123d. `cad/src/model.py` now builds each component as it is made and fitted (`build_components()`) and runs 68 checks of contacts, clearances and overlaps (`python cad/src/model.py --check`): 68 of 68 pass. STEP and STL regenerated.
+- `docs/decisions/0003-design-for-construction.md` (CCB-DDR-003 v0.1, Draft): twelve changes, made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review.
+- `docs/05-build-plan.md` (CCB-BLD-001 v0.1): the illustrated prototype build plan, 21 components in build order, 19 assembly steps, first checks, safety stops. Pictures from `cad/src/build_plan_media.py`: overview, 14 making sketches (`cad/drawings/CCB-DWG-101` to `114`), 11 joint close-ups and 19 step pictures in `docs/05-build-plan/`.
+- `docs/06-design-decisions.md` (CCB-DEC-001 v0.1): open decisions, items to confirm when parts are bought, and decisions made.
+- Calculations re-run: CCB-CAL-001 v0.4 (`docs/04-calcs/sizing.py` now takes the tripod geometry from the model). CCB-PRC-001 v0.6, CCB-REQ-001 v0.6, `bom/bom.csv` and `bom/bom-notes.md` updated. CCB-DWG-001 Rev P5; concept sheet CCB-DWG-010 Rev P4; concept media and `media/model.glb` regenerated.
+- `project.yaml`: `design_state: constructable`; the build plan, the register and CCB-DDR-003 added to `trl_evidence`. README: links line and a "Building the prototype" section.
+
+### Design changes made for construction (CCB-DDR-003)
+
+1. Plinth blocks laid as a pinwheel, 580 mm square (they overlapped by 50 mm).
+2. Lid hole 150 mm; the throat stands on the lid inside a collar rolled to fit it, riveted to the lid by six tabs and to the throat by four rivets (the throat could drop through the 160 mm hole).
+3. Air shroud riveted to the throat by six tabs; band damper 60 mm with a wing screw (no fixing; the band floated and could not close the intake).
+4. Port dampers modelled as curved plates sliding in riveted guide strips (listed but not drawn or held).
+5. Firebricks laid round the retort's edge, 200 mm out, 8 mm clear of the gas holes (they covered gas holes).
+6. Two M8 U-bolt handles on the retort lid (no way to lift the retort out of a 43 mm gap).
+7. Jacket stand: three fins welded to the jacket, angle legs bolted flat to them, pinned at bolted foot cleats and pads; ring seat removed (the ring was 7 mm below and outside the jacket, so nothing carried it).
+8. Flue 650 mm on three stop clips resting on the sleeve rim; rain cap on three riveted legs, 60 mm above the outlet (no seat for the flue; cap posts inside the bore; cap 10 mm above the outlet at 2.75 m).
+9. Baffle hung on a 10 mm rod through the flue foot (the cross bar cut into the flue wall).
+10. Jacket loose lid resting on the rim on three tabs, with a 210 mm centre hole and the vent nipple through it (lid and vent floated).
+11. Logger box strapped beside the leg (the leg passed through it).
+12. Core probe 500 mm in through the drum side and a retort slot; throat probe below the sleeve (the probe could not be inserted or reach the core).
+
+### Key results
+
+- Masses (CCB-CAL-001 v0.4): kiln 97 kg (was 96 kg); lift unit 47.4 kg, 23.7 kg each for two (was 46.6 kg); retort with char 15.5 kg; full jacket 85 kg. R11 still met with 1.3 kg per person to spare. Tripod leg buckling factor 58.
+- Flue outlet stays 2.70 m. Draft margin 2.4, secondary hole area 33.9 cm² against 28.6 cm² needed. Heat to water unchanged at 11.5 MJ.
+- No requirement changed status: six met, five at risk (R2, R3, R5, R6, R8), one not verifiable at TRL 3 (R4). R10 is met only on the unchanged prices; the added parts are not priced.
+
+### Proposed, awaiting Amish
+
+All in the design decisions register (CCB-DEC-001): accept CCB-DDR-003 (1); budget after the added parts, recommended top-up to $330 (2); concrete blocks under the hot drum floor (3); flared sleeve bottom to guide the jacket onto the throat (4); two-person lift or a swinging arm (5); first region and partner (6); conical rain cap (7); hot-surface labels in the BOM (8).
+
+### Safety concerns
+
+- The plinth's concrete blocks sit under the fire below the retort; their temperature is a first check.
+- Lowering the 47 kg heat-recovery unit onto the throat with 2 mm clearance at about 1.5 m is the hardest handling step; it needs two people and a drained jacket.
+- Both probes must be pulled out before the retort or the heat-recovery unit is moved.
+
+### Stale media
+
+The photoreal renders (`media/render-*.png`), `media/card.png`, `media/social-preview.png` and `cad/src/product_model.py` still show the concept's ring seat, round rain cap posts and the logger through the leg. They are made on Amish's Mac and were not regenerated here.
+
+### TRL
+
+`trl: 3`, `trl_target: 3`. The build plan is TRL 3 paper work; nothing was built, bought or tested. TRL 4 remains on hold by Amish's instruction.
+
+### Recommended next step
+
+Amish to review CCB-DDR-003 and decide the open items in CCB-DEC-001, starting with the budget (2); then refresh the photoreal renders on the Mac.

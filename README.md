@@ -8,7 +8,7 @@ Batch retort kiln that turns biomass into biochar, with a secondary burner that 
 
 ![CharCube: retort kiln that makes biochar and hot water, product render](media/render-hero.png)
 
-[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement CCB-DWG-001 (PDF)](cad/drawings/CCB-DWG-001.pdf) · [Calculations CCB-CAL-001](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
+[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement CCB-DWG-001 (PDF)](cad/drawings/CCB-DWG-001.pdf) · [Calculations CCB-CAL-001](docs/04-calcs/01-sizing.md) · [Prototype build plan](docs/05-build-plan.md) · [Design decisions](docs/06-design-decisions.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 
@@ -72,6 +72,12 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 - Two-channel thermocouple logger
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv). The parametric model is [cad/src/model.py](cad/src/model.py), with STEP and STL exports in `cad/step/` and `cad/stl/`.
+
+## Building the prototype
+
+The [prototype build plan](docs/05-build-plan.md) (CCB-BLD-001) shows how to make and fit every one of the 21 components, in build order, with a making sketch for each made part, close-ups of the joints and a picture for every assembly step. Most of the work is cutting, drilling, rolling and riveting two used drums, plain pipe and sheet; the water jacket is the one welded part. Writing the plan made the design buildable: the jacket now stands on angle legs bolted to fins on its shell, the throat stands in a riveted collar, and the flue rests on the jacket on three clips (CCB-DDR-003, open for review). It is a plan, not yet built; building and testing to it is TRL 4 work, which is on hold.
+
+![CharCube prototype: every component, pulled apart and numbered in build order](docs/05-build-plan/overview.png)
 
 ## Safety
 

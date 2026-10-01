@@ -1,4 +1,4 @@
-"""CharCube general arrangement drawing CCB-DWG-001 (Rev P4).
+"""CharCube general arrangement drawing CCB-DWG-001 (Rev P5).
 
 Run from the repo root:  python cad/src/sheets.py
 Builds cad/drawings/CCB-DWG-001.svg, .pdf and .png from the parametric model.
@@ -24,12 +24,13 @@ work = ROOT / "cad/drawings/_views"
 views = project_views(asm, work)
 
 s = Sheet(project="CharCube", title="General arrangement, TRL 3 model", dwg_no="CCB-DWG-001",
-          rev="P4", author="Amish Chadha", date="2026-09-26", concept=True, scale=1 / 30,
+          rev="P5", author="Amish Chadha", date="2026-09-30", concept=True, scale=1 / 30,
           material="Plain carbon steel drums, sheet and pipe; no galvanized parts. See bom/bom.csv",
           revisions=[("P1", "Preliminary GA from the TRL 3 model (CCB-CAL-001)", "2026-09-25", "AC"),
                      ("P2", "DDR-002: baffle insert, jacket and lid blankets, 30 air holes", "2026-09-25", "AC"),
                      ("P3", "DDR-002 item 17: budget top-up to $320; R10 met", "2026-09-26", "AC"),
-                     ("P4", "Layout and labels tidied", "2026-09-30", "AC")])
+                     ("P4", "Layout and labels tidied", "2026-09-30", "AC"),
+                     ("P5", "CCB-DDR-003: design made constructable (fins and legs, collar, clips)", "2026-09-30", "AC")])
 s.add_ortho(views, ["front", "top", "right"])
 s.add_svg(views["iso"], 276, 44, 140, 62, label="Isometric view", sublabel="Not to scale")
 s.add_notes("Key dimensions (mm) and data", [
@@ -44,9 +45,9 @@ s.add_notes("Key dimensions (mm) and data", [
     f"Spiral baffle {P['BAFFLE_W']:.0f} wide in sleeve, hung from flue foot; {P['JKT_INS_T']:.0f} mm wool on jacket",
     f"{P['LID_INS_T']:.0f} mm ceramic fibre on lid and top band, clear of shroud",
     f"Jacket underside {L['z_jkt']:.0f}; flue outlet {L['z_out']:.0f} above ground",
-    f"Tripod feet on {2 * P['FOOT_R']:.0f} circle; 40 x 40 x 4 angle legs",
+    f"Tripod feet on {2 * P['FOOT_R']:.0f} circle; 40 x 40 x 4 legs bolted to jacket fins",
     "Jacket OPEN-VENTED: never fit a sealed lid, valve or plug",
-    "Kiln about 96 kg dry; lift unit 47 kg, two people (CCB-CAL-001)",
+    "Kiln about 97 kg dry; lift unit 47 kg, two people (CCB-CAL-001)",
     "Parts $319 against the $320 budget (R10 met). See CCB-CAL-001 v0.3",
     "PRELIMINARY, NOT FOR FABRICATION",
 ], x=276, y=124, width=140)

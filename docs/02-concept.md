@@ -3,9 +3,9 @@ doc_id: CCB-PRC-001
 title: CharCube design precis
 project: CharCube
 doc_type: Design precis
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-09-26'
+date: '2026-09-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,11 +29,15 @@ revisions:
   date: '2026-09-26'
   author: Amish Chadha
   change: Budget top-up approved by Amish ($320, CCB-DDR-002 item 17); R10 met
+- version: "0.6"
+  date: '2026-09-30'
+  author: Amish Chadha
+  change: Design made constructable (CCB-DDR-003, Draft); components table, masses and probe routes updated; build plan CCB-BLD-001
 ---
 
 # CharCube design precis
 
-CharCube is a batch retort kiln made from a 114 L (30 US gal) steel drum sealed inside a 200 L (55 US gal) drum. Crop residue packed into the inner drum (the retort) is heated without air; the gas it gives off escapes through holes in the retort base and burns in the gap between the drums, which keeps the process going. The flame and any unburned gas then pass through a burner throat fed with secondary air, and the hot flue gas rises past a spiral baffle through an open-vented, blanketed water jacket of about 61 L before leaving a flue 2.70 m above the ground. The TRL 3 calculations (CCB-CAL-001 v0.3) give, for the central case: 12.0 kg of air-dry residue per batch makes about 3.0 kg of biochar in a burn of about 4.5 h using about 3.7 kg of wood, and heats the water by about 45 K (11.5 MJ). The kiln parts cost $319 against the $320 budget, topped up from $300 by Amish on 2026-09-26, so cost (R10) is met with a $1 margin; burn time, hot water and start-up wood (R5, R6, R8) are at risk.
+CharCube is a batch retort kiln made from a 114 L (30 US gal) steel drum sealed inside a 200 L (55 US gal) drum. Crop residue packed into the inner drum (the retort) is heated without air; the gas it gives off escapes through holes in the retort base and burns in the gap between the drums, which keeps the process going. The flame and any unburned gas then pass through a burner throat fed with secondary air, and the hot flue gas rises past a spiral baffle through an open-vented, blanketed water jacket of about 61 L before leaving a flue 2.70 m above the ground. The TRL 3 calculations (CCB-CAL-001 v0.4) give, for the central case: 12.0 kg of air-dry residue per batch makes about 3.0 kg of biochar in a burn of about 4.5 h using about 3.7 kg of wood, and heats the water by about 45 K (11.5 MJ). The kiln parts cost $319 against the $320 budget, topped up from $300 by Amish on 2026-09-26, so cost (R10) is met with a $1 margin; burn time, hot water and start-up wood (R5, R6, R8) are at risk.
 
 ![Hero render](../media/hero.png)
 
@@ -47,7 +51,7 @@ CharCube is a batch retort kiln made from a 114 L (30 US gal) steel drum sealed 
 4. **Clean-up burn.** Everything leaving the outer drum passes the burner throat, a 160 mm steel pipe 400 mm long. A 230 mm sleeve (the air shroud) around its base admits secondary air, preheated by the throat wall, through 30 holes of 12 mm, so gas that escaped the annulus fire burns there instead of leaving as smoke and methane.
 5. **Heat recovery.** The hot gas (about 400 to 465 °C at the throat exit, after mixing with the secondary air) rises through a 168 mm sleeve that forms the centre of an annular water jacket. The gas flow is laminar or transitional, so a twisted steel strip (the spiral baffle insert) swirls it against the sleeve wall, and a mineral wool blanket on the jacket shell keeps the heat in the water. The jacket is open at the top, so it cannot build pressure. Hot water is drawn from a tap at its base.
 6. **Finish and cool.** When the flame at the throat dies back (about 4.5 h after lighting; 3.4 to 7.0 h), the primary ports and secondary damper are closed and the kiln is left sealed overnight. The char cools without air, so it does not burn away.
-7. **Unload and log.** Next morning the tripod unit and lid are lifted off, the retort (about 15.2 kg with its char) is lifted out, and the char is tipped out, quenched or wetted, weighed and crushed. A two-channel thermocouple logger records the retort core and the throat exit every 10 s, giving a record of peak temperature and time at temperature for each batch.
+7. **Unload and log.** Next morning the tripod unit and lid are lifted off, the core probe is pulled out, the retort (about 15.5 kg with its char) is lifted out by its two U-bolt handles, and the char is tipped out, quenched or wetted, weighed and crushed. A two-channel thermocouple logger records the retort core and the throat exit every 10 s, giving a record of peak temperature and time at temperature for each batch.
 
 ![Energy flow](../media/flow.png)
 
@@ -59,20 +63,20 @@ Table 1. Main components. Numbers match `bom/bom.csv`, Figure 4 and CCB-DWG-001.
 
 | # | Component | Choice | Notes |
 | --- | --- | --- | --- |
-| 1 | Outer drum (firebox shell) | 200 L open-head steel drum, 572 mm diameter x 851 mm, four 40 x 110 mm primary air ports with sliding dampers | Used drum; must have held a non-flammable, non-toxic product and be burned clean of paint before use |
-| 2 | Outer lid with flue collar | The drum's own lid with a 160 mm collar, 40 mm high, riveted | Sealed with ceramic gasket rope and the drum's locking ring |
-| 3 | Inner retort | 114 L open-head steel drum, 463 mm diameter x 737 mm, bolt-ring lid, eight 20 mm gas holes on a 300 mm circle in the base | Holds the feedstock; replaced when it scales through (estimate 50 to 100 batches) |
-| 4 | Firebrick standoffs | Three half firebricks, 60 mm high | Leave room for fire under the retort |
-| 5 | Secondary air shroud | 230 mm sleeve, 150 mm high, around the throat base; closed top, open bottom with a sliding band damper | Replaces the 25 mm pipe ring of TRL 2, which could not pass the air (CCB-CAL-001 section 6); decided by Amish, 2026-09-25 (CCB-DDR-002 item 11) |
+| 1 | Outer drum (firebox shell) | 200 L open-head steel drum, 572 mm diameter x 851 mm, four 40 x 110 mm primary air ports with sliding dampers in riveted guides | Used drum; must have held a non-flammable, non-toxic product and be burned clean of paint before use |
+| 2 | Outer lid with flue collar | The drum's own lid with a 150 mm hole and a 160 mm bore collar, 40 mm high, riveted on by six tabs; the throat stands on the lid inside it | Sealed with ceramic gasket rope and the drum's locking ring |
+| 3 | Inner retort | 114 L open-head steel drum, 463 mm diameter x 737 mm, bolt-ring lid, eight 20 mm gas holes on a 300 mm circle in the base, a slot for the core probe, two U-bolt handles on the lid | Holds the feedstock; replaced when it scales through (estimate 50 to 100 batches) |
+| 4 | Firebrick standoffs | Three half firebricks, 60 mm high, laid round the retort's edge clear of the gas holes | Leave room for fire under the retort |
+| 5 | Secondary air shroud | 230 mm sleeve, 150 mm high, around the throat base; closed top riveted to the throat, open bottom with a sliding band damper | Replaces the 25 mm pipe ring of TRL 2, which could not pass the air (CCB-CAL-001 section 6); decided by Amish, 2026-09-25 (CCB-DDR-002 item 11) |
 | 6 | Burner throat (afterburner) | 160 x 2 mm plain steel pipe, 400 mm long, two staggered rings of 15 air holes of 12 mm (30 in all) inside the shroud | The jacket sleeve slips over its top end; 30 holes offset the baffle pressure drop |
-| 7 | Flue pipe with rain cap | 160 x 2 mm plain (not galvanized) steel, 700 mm, slipping 50 mm into the jacket sleeve; rain cap on three posts | Outlet 2.70 m above the ground |
+| 7 | Flue pipe with rain cap | 160 x 2 mm plain (not galvanized) steel, 650 mm, its foot 50 mm inside the jacket sleeve, resting on the sleeve rim on three riveted clips; rain cap on three riveted legs, 60 mm above the outlet | Outlet 2.70 m above the ground |
 | 8 | Water jacket | Annular steel tank, 420 mm outside diameter x 600 mm, 2 mm walls, around an integral 168 mm flue sleeve; about 61 L at 540 mm depth; open top with a loose lid and 24 mm vent | The one welded, water-tight part; local fabricator |
 | 9 | Draw-off tap | 1/2 in brass ball valve with a short nipple | Drains the jacket before moving it |
-| 10 | Jacket support tripod | Three 40 x 40 x 4 mm angle legs bolted to a flat-bar ring seat, feet on a 1.44 m circle | Carries the jacket and flue so the drum lid carries no water load |
+| 10 | Jacket support tripod | Three 40 x 40 x 4 mm angle legs, each bolted to a fin welded on the jacket and pinned to a bolted foot cleat and pad; feet on a 1.44 m circle | Carries the jacket and flue so the drum lid carries no water load |
 | 11 | Insulation blanket | 25 mm ceramic fibre blanket held by wire mesh, air ports left clear | Halves the shell loss (CCB-CAL-001 section 4) |
-| 12 | Plinth | Four concrete blocks and a steel ash pan | Lifts the air ports clear of the ground and keeps embers off it |
-| 13 | Thermocouple logger | Two type K class 1 probes (retort core, throat exit), two MAX31855 amplifiers, a small microcontroller and microSD card, USB power bank | Mounted on a tripod leg, away from the heat |
-| 15 | Spiral baffle insert | 1.5 mm steel strip 150 mm wide, twisted half a turn per 300 mm, in the jacket sleeve, on a cross bar in notches at the foot of the flue | Triples gas-side convection (assumption); lifts out with the flue for tar and soot cleaning; decided by Amish, 2026-09-25 (CCB-DDR-002 item 12) |
+| 12 | Plinth | Four concrete blocks laid as a pinwheel and a steel ash pan | Lifts the air ports clear of the ground and keeps embers off it |
+| 13 | Thermocouple logger | Two type K class 1 probes (retort core, in through the drum side; throat exit, below the jacket), two MAX31855 amplifiers, a small microcontroller and microSD card, USB power bank | Strapped beside a tripod leg, away from the heat |
+| 15 | Spiral baffle insert | 1.5 mm steel strip 150 mm wide, twisted half a turn per 300 mm, in the jacket sleeve, hung on a rod through the foot of the flue | Triples gas-side convection (assumption); lifts out with the flue for tar and soot cleaning; decided by Amish, 2026-09-25 (CCB-DDR-002 item 12) |
 | 16 | Jacket shell blanket | 25 mm mineral wool on the jacket side, held by wire; tap, vent and lid clear | Cuts the jacket shell loss; decided by Amish, 2026-09-25 (item 12) |
 | 17 | Lid and top band blanket | 25 mm ceramic fibre disc on the lid, clear of the shroud intake, with a skirt over the top band and locking ring | Saves 1.22 kW of shell loss; lifted off with the lid; decided by Amish, 2026-09-25 (item 13) |
 
@@ -105,7 +109,7 @@ Table 2. Batch, energy, carbon and cost.
 | Carbon stored for 100 years | 1.30 kg C, 4.8 kg CO₂ per batch (2.96 kg x 0.55 x 0.80) | |
 | Methane penalty | 2.0 kg CO₂e per batch at the retort field average (24 g CH₄ per kg char, GWP100 28) | R4 not verifiable |
 | Net removal | 2.8 kg CO₂e per batch (2.0 to 3.5); 0.70 t CO₂e and about 740 kg of char a year at 250 batches; about 3.0 t of residue kept out of open burning | |
-| Mass | About 96 kg without plinth and water; lift unit (tripod, drained jacket with baffle and blanket, flue) 46.6 kg for two people; retort with char 15.2 kg; full jacket 83 kg | R11 met |
+| Mass | About 97 kg without plinth and water; lift unit (tripod, drained jacket with baffle and blanket, flue) 47.4 kg for two people; retort with char 15.5 kg; full jacket 85 kg | R11 met |
 | Height | Flue outlet 2.70 m; footprint about 1.44 m across the tripod feet | R12 met |
 | Parts cost | $319 against $320 (lines 15 to 17 add $21); safety kit (about $40) listed separately | R10 met ($1 margin) |
 
@@ -118,7 +122,7 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 - **Nested-drum retort rather than a flame-curtain kiln.** Decided by Amish, 2026-09-25. A Kon-Tiki cone costs less and needs no start-up wood, but it is open, its heat cannot be recovered and its yield on straw is lower.
 - **Annular water jacket on the flue rather than a copper coil.** Decided by Amish, 2026-09-25. It needs no pump or raised tank and cannot build pressure. CCB-CAL-001 showed it recovers only about 6.4 MJ per batch with a plain sleeve, so a spiral baffle insert and a jacket blanket were added (decided by Amish, 2026-09-25, CCB-DDR-002 item 12), giving about 11.5 MJ.
 - **Burner throat with preheated secondary air.** Decided by Amish, 2026-09-25. The TRL 3 sizing replaced the 25 mm pipe ring with an air shroud (decided by Amish, 2026-09-25, CCB-DDR-002 item 11).
-- **Jacket carried on a tripod, not on the drum lid.** Decided by Amish, 2026-09-25. The drained lift unit weighs 46.6 kg, 23.3 kg each for two people.
+- **Jacket carried on a tripod, not on the drum lid.** Decided by Amish, 2026-09-25. The drained lift unit weighs 47.4 kg, 23.7 kg each for two people. The legs bolt to three fins welded on the jacket (CCB-DDR-003).
 - **Target feedstock.** Decided by Amish, 2026-09-25: bundled straw and mixed stalks and cobs first; a straw press is a separate project.
 - **Temperature logging as standard.** Decided by Amish, 2026-09-25. Class 1 probes meet the restated R9, ±5 °C to 700 °C and indicative above (CCB-DDR-002 item 15).
 - **Insulation blanket.** Decided by Amish, 2026-09-25: ceramic fibre for the prototype, now also on the lid and top band (CCB-DDR-002 item 13), which saves 1.22 kW.
@@ -140,7 +144,7 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 
 - **Used drums.** Use only open-head drums that held non-flammable, non-toxic products. Never cut, drill or grind a drum that held fuel, solvent or pesticide, and burn paint and liners off outdoors, upwind, before first use. Do not use galvanized pipe or drums: heated zinc gives off toxic fumes.
 - **Char handling.** Tip char out only after overnight cooling, onto bare ground, and quench or wet it before bagging. Dry char dust is a fire and inhalation hazard; wet it and wear a dust mask when crushing.
-- **Lifting.** Drain the jacket before moving it. The tripod, jacket and flue unit weighs about 47 kg empty and needs two people; a full jacket weighs about 83 kg and must never be moved; move it only when the flue is cool enough to handle with gloves.
+- **Lifting.** Drain the jacket before moving it. The tripod, jacket and flue unit weighs about 47 kg empty and needs two people; a full jacket weighs about 85 kg and must never be moved; move it only when the flue is cool enough to handle with gloves.
 - **Sharp edges.** Cut drum edges and air ports must be deburred or folded.
 - **Baffle and blankets.** Lift the baffle insert out with the flue only when cool, and scrape tar outdoors with gloves. Wear a dust mask when cutting ceramic fibre or mineral wool, and keep the lid blanket clear of the shroud intake so the secondary air is not blocked.
 - **Temperature logger.** Keep the logger and power bank on the tripod leg away from the heat; thermocouple leads must be rated for the temperature where they run.
@@ -158,4 +162,4 @@ The TRL 3 open questions on gas holes, secondary air, draft, jacket heat transfe
 
 TRL 4 (building and logging batches) is on hold by Amish's instruction.
 
-Concept media: [blueprint sheet](../media/concept-blueprint.pdf), [interactive 3D model](../media/viewer.html). General arrangement: [CCB-DWG-001](../cad/drawings/CCB-DWG-001.pdf). Calculations: [CCB-CAL-001](04-calcs/01-sizing.md).
+Concept media: [blueprint sheet](../media/concept-blueprint.pdf), [interactive 3D model](../media/viewer.html). General arrangement: [CCB-DWG-001](../cad/drawings/CCB-DWG-001.pdf). Prototype build plan: [CCB-BLD-001](05-build-plan.md). Calculations: [CCB-CAL-001](04-calcs/01-sizing.md).
