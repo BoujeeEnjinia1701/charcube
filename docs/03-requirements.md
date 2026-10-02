@@ -3,9 +3,9 @@ doc_id: CCB-REQ-001
 title: CharCube requirements
 project: CharCube
 doc_type: Requirements
-version: "0.7"
+version: "0.8"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -37,6 +37,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.8"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Decision of 2026-10-02: lifting aid for the heat-recovery unit noted under R11'
 ---
 
 # CharCube requirements
@@ -66,7 +70,7 @@ These are first-pass requirements for the concept. Targets are proposals for rev
 - **R8 at risk.** The lid blanket brings the central wood demand to 3.7 kg, but a long burn could need about 9.8 kg.
 - **R2 and R3 at risk.** Yield and core temperature depend on feedstock and operation.
 - **R4** cannot be shown without emission measurement.
-- **R11** is met only with the jacket drained and two people lifting the tripod unit (23.7 kg each, close to the 25 kg limit).
+- **R11** is met only with the jacket drained and two people lifting the tripod unit (23.7 kg each, close to the 25 kg limit). R11 does not count the 1.5 m lift height, so a lifting aid (a swinging arm on a post or a hand winch) is to be designed for the first build (decided by Amish, 2026-10-02).
 
 ## Assumptions
 

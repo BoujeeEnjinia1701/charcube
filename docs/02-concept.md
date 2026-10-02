@@ -3,9 +3,9 @@ doc_id: CCB-PRC-001
 title: CharCube design precis
 project: CharCube
 doc_type: Design precis
-version: "0.7"
+version: "0.8"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -37,6 +37,10 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.8"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Decisions of 2026-10-02 carried in: lifting aid, fibre board under the drum floor, hot-surface labels, conical rain cap, partner selection rule and first candidate'
 ---
 
 # CharCube design precis
@@ -73,7 +77,7 @@ Table 1. Main components. Numbers match `bom/bom.csv`, Figure 4 and CCB-DWG-001.
 | 4 | Firebrick standoffs | Three half firebricks, 60 mm high, laid round the retort's edge clear of the gas holes | Leave room for fire under the retort |
 | 5 | Secondary air shroud | 230 mm sleeve, 150 mm high, around the throat base; closed top riveted to the throat, open bottom with a sliding band damper | Replaces the 25 mm pipe ring of TRL 2, which could not pass the air (CCB-CAL-001 section 6); decided by Amish, 2026-09-25 (CCB-DDR-002 item 11) |
 | 6 | Burner throat (afterburner) | 160 x 2 mm plain steel pipe, 400 mm long, two staggered rings of 15 air holes of 12 mm (30 in all) inside the shroud | The jacket sleeve slips over its top end; 30 holes offset the baffle pressure drop |
-| 7 | Flue pipe with rain cap | 160 x 2 mm plain (not galvanized) steel, 650 mm, its foot 50 mm inside the jacket sleeve, resting on the sleeve rim on three riveted clips; rain cap on three riveted legs, 60 mm above the outlet | Outlet 2.70 m above the ground |
+| 7 | Flue pipe with rain cap | 160 x 2 mm plain (not galvanized) steel, 650 mm, its foot 50 mm inside the jacket sleeve, resting on the sleeve rim on three riveted clips; conical rain cap (decided by Amish, 2026-10-02) on three riveted legs, 60 mm above the outlet | Outlet 2.70 m above the ground |
 | 8 | Water jacket | Annular steel tank, 420 mm outside diameter x 600 mm, 2 mm walls, around an integral 168 mm flue sleeve; about 61 L at 540 mm depth; open top with a loose lid and 24 mm vent | The one welded, water-tight part; local fabricator |
 | 9 | Draw-off tap | 1/2 in brass ball valve with a short nipple | Drains the jacket before moving it |
 | 10 | Jacket support tripod | Three 40 x 40 x 4 mm angle legs, each bolted to a fin welded on the jacket and pinned to a bolted foot cleat and pad; feet on a 1.44 m circle | Carries the jacket and flue so the drum lid carries no water load |
@@ -126,7 +130,7 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 - **Nested-drum retort rather than a flame-curtain kiln.** Decided by Amish, 2026-09-25. A Kon-Tiki cone costs less and needs no start-up wood, but it is open, its heat cannot be recovered and its yield on straw is lower.
 - **Annular water jacket on the flue rather than a copper coil.** Decided by Amish, 2026-09-25. It needs no pump or raised tank and cannot build pressure. CCB-CAL-001 showed it recovers only about 6.4 MJ per batch with a plain sleeve, so a spiral baffle insert and a jacket blanket were added (decided by Amish, 2026-09-25, CCB-DDR-002 item 12), giving about 11.5 MJ.
 - **Burner throat with preheated secondary air.** Decided by Amish, 2026-09-25. The TRL 3 sizing replaced the 25 mm pipe ring with an air shroud (decided by Amish, 2026-09-25, CCB-DDR-002 item 11).
-- **Jacket carried on a tripod, not on the drum lid.** Decided by Amish, 2026-09-25. The drained lift unit weighs 47.4 kg, 23.7 kg each for two people. The legs bolt to three fins welded on the jacket (CCB-DDR-003).
+- **Jacket carried on a tripod, not on the drum lid.** Decided by Amish, 2026-09-25. The drained lift unit weighs 47.4 kg, 23.7 kg each for two people. The legs bolt to three fins welded on the jacket (CCB-DDR-003). A lifting aid, a swinging arm on a post or a hand winch, is to be designed for the first build (decided by Amish, 2026-10-02); users are asked through the partner how it should work.
 - **Target feedstock.** Decided by Amish, 2026-09-25: bundled straw and mixed stalks and cobs first; a straw press is a separate project.
 - **Temperature logging as standard.** Decided by Amish, 2026-09-25. Class 1 probes meet the restated R9, ±5 °C to 700 °C and indicative above (CCB-DDR-002 item 15).
 - **Insulation blanket.** Decided by Amish, 2026-09-25: ceramic fibre for the prototype, now also on the lid and top band (CCB-DDR-002 item 13), which saves 1.22 kW.
@@ -148,7 +152,9 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 
 - **Used drums.** Use only open-head drums that held non-flammable, non-toxic products. Never cut, drill or grind a drum that held fuel, solvent or pesticide, and burn paint and liners off outdoors, upwind, before first use. Do not use galvanized pipe or drums: heated zinc gives off toxic fumes.
 - **Char handling.** Tip char out only after overnight cooling, onto bare ground, and quench or wet it before bagging. Dry char dust is a fire and inhalation hazard; wet it and wear a dust mask when crushing.
-- **Lifting.** Drain the jacket before moving it. The tripod, jacket and flue unit weighs about 47 kg empty and needs two people; a full jacket weighs about 85 kg and must never be moved; move it only when the flue is cool enough to handle with gloves.
+- **Lifting.** Drain the jacket before moving it. The tripod, jacket and flue unit weighs about 47 kg empty and is lifted to about 1.5 m, so a lifting aid is to be designed for the first build (decided by Amish, 2026-10-02); until then it needs two people; a full jacket weighs about 85 kg and must never be moved; move it only when the flue is cool enough to handle with gloves.
+- **Hot plinth.** A 25 mm ceramic fibre board lies between the ash pan and the concrete blocks from the first burn, with a thermocouple on a block, because concrete can crack or spall when heated (decided by Amish, 2026-10-02).
+- **Warning labels.** Durable hot-surface warning labels (ISO 7010 W017) go on the drum blanket and the jacket (decided by Amish, 2026-10-02).
 - **Sharp edges.** Cut drum edges and air ports must be deburred or folded.
 - **Baffle and blankets.** Lift the baffle insert out with the flue only when cool, and scrape tar outdoors with gloves. Wear a dust mask when cutting ceramic fibre or mineral wool, and keep the lid blanket clear of the shroud intake so the secondary air is not blocked.
 - **Temperature logger.** Keep the logger and power bank on the tripod leg away from the heat; thermocouple leads must be rated for the temperature where they run.
@@ -158,10 +164,10 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 The TRL 3 open questions on gas holes, secondary air, draft, jacket heat transfer and surface temperatures are answered in CCB-CAL-001. What remains:
 
 - How much does the spiral insert really raise heat transfer, and how fast does it foul? The factor of 3 is an assumption.
-- Is the 47 kg two-person lift acceptable to users, or is a swinging arm needed?
+- How should the lifting aid for the 47 kg heat-recovery unit work (a swinging arm on a post or a hand winch)? Ask users through the partner (decided by Amish, 2026-10-02, that one is needed).
 - How fast does tar foul the jacket sleeve, and how is it cleaned?
 - Establish the batch record needed for a biochar certificate, even if certification stays out of scope.
-- First region, residue and partner: proposed, awaiting Amish; partners are chosen per area later.
+- First region, residue and partner: kept open under the portfolio rule and chosen by this rule (decided by Amish, 2026-10-02): a region where rice or wheat straw is still burned in the open, with a partner that already runs residue or biochar trials. The first candidate to approach is an agricultural university's extension service, for example Punjab Agricultural University in India; nothing is agreed.
 - Validate feedstock, packing, batch size, water use and price with users through a local partner.
 
 TRL 4 (building and logging batches) is on hold by Amish's instruction.

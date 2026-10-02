@@ -324,3 +324,47 @@ The photoreal renders (`media/render-*.png`), `media/card.png`, `media/social-pr
 ### Recommended next step
 
 Amish to review CCB-DDR-003 and decide the open items in CCB-DEC-001; then refresh the photoreal renders on the Mac.
+
+## Session 2026-10-02: open decisions decided by Amish
+
+Authority: Amish, 2026-10-02: "i approve your recommendations for all 555 open decisions." The recommendations approved are those written for the open decisions in the design decisions register. No model, BOM quantity or price, or picture was changed; where a decision needs one, it is listed below as a follow-up. `trl` and `trl_target` stay at 3. No commit or push.
+
+### Decisions recorded
+
+7, all moved to "Decisions made" in `docs/06-design-decisions.md`, dated 2026-10-02:
+
+1. Design for construction (CCB-DDR-003) accepted: all twelve changes, with the first burn to confirm that the 150 mm lid hole does not limit draft.
+2. Plinth: 25 mm ceramic fibre board between pan and blocks from the first burn, with a thermocouple on a block; dropped later only if a measured burn keeps the blocks under about 150 °C.
+3. Jacket sleeve: bottom 20 mm flared to about 190 mm.
+4. Heat-recovery unit: a lifting aid (swinging arm on a post or hand winch) designed for the first build; users asked how it should work.
+5. First region, residue and partner: selection rule set (open straw burning, partner already running residue or biochar trials); first candidate to approach an agricultural university extension service such as Punjab Agricultural University.
+6. Rain cap: conical cap adopted in the model and drawings.
+7. Hot-surface labels (ISO 7010 W017) for the drum blanket and jacket added to BOM line 14.
+
+### Documents changed
+
+- `docs/06-design-decisions.md` (CCB-DEC-001 v0.3)
+- `docs/decisions/0003-design-for-construction.md` (CCB-DDR-003 v0.3): accepted; A2 and A3 recorded; status stays Draft
+- `docs/02-concept.md` (CCB-PRC-001 v0.8): lifting aid, fibre board, labels, conical cap, partner rule
+- `docs/03-requirements.md` (CCB-REQ-001 v0.8): R11 note on the lifting aid
+- `bom/bom.csv`: notes on lines 7, 12 and 14 only; no quantity or price changed
+
+### Follow-up actions to carry approved decisions into the design
+
+1. Decision 2 (model): Add the 25 mm ceramic fibre board between the ash pan and the blocks in `cad/src/model.py` and check the raised kiln (port height, flue outlet height, contacts); regenerate CCB-DWG-001 and the plinth making sketch.
+2. Decision 2 (pictures): Show the fibre board and the block thermocouple in build plan section 3.1 and its first checks.
+3. Decision 2 (bom): Add the fibre board to the BOM line 12 spec and price, and a block thermocouple to line 13.
+4. Decision 3 (model): Flare the bottom 20 mm of the jacket sleeve to about 190 mm in the model, the jacket making sketch and build plan section 3.11, step 15.
+5. Decision 4 (model): Design the lifting aid (a swinging arm on a post or a hand winch) for the heat-recovery unit in the model and drawings.
+6. Decision 4 (pictures): Show the lifting aid in build plan sections 3.15 and 3.16.
+7. Decision 4 (bom): Add the lifting aid to the BOM with a price.
+8. Decision 4 (calcs): Check the lifting aid's loads and re-judge R11 and R10 in CCB-CAL-001.
+9. Decision 6 (model): Model the conical rain cap on the three flat-bar legs and 60 mm gap; regenerate CCB-DWG-001, the flue making sketch and build plan section 3.18; update the BOM line 7 spec.
+10. Decision 7 (bom): Add the hot-surface warning labels to the BOM line 14 spec and price, and show them in build plan section 3.21.
+11. Decision 1 (calcs): Price the parts added for construction and the additions decided on 2026-10-02, and re-state the value-engineering result in CCB-CAL-001, section 11.
+
+### Points found in the review
+
+- Value engineering is not like for like: the USD 319 estimate leaves the parts added for construction unpriced (about USD 5 to 10), and items 2, 4 and 7 as recommended add more. Price them before reading the result against the USD 320 target.
+- R11 (no lift above 25 kg per person) ignores lift height and the reduced capacity of team lifts; the 47 kg unit lifted to about 1.5 m meets the letter of R11 but not common manual-handling guidance.
+- The register still describes the rain cap as resting on 'posts'; the design for construction replaced them with three riveted flat-bar legs.
