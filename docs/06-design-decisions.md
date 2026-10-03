@@ -3,9 +3,9 @@ doc_id: CCB-DEC-001
 title: CharCube design decisions register
 project: CharCube
 doc_type: Design decisions register
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-10-02'
+date: '2026-10-03'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,6 +25,10 @@ revisions:
     date: '2026-10-02'
     author: Amish Chadha
     change: 'Approved follow-ups carried out: every part priced; value-engineering result restated'
+  - version: "0.5"
+    date: '2026-10-03'
+    author: Amish Chadha
+    change: "Amish accepted the cost overrun against the value-engineering target on 2026-10-03; row added to decisions made; value engineering section updated"
 ---
 
 # CharCube design decisions register
@@ -51,6 +55,8 @@ None. All open decisions were decided on 2026-10-02.
 
 Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target).
 
+Amish accepted this overrun on 2026-10-03: the estimated cost of USD 546 against the USD 320 target (USD 226 over), with the lifting aid (USD 160) counted in the kit cost as it stands. Amish: "Cost over target - i accept all the cost variations and overruns". It stays reported against the target as an accepted overrun, and the savings below remain worth trying.
+
 Every BOM line is priced, with its basis in the line's notes (2026-10-02). The parts added for construction add USD 17 to the earlier USD 319; the additions decided on 2026-10-02 add USD 186: the fibre board USD 28, the block thermocouple USD 10, the hot-surface labels USD 8 and the lifting aid USD 160 (CCB-CAL-001 section 11).
 
 - **Main cost drivers:** the lifting aid (USD 160), the welded water jacket with its spiral baffle insert, the logger, the plinth with its fibre board, the ceramic fibre blankets and the two drums (see `bom/bom.csv`).
@@ -72,3 +78,4 @@ Every BOM line is priced, with its basis in the line's notes (2026-10-02). The p
 | 2026-10-02 | First region, residue and partner: kept open under the portfolio rule, chosen by this rule: a region where rice or wheat straw is still burned in the open, with a partner that already runs residue or biochar trials. First candidate to approach: an agricultural university's extension service, for example Punjab Agricultural University in India | Amish: "i approve your recommendations for all 555 open decisions." | CCB-DDR-001 item 9; CCB-DDR-002 Table 2 |
 | 2026-10-02 | Rain cap: the conical cap is adopted in the model and drawings, on the three flat-bar legs and 60 mm gap set by the design for construction | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, appearance item 1 |
 | 2026-10-02 | Hot-surface labels: durable ISO 7010 W017 hot-surface warning labels for the drum blanket and the jacket are added to BOM line 14 | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, appearance item 5 |
+| 2026-10-03 | Cost overrun accepted: the estimated cost of USD 546 against the USD 320 target (USD 226 over), with the lifting aid (USD 160) counted in the kit cost as it stands | Amish: "Cost over target - i accept all the cost variations and overruns" | [REVIEW.md](REVIEW.md), session 2026-10-03 |
