@@ -3,11 +3,14 @@
 Finished-product look for photoreal renders: the 200 L outer drum with chimes, rolling hoops and
 sliding port dampers, wrapped in its ceramic fibre blanket held by a wire mesh, with a lid and top
 band blanket; the riveted lid collar, air shroud with its band damper handle, burner throat and
-flue with a conical rain cap on three posts; the teal water jacket with its mineral wool blanket,
-open vent, loose lid and brass ball-valve tap; the jacket tripod drawn as 40 x 40 x 4 mm steel
-angle on a flat-bar ring seat with bolted gussets and foot plates; the concrete block plinth and
-ash pan; the retort with its bolt-ring lid on firebrick standoffs; the spiral baffle; and the
-thermocouple logger in a weatherproof box with a clear window, a lit status light and its probes.
+flue with its stop clips and a conical rain cap on three riveted flat-bar legs; the teal water jacket
+with its flared sleeve foot, mineral wool blanket, open vent, loose lid and brass ball-valve tap; the
+jacket tripod of 40 x 40 x 4 mm steel angle bolted to fins welded on the jacket, with bolted foot
+cleats and pads; the pinwheel concrete block plinth with its ceramic fibre board, block thermocouple
+and ash pan; the retort with its bolt-ring lid and U-bolt handles on firebrick standoffs; the spiral
+baffle; the thermocouple logger strapped beside a leg, with its probes; and the lifting aid (post in a
+ground sleeve, bolted arm and brace, pulleys, hand winch, rope and hook), parked behind the kiln.
+Revised 2026-10-02 to match the constructable design (CCB-DDR-003) and the 2026-10-02 decisions.
 Hot-surface labels (yellow triangles) sit on both blankets and a teal name band on the drum
 blanket. Context is a compact paved ground patch and the shared clay mannequin standing beside
 the kiln for scale.
@@ -15,7 +18,7 @@ APPEARANCE MODEL ONLY: no tolerances, no fabrication detail. CONCEPT, NOT FOR FA
 
 Every main dimension, height and interface comes from PARAMS, levels() and build_parts() in
 model.py, with the same axes: Z up, ground at Z = 0, kiln axis on X = Y = 0, front toward -Y.
-Differences from model.py are listed in docs/REVIEW.md, session 2026-09-26.
+Differences from model.py are listed in docs/REVIEW.md (sessions 2026-09-26 and 2026-10-02).
 
     from product_model import product_parts
     for p in product_parts(): print(p["name"], p["group"], p["material"])
@@ -30,7 +33,8 @@ sys.path.insert(0, str(HERE.parents[1] / ".kit"))
 
 from build123d import (Axis, Box, Cone, Cylinder, Plane, Polygon, Pos, Rectangle, Rot, Solid, Sphere,
                        Torus, Vector, extrude, fillet)
-from model import PARAMS, build_parts, levels
+from build123d import Compound
+from model import PARAMS, build_components, build_parts, levels
 
 TITLE = "CharCube: retort kiln that makes biochar and hot water"
 
@@ -42,7 +46,10 @@ RENDER_VIEWS = [
     {"name": "exploded", "groups": ["shell", "internal", "accessory"], "explode": True, "el": 28, "az": -55,
      "note": "Exploded view from the front right and above (about 28 deg elevation): plinth and ash pan, "
              "outer drum, blanket, retort on firebricks, lid, air shroud, burner throat, water jacket, "
-             "jacket blanket, spiral baffle, flue with rain cap, tripod and logger"},
+             "jacket blanket, spiral baffle, flue with conical rain cap, tripod and logger"},
+    {"name": "site", "groups": ["shell", "internal", "site", "context"], "explode": False, "el": 14, "az": -30,
+     "note": "Site view from the front right, slightly above (about 14 deg elevation): the kiln with the lifting "
+             "aid's post 1.2 m behind it and its arm parked to the left, person standing at left for scale"},
     {"name": "detail", "groups": ["shell", "internal"], "explode": False, "el": 16, "az": -35,
      "note": "Detail from the front right, slightly above (about 16 deg elevation): the kiln alone without "
              "the ground and person; air shroud and burner throat under the jacket, hot-surface labels, "
@@ -181,7 +188,8 @@ def _angle_leg(foot, top, ang_deg):
 
 def product_parts(P=PARAMS):
     L = levels(P)
-    M = build_parts(P)
+    CM = build_components(P)
+    M = build_parts(P, C=CM)
     z0, z_lid, z_thr, z_jkt, z_jtop = L["z0"], L["z_lid"], L["z_thr"], L["z_jkt"], L["z_jtop"]
     ro, rr, rf = P["OUT_D"] / 2, P["RET_D"] / 2, P["FLUE_D"] / 2
     rj, rsl = P["JKT_D"] / 2, P["SLEEVE_D"] / 2
@@ -207,18 +215,14 @@ def product_parts(P=PARAMS):
     E_TRI = (900, 1900, 1300)
 
     # ------------------------------------------------------------ 12 plinth: blocks and ash pan
-    blocks = None
-    for sy in (-1, 1):
-        row = _box(0, sy * 105, P["BASE_H"] / 2, 730, 190, P["BASE_H"])      # two 390 blocks per row, as model.py
-        row = _fillet_try(row, row.edges(), [4.0, 2.0])
-        row -= _box(0, sy * 105, P["BASE_H"] / 2, 4, 200, P["BASE_H"] + 10)  # mortar-free joint between blocks
-        for sx in (-1, 1):
-            for k in (-1, 1):                                                  # block core recesses on the ends
-                row -= _box(sx * 170 + k * 90, sy * 105 + sy * 96, P["BASE_H"] / 2 + 10, 110, 6, 120)
-        blocks = row if blocks is None else blocks + row
+    blocks = CM["blocks"].shape
+    blocks = _fillet_try(blocks, blocks.edges(), [4.0, 2.0])
     add("Plinth concrete blocks", blocks, C_CONCRETE, "painted", 12, "shell", E_BLK)
-    pan = _box(0, 0, P["BASE_H"] + P["PAN_T"] / 2, 760, 600, P["PAN_T"])
-    lip = _box(0, 0, P["BASE_H"] + 9, 760, 600, 18) - _box(0, 0, P["BASE_H"] + 10, 754, 594, 30)
+    add("Ceramic fibre board", CM["board"].shape, C_CERAMIC, "fabric", 12, "shell", ((E_BLK[0] + E_PAN[0]) / 2, 0, (E_BLK[2] + E_PAN[2]) / 2))
+    add("Block thermocouple", CM["btc"].shape, C_CABLE, "rubber", 13, "shell", E_BLK)
+    hp = P["BASE_H"] + P["BOARD"][2]
+    pan = CM["pan"].shape
+    lip = _box(0, 0, hp + 9, 760, 600, 18) - _box(0, 0, hp + 10, 754, 594, 30)
     pan = _fillet_try(pan + lip, (pan + lip).edges().filter_by(Axis.Z), [3.0, 1.5])
     add("Steel ash pan", pan, C_PAN, "metal", 12, "shell", E_PAN)
 
@@ -264,7 +268,7 @@ def product_parts(P=PARAMS):
         x, y, _ = _polar(rb + 0.6, 11.25 + 22.5 * k, 0)
         mesh += Pos(x, y, (zi0 + zi1) / 2) * Rot(0, 0, 11.25 + 22.5 * k) * Box(2.2, 2.2, zi1 - zi0 - 40)
     add("Blanket wire mesh", mesh, C_WIRE, "metal", 11, "shell", E_INS)
-    base, ink = _hot_label(-40, rb + 3.0, zi0 + 300, 1.0)
+    base, ink = _hot_label(-40, rb + 3.0, zi0 + 300, 0.8)
     add("Hot-surface label, drum (yellow)", base, C_YELLOW, "paper", 14, "shell", E_INS)
     add("Hot-surface label print, drum", ink, C_INK, "paper", 14, "shell", E_INS)
     band = _wrap(_rect(0, zi1 - 120, 250, 64), -40, rb + 3.0, rb + 3.8, zi1 - 200, zi1 - 40)
@@ -331,8 +335,7 @@ def product_parts(P=PARAMS):
 
     # ------------------------------------------------------------ 8 water jacket, 9 tap, 16 blanket
     jt = P["JKT_T"]
-    jkt = (_ring(rj, rj - jt, P["JKT_H"], z_jkt) + (_zcyl(rj, jt, z_jkt) - _zcyl(rsl, 10, z_jkt - 5))
-           + _ring(rsl, rsl - P["SLEEVE_T"], P["JKT_H"] + 2 * P["SOCKET"], z_jkt - P["SOCKET"]))
+    jkt = CM["jacket"].shape                                                   # with the flared sleeve foot and lift-bar holes
     jkt += _hoop(rj, z_jkt + 2, 3.0) + _hoop(rj, z_jtop - 2, 3.0)
     jkt += _tube((0, rj - 40, z_jtop), (0, rj - 40, z_jtop + 90), 12) - _tube((0, rj - 40, z_jtop - 5),
                                                                                (0, rj - 40, z_jtop + 100), 9)
@@ -372,96 +375,44 @@ def product_parts(P=PARAMS):
     add("Tap lever", lever, C_INK, "rubber", 9, "shell", E_TAP)
 
     # ------------------------------------------------------------ 7 flue, 15 baffle
-    fl = _ring(rf, rf - P["FLUE_T"], P["FLUE_ABOVE"] + P["SOCKET"], z_jtop)
-    fl += _hoop(rf, L["z_out"] - 2, 2.0)
-    for k in range(3):
-        a = 2 * math.pi * k / 3
-        fl += _tube((rf * 0.9 * math.cos(a), rf * 0.9 * math.sin(a), L["z_out"] - 40),
-                    (rf * 0.9 * math.cos(a), rf * 0.9 * math.sin(a), L["z_cap"] + 10), 4)
+    fl = CM["flue"].shape + _hoop(rf, L["z_out"] - 2, 2.0)
     add("Flue pipe", fl, C_BLACK, "painted", 7, "shell", E_FLUE)
-    cap = Pos(0, 0, L["z_cap"]) * Cone(P["CAP_D"] / 2, 20, 60, align=None)
-    cap -= Pos(0, 0, L["z_cap"] - 2.5) * Cone(P["CAP_D"] / 2 - 2.5, 17.5, 60, align=None)
-    cap += _hoop(P["CAP_D"] / 2 - 1.5, L["z_cap"] + 1.5, 2.0)
-    add("Conical rain cap", cap, C_BLACK, "painted", 7, "shell", E_FLUE)
+    add("Flue stop clips and cap legs", Compound(children=[CM["clips"].shape, CM["cap_legs"].shape]), C_BLACK, "painted", 7, "shell", E_FLUE)
+    add("Conical rain cap", CM["cap"].shape, C_BLACK, "painted", 7, "shell", E_FLUE)
     add("Spiral baffle insert", M[15][1], "#4A4F56", "metal", 15, "internal", E_BAF)
 
     # ------------------------------------------------------------ 10 tripod: angle legs, ring seat, gussets
-    rseat = rj + 12
-    zr_ = z_jkt - 12
-    trip = _ring(rj + 34, rj - 8, 6, z_jkt - 8)
-    bolts = None
-    for k in range(3):
-        a = 30 + 120 * k
-        top = _polar(rseat, a, zr_)
-        foot = _polar(P["FOOT_R"], a, 0.0)
-        trip += _angle_leg(foot, top, a)
-        g = Rot(0, 0, a) * _box(rseat + 6, 0, z_jkt - 40, 56, 6, 70)
-        trip += g
-        fp = Rot(0, 0, a) * _box(P["FOOT_R"], 0, 4, 90, 90, 8)
-        trip += _fillet_try(fp, fp.edges().filter_by(Axis.Z), [8.0, 4.0])
-        for dz in (-58, -26):
-            b = Rot(0, 0, a) * (Pos(rseat + 10, -6, z_jkt + dz) * Rot(90, 0, 0) * Cylinder(6.5, 6))
-            bolts = b if bolts is None else bolts + b
-        for dx, dy in ((-28, -28), (28, 28), (-28, 28), (28, -28)):
-            b = Rot(0, 0, a) * (Pos(P["FOOT_R"] + dx, dy, 11) * Cylinder(7, 6))
-            bolts += b
-    add("Jacket support tripod", trip, C_TRIPOD, "painted", 10, "shell", E_TRI)
-    add("Tripod bolts and ground pins", bolts, C_BOLT, "metal", 14, "shell", E_TRI)
+    add("Jacket support tripod", Compound(children=[CM[k].shape for k in ("tri_leg", "tri_cleat", "tri_pad")]),
+        C_TRIPOD, "painted", 10, "shell", E_TRI)
+    add("Jacket fins", CM["fins"].shape, C_ACCENT, "painted", 8, "shell", E_JKT)
+    add("Tripod bolts", CM["tri_bolts"].shape, C_BOLT, "metal", 14, "shell", E_TRI)
 
-    # ------------------------------------------------------------ 13 thermocouple logger and probes
-    a0 = math.radians(30)
-    lz = 520.0
-    lr = P["FOOT_R"] - (P["FOOT_R"] - rseat) * lz / (z_jkt - 12)
-    lx, ly = lr * math.cos(a0), lr * math.sin(a0)
-    by = ly - 62                                    # box on the front face of the leg (model.py centres it on the leg)
-    body = _box(lx, by + 4, lz, 90, 52, 130)
-    body = _fillet_try(body, body.edges().filter_by(Axis.Y), [8.0, 5.0])
-    body = _fillet_try(body, body.faces().sort_by(Axis.Y)[-1].edges(), [2.0, 1.0])
-    body -= _box(lx, by - 4, lz, 82, 52, 122)
-    add("Logger enclosure", body, C_SHELL, "plastic", 13, "shell", E_TRI)
-    lidf = _box(lx, by - 25, lz, 90, 8, 130)
-    lidf = _fillet_try(lidf, lidf.edges().filter_by(Axis.Y), [8.0, 5.0])
-    lidf = _fillet_try(lidf, lidf.faces().sort_by(Axis.Y)[0].edges(), [2.0, 1.0])
-    lidf -= _box(lx, by - 25, lz + 10, 62, 20, 80)
-    add("Logger lid frame", lidf, C_SHELL2, "plastic", 13, "shell", E_TRI)
-    win = _box(lx, by - 25, lz + 10, 66, 2.0, 84)
-    add("Logger clear window", win, C_WINDOW, "clear", 13, "shell", E_TRI)
-    pcb = _box(lx, by + 22, lz + 8, 70, 1.6, 100)
-    add("Logger board", pcb, C_PCB, "plastic", 13, "internal", E_TRI)
-    chips = (_box(lx - 14, by + 17, lz + 34, 24, 8, 30) + _box(lx + 18, by + 18.5, lz + 30, 14, 5, 12)
-             + _box(lx + 18, by + 18.5, lz + 12, 14, 5, 12) + _box(lx, by + 17, lz - 22, 52, 8, 26))
-    add("Logger modules and microSD", chips, C_CHIP, "plastic", 13, "internal", E_TRI)
-    bank = _box(lx, by + 12, lz - 22, 60, 12, 30)
-    bank = _fillet_try(bank, bank.edges().filter_by(Axis.Y), [4.0, 2.0])
-    add("Logger power bank", bank, "#1E3A5F", "plastic", 13, "internal", E_TRI)
-    led = Pos(lx + 30, by - 29.5, lz - 50) * Sphere(3.5) & _box(lx + 30, by - 32, lz - 50, 8, 6, 8)
-    led += Pos(lx + 30, by - 29.5, lz - 50) * Rot(90, 0, 0) * Cylinder(3.5, 2)
+    # ------------------------------------------------------------ 13 thermocouple logger and probes (positions from model.py)
+    lg = CM["logger"].shape
+    lbb = lg.bounding_box()
+    add("Logger enclosure", lg, C_SHELL, "plastic", 13, "shell", E_TRI)
+    lc = lbb.center()
+    led = Pos(lc.X, lbb.min.Y - 1.5, lc.Z - 40) * Sphere(3.5)
     add("Logger status light, green (lit)", led, C_LED_G, "emissive", 13, "shell", E_TRI)
-    lab = _box(lx - 18, by - 29.3, lz - 50, 40, 0.6, 12)
-    add("Logger label", lab, C_ACCENT, "painted", 13, "shell", E_TRI)
-    glands = None
-    for dx in (-20, 20):
-        g = _zcyl(8, 10, lz + 65, lx + dx, by) + _zcyl(10, 4, lz + 65, lx + dx, by)
-        glands = g if glands is None else glands + g
-    add("Logger cable glands", glands, C_INK, "plastic", 13, "shell", E_TRI)
-    straps = None
-    for dz in (-40, 40):
-        s = (_box((lx + lx) / 2, (by + ly) / 2 + 10, lz + dz, 100, (ly - by) + 60, 20)
-             - _box((lx + lx) / 2, (by + ly) / 2 + 10, lz + dz, 92, (ly - by) + 52, 30))
-        straps = s if straps is None else straps + s
-    add("Logger mounting straps", straps, C_INK, "fabric", 13, "shell", E_TRI)
-
-    zc = L["z_ret"] + P["FILL_H"] / 2
-    probes = _tube((70, 60, z_thr + 140), (70, 60, zc), 4) + _tube((rf + 60, 0, z_jkt - 40), (0, 0, z_jkt - 40), 4)
-    add("Type K probes", probes, C_BOLT, "metal", 13, "shell", E_TRI)
-    wp = (lx - 120, ly, z_lid + 120)
-    cab = _pipe([(lx - 20, by, lz + 79), (lx - 20, by, lz + 160), wp], 3)
-    cab += _pipe([(lx + 20, by, lz + 79), (lx + 20, by, lz + 180), (wp[0] + 10, ly, wp[2] + 10)], 3)
-    cab += _pipe([wp, (70, 60, z_thr + 140)], 3) + _pipe([(wp[0] + 10, ly, wp[2] + 10), (rf + 60, 0, z_jkt - 40)], 3)
+    add("Type K probes", CM["probes"].shape, C_BOLT, "metal", 13, "shell", E_TRI)
+    zc = L["z_core"]
+    wp = (lc.X, P["CORE_PROBE_L"] + 50, lbb.max.Z + 150)
+    cab = _pipe([(lc.X, lc.Y, lbb.max.Z), wp, (0, P["CORE_PROBE_L"] + 50, zc)], 3)
+    cab += _pipe([(lc.X + 10, lc.Y, lbb.max.Z), (lc.X + 10, P["THROAT_PROBE_L"] + 50, L["z_tprobe"]),
+                  (0, P["THROAT_PROBE_L"] + 50, L["z_tprobe"])], 3)
     add("Probe cables", cab, C_CABLE, "rubber", 13, "shell", E_TRI)
 
+    # ------------------------------------------------------------ 18 lifting aid, parked (footing below ground left out)
+    E_AID = (0, 900, 0)
+    add("Lifting aid post and ground sleeve", Compound(children=[CM["post"].shape, CM["gsleeve"].shape]), C_BLACK, "painted", 18, "site", E_AID)
+    add("Lifting aid arm and brace", Compound(children=[CM["arm"].shape, CM["brace"].shape]), C_BLACK, "painted", 18, "site", E_AID)
+    add("Lifting aid pulleys, bolts and hook", Compound(children=[CM[k].shape for k in ("pulleys", "aid_bolts", "hook")]),
+        C_BOLT, "metal", 18, "site", E_AID)
+    add("Hand winch", CM["winch"].shape, C_ACCENT, "painted", 18, "site", E_AID)
+    add("Steel wire rope", CM["rope"].shape, C_WIRE, "metal", 18, "site", E_AID)
+
     # ------------------------------------------------------------ context: ground patch and person
-    gx0, gx1, gy0, gy1 = -1250.0, 850.0, -950.0, 600.0
+    gx0, gx1, gy0, gy1 = -1500.0, 850.0, -950.0, 1500.0
     ground = _box((gx0 + gx1) / 2, (gy0 + gy1) / 2, -30, gx1 - gx0, gy1 - gy0, 60)
     ground = _fillet_try(ground, ground.faces().sort_by(Axis.Z)[-1].edges(), [10.0, 5.0])
     for x in (-1000, -500, 0, 500):                                           # paver joints every 500 mm

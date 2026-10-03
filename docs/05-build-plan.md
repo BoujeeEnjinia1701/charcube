@@ -3,9 +3,9 @@ doc_id: CCB-BLD-001
 title: CharCube prototype build plan
 project: CharCube
 doc_type: Build plan
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
     date: '2026-09-30'
     author: Amish Chadha
     change: First build plan, with pictures by component and step; design made constructable (CCB-DDR-003)
+  - version: "0.2"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: Amish's 2026-10-02 decisions built in (fibre board and block thermocouple, flared sleeve foot, conical rain cap, hot-surface labels, lifting aid); pictures regenerated
 ---
 
 # CharCube prototype build plan
@@ -25,13 +29,13 @@ revisions:
 
 *Figure 1. Every component pulled apart and numbered in build order.*
 
-The prototype is one CharCube kiln, about 2.76 m tall to its rain cap: a 114 L steel drum (the retort) packed with residue, standing on bricks inside a 200 L drum on a block plinth, with a burner throat and air shroud on the outer drum's lid, and a water jacket carried above it on a three-legged stand with the flue rising through it. Figure 1 shows the 21 components in the order you make or fit them. Most are made in a small workshop from two used drums, plain steel pipe, sheet, strip and angle, by cutting, drilling, rolling sheet by hand, folding and riveting; the legs and feet are bolted. The water jacket is the one welded part and goes to a welder. The blocks, bricks, blankets, tap, probes and logger are bought. The parts cost about $319 from the bill of materials.
+The prototype is one CharCube kiln, about 2.84 m tall to its rain cap, with a lifting aid beside it: a 114 L steel drum (the retort) packed with residue, standing on bricks inside a 200 L drum on a block plinth shielded by a fibre board, with a burner throat and air shroud on the outer drum's lid, and a water jacket carried above it on a three-legged stand with the flue rising through it. A post with a swinging arm and a hand winch stands 1.2 m behind the kiln to lift the heat-recovery unit on and off. Figure 1 shows the 26 components in the order you make or fit them. Most are made in a small workshop from two used drums, plain steel pipe, sheet, strip and angle, by cutting, drilling, rolling sheet by hand, folding and riveting; the legs and feet are bolted. The water jacket is the one welded part and goes to a welder. The lifting aid is bolted together from steel tube and angle. The blocks, fibre board, bricks, blankets, tap, probes, logger, labels and winch are bought. The parts cost about $546 from the bill of materials, of which the lifting aid is about $160.
 
 > **Safety:** CharCube is a fire that makes flammable, toxic gas and hot water. Build it so that it is only ever lit outdoors, at least 5 m from buildings, fences and dry vegetation, with a fire extinguisher or 50 L of water and a shovel at hand. Use only drums that held non-flammable, non-toxic products, and never cut, drill or grind a drum that held fuel, solvent or pesticide. Never use galvanized pipe or sheet anywhere in the hot path. Wear eye protection, gloves and hearing protection when cutting and grinding, and a dust mask when cutting ceramic fibre or mineral wool. The water jacket must stay open to the air: never fit a sealed lid, valve or plug.
 
 ## 2. What changed to make it buildable
 
-The concept showed what the kiln does; some of its parts could not be made, fixed or used as drawn. Each change below keeps what the kiln does, and all of them are recorded in decision record CCB-DDR-003, open for Amish's review.
+The concept showed what the kiln does; some of its parts could not be made, fixed or used as drawn. Each change below keeps what the kiln does, and all of them are recorded in decision record CCB-DDR-003, which Amish accepted on 2026-10-02 together with the fibre board, the flared sleeve foot, the conical rain cap, the labels and the lifting aid.
 
 *Table 1. Changes from the concept.*
 
@@ -44,7 +48,7 @@ The concept showed what the kiln does; some of its parts could not be made, fixe
 | Firebricks | Standing under the gas holes | Long side round the retort, 200 mm out, 8 mm clear of the holes (Figure 8) | The gas holes vent freely |
 | Retort | Nothing to lift it by in a 43 mm gap | Two U-bolt handles on its lid | Hands do not fit beside it |
 | Jacket stand | A ring seat 7 mm below the jacket and outside its edge; round stand-in legs | Three fins welded to the jacket; angle legs bolted flat to them; bolted foot cleats and pads (Figures 18, 20) | Every joint is face to face and bolted |
-| Flue and rain cap | No seat for the flue; cap posts inside the bore; cap 10 mm above the outlet | A 650 mm flue resting on three clips; cap on three riveted legs, 60 mm above the outlet (Figures 22, 24) | The flue sits on the jacket; the outlet is at 2.70 m |
+| Flue and rain cap | No seat for the flue; cap posts inside the bore; cap 10 mm above the outlet | A 650 mm flue resting on three clips; a conical cap on three riveted legs, at least 60 mm from the flue's top edge (Figures 22, 24) | The flue sits on the jacket; the outlet is at 2.72 m |
 | Baffle | A cross bar cut into the flue wall | A rod through two holes in the flue foot; the strip hangs on it (Figure 22) | It lifts out with the flue |
 | Jacket lid | Floating above the rim; a vent standing on nothing | Rests on the rim on three tabs; vent nipple through it (Figure 16) | Open to the air, located, removable |
 | Logger | Box drawn through a leg | Strapped beside the leg | A box cannot share space with a leg |
@@ -54,28 +58,30 @@ The concept showed what the kiln does; some of its parts could not be made, fixe
 
 Make and check each component before the assembly step that needs it. Sizes are in millimetres. "Front" is the side the operator works from; "back", "left" and "right" are as seen standing in front of the kiln, and the tap is on the right. Workshop tolerance is 1 mm unless a step says otherwise; drawings do not carry tolerances before TRL 4.
 
-### 3.1 Plinth blocks and ash pan
+### 3.1 Plinth blocks, fibre board, block thermocouple and ash pan
 
-![Figure 2. Making sketch of the ash pan](../cad/drawings/CCB-DWG-101.png)
+![Figure 2. Making sketch of the ash pan and fibre board](../cad/drawings/CCB-DWG-101.png)
 
-*Figure 2. Ash pan making sketch (CCB-DWG-101).*
+*Figure 2. Plinth making sketch: ash pan, fibre board and block thermocouple (CCB-DWG-101).*
 
-**What it is and what it is made from.** Four bought concrete blocks, 390 x 190 x 190, and a steel plate, 760 x 600 x 3, that lifts the drum's air ports clear of the ground and catches embers.
+**What it is and what it is made from.** Four bought concrete blocks, 390 x 190 x 190; a 25 mm ceramic fibre board, 600 x 600, that keeps the heat of the fire off the blocks, since concrete can crack or spall when heated; a thermocouple with its tip on a block, to show how hot the blocks get; and a steel plate, 760 x 600 x 3, that lifts the drum's air ports clear of the ground and catches embers.
 
 **How to make it.**
 
 1. Cut the pan from 3 mm mild steel plate, 760 x 600. Grind the edges and round the corners to about 10.
 2. Scribe a 572 circle in the middle and a centre line each way; the drum stands on the circle.
+3. Cut the board, 600 x 600, from a sheet of 25 mm ceramic fibre board (1260 °C grade) with a fine saw, wearing a dust mask. On its underside cut a groove 4 wide and 4 deep, starting 150 behind the centre and 50 to the left of it and running straight out to the back edge.
+4. The block thermocouple is bought: a bare-wire type K with glass-fibre insulation and a 1 m lead (section 3.20).
 
 **How it fits the parts next to it.**
 
 ![Figure 3. Joint 1: drum, ash pan and block plinth](05-build-plan/joint-01.png)
 
-*Figure 3. The four blocks make a 580 mm square round a 200 mm hole; the pan lies on them and the drum's rim stands over the blocks.*
+*Figure 3. The four blocks make a 580 mm square round a 200 mm hole; the fibre board lies on them, the pan on the board, and the drum's rim stands over the blocks.*
 
-Each block's end butts against the side of the next, turning the same way round the square. The pan lies flat on all four blocks; it is 90 wider than the blocks at each side so embers from the ports land on steel.
+Each block's end butts against the side of the next, turning the same way round the square. The thermocouple's tip lies on the back block, 150 behind the centre, and its lead runs out at the back along the groove, so the board does not pinch it. The board lies centred on the blocks and the pan lies flat on the board; the pan is 80 wider than the board at each side so embers from the ports land on steel.
 
-**Check before moving on.** The pan lies level (a spirit level both ways) and does not rock.
+**Check before moving on.** The pan lies level (a spirit level both ways) and does not rock; the thermocouple reads room temperature at the logger.
 
 ### 3.2 Outer drum
 
@@ -250,16 +256,18 @@ Slide the shroud over the throat onto a 40 spacer block on the lid, drill throug
 **How to make it (for the welder).**
 
 1. Shell: 2 mm sheet rolled to 420 outside diameter, 600 tall. Bottom: a 2 mm ring, 420 outside with a 168 hole.
-2. Weld the bottom to the shell and the sleeve through the bottom, water-tight, with the sleeve standing 50 out of the top and 50 out of the bottom. The top is open; nothing is welded over it.
-3. Fins: three 6 mm plates, 85 wide and 140 tall, welded on edge to the shell, one at the front and one each at the back left and back right, 120 degrees apart. Each fin runs from 60 up the shell to 80 below the jacket's underside. Drill two 11 holes in each: 245 from the jacket's axis and 15 above its underside, and 267 from the axis and 52 below the underside.
-4. Weld a 1/2 in socket into the shell on the right side, 40 above the bottom, for the tap.
-5. Fill with water and leave overnight; fix any leak. Then paint the outside with high-temperature paint.
+2. Weld the bottom to the shell and the sleeve through the bottom, water-tight, with the sleeve standing 50 out of the top and 50 out of the bottom. The top is open; nothing is welded over it. Weld the sleeve all round: when the unit is lifted, the sleeve carries all of it.
+3. Flare the bottom 20 of the sleeve out to about 190 across, a short cone, so the sleeve guides itself onto the throat as the unit is lowered.
+4. Drill two 18 holes straight across the top socket, 35 above the shell's top edge, for the lift bar (section 3.22). Turn them a quarter turn from where the flue's rod holes will sit.
+5. Fins: three 6 mm plates, 85 wide and 140 tall, welded on edge to the shell, one at the front and one each at the back left and back right, 120 degrees apart. Each fin runs from 60 up the shell to 80 below the jacket's underside. Drill two 11 holes in each: 245 from the jacket's axis and 15 above its underside, and 267 from the axis and 52 below the underside.
+6. Weld a 1/2 in socket into the shell on the right side, 40 above the bottom, for the tap.
+7. Fill with water and leave overnight; fix any leak. Then paint the outside with high-temperature paint.
 
 **How it fits the parts next to it.**
 
 ![Figure 14. Joint 5: the jacket sleeve over the throat](05-build-plan/joint-05.png)
 
-*Figure 14. The lower 50 mm of the sleeve slips over the top of the throat with 2 mm clear all round; the baffle hangs 10 mm above the throat.*
+*Figure 14. The lower 50 mm of the sleeve slips over the top of the throat with 2 mm clear all round; its flared foot guides it on; the baffle hangs 10 mm above the throat.*
 
 The legs bolt to the fins (Figure 18); the flue rests on the sleeve's upper rim (Figure 22).
 
@@ -317,8 +325,8 @@ The legs bolt to the fins (Figure 18); the flue rests on the sleeve's upper rim 
 
 **How to make it.**
 
-1. Cut three lengths, 1555 on the longest edge. Cut the lower end 18 degrees off square, so it stands level when the leg leans 18 degrees in; cut the upper end square.
-2. On one face of the angle (the flat face), on a line 18 from its free edge, drill three 11 holes, measured along the leg from the middle of the lower end: 19 (the foot pin), 1453 and 1523 (the fin bolts).
+1. Cut three lengths, 1579 on the longest edge. Cut the lower end 18 degrees off square, so it stands level when the leg leans 18 degrees in; cut the upper end square.
+2. On one face of the angle (the flat face), on a line 18 from its free edge, drill three 11 holes, measured along the leg from the middle of the lower end: 19 (the foot pin), 1477 and 1547 (the fin bolts).
 3. Drill the three legs clamped together so the holes match.
 
 **How it fits the parts next to it.**
@@ -328,6 +336,8 @@ The legs bolt to the fins (Figure 18); the flue rests on the sleeve's upper rim 
 *Figure 18. The leg's flat face lies on the fin; two M10 bolts make the joint rigid.*
 
 The flat face lies against the side of a fin, the other face pointing away from the jacket, with two M10 bolts and nyloc nuts. The leg stays 21 clear of the jacket blanket and 40 clear of the drum blanket.
+
+The legs and their feet are what the heat-recovery unit stands on when the lifting aid sets it down (section 3.22); the unit is never carried by its legs.
 
 **Check before moving on.** Hole centres within 1 of the figures.
 
@@ -351,7 +361,7 @@ The flat face lies against the side of a fin, the other face pointing away from 
 
 *Figure 20. One M10 bolt pins the leg to the cleat, so the leg can settle as the unit is set down.*
 
-The leg's flat face lies on the cleat's upright face, outside it; one M10 bolt with a nyloc nut, snug. The foot centres sit on a 1.44 m circle.
+The leg's flat face lies on the cleat's upright face, outside it; one M10 bolt with a nyloc nut, snug. The foot centres sit on a 1.44 m circle. The pin lets each leg settle as the lifting aid lowers the unit onto its feet, beside the kiln or over it.
 
 **Check before moving on.** Each pad sits flat with the screw heads flush.
 
@@ -361,7 +371,7 @@ The leg's flat face lies on the cleat's upright face, outside it; one M10 bolt w
 
 *Figure 21. Flue pipe and stop clips making sketch (CCB-DWG-112).*
 
-**What it is and what it is made from.** A 650 length of 160 x 2 plain steel pipe that carries the gas from the jacket to the outlet, 2.70 m above the ground. Three clips of 20 x 20 x 3 angle seat it on the jacket.
+**What it is and what it is made from.** A 650 length of 160 x 2 plain steel pipe that carries the gas from the jacket to the outlet, 2.72 m above the ground. Three clips of 20 x 20 x 3 angle seat it on the jacket.
 
 **How to make it.**
 
@@ -379,23 +389,23 @@ The leg's flat face lies on the cleat's upright face, outside it; one M10 bolt w
 
 ### 3.18 Rain cap and legs
 
-![Figure 23. Making sketch of the rain cap and legs](../cad/drawings/CCB-DWG-113.png)
+![Figure 23. Making sketch of the conical rain cap and legs](../cad/drawings/CCB-DWG-113.png)
 
-*Figure 23. Rain cap and legs making sketch (CCB-DWG-113).*
+*Figure 23. Conical rain cap and legs making sketch (CCB-DWG-113).*
 
-**What it is and what it is made from.** A 260 square of 3 mm sheet on three legs of 20 x 3 flat bar, keeping rain out of the flue.
+**What it is and what it is made from.** A cone of 1.5 mm sheet, 260 across with a 30 degree slope, on three legs of 20 x 3 flat bar, keeping rain out of the flue.
 
 **How to make it.**
 
-1. Cut the cap and round its corners.
-2. Cut three legs 145 long and bend each 90 degrees 30 from one end to make a foot.
-3. Rivet the legs to the outside of the flue top, 120 degrees apart, two 4.8 rivets each, with the bent feet 56 above the flue's top edge. Rivet the cap onto the feet.
+1. Cut a 300 disc from 1.5 sheet. Cut out a 48 degree wedge to the centre, roll the rest into a cone 260 across and rivet the overlap with three 4.8 rivets.
+2. Cut three legs 142 long and bend each 90 degrees 30 from one end to make a foot.
+3. Rivet the legs to the outside of the flue top, 120 degrees apart, two 4.8 rivets each, with the bent feet 52 above the flue's top edge. Rivet the cone to the feet.
 
 **How it fits the parts next to it.**
 
 ![Figure 24. Joint 9: rain cap on its three legs](05-build-plan/joint-09.png)
 
-*Figure 24. The cap's underside sits about 58 mm above the outlet: less than that chokes the draft.*
+*Figure 24. The shortest gap from the flue's top edge to the cone is 60 mm all round: less than that chokes the draft.*
 
 **Check before moving on.** The gap under the cap is the same all round.
 
@@ -419,9 +429,9 @@ The leg's flat face lies on the cleat's upright face, outside it; one M10 bolt w
 
 ### 3.20 Logger and probes
 
-**What it is and what it is made from.** Bought: a weatherproof box with a small microcontroller, two thermocouple amplifiers, a microSD card and a USB power bank; two type K class 1 probes with 6 stainless sheaths, 500 long (retort core) and 300 long (throat exit).
+**What it is and what it is made from.** Bought: a weatherproof box with a small microcontroller, three thermocouple amplifiers, a microSD card and a USB power bank; two type K class 1 probes with 6 stainless sheaths, 500 long (retort core) and 300 long (throat exit); and the block thermocouple, a bare-wire type K with glass-fibre insulation and a 1 m lead (section 3.1).
 
-**How to make it.** Wire the two amplifiers to the microcontroller as their makers describe and lead the probe cables through cable glands in the box. The logging program is not part of this plan.
+**How to make it.** Wire the three amplifiers to the microcontroller as their makers describe and lead the probe cables through cable glands in the box. The logging program is not part of this plan.
 
 **How it fits the parts next to it.**
 
@@ -431,7 +441,7 @@ The leg's flat face lies on the cleat's upright face, outside it; one M10 bolt w
 
 The core probe goes in at the back, 361 above the drum floor, until its tip reaches the retort's axis. The throat probe goes into the throat's 8 hole at the back, 70 below the jacket, until its tip reaches the throat's axis. The box is strapped with two stainless hose clips beside the back right leg, 520 above the ground, away from the heat; probe cables are rated for the temperature where they run.
 
-**Check before moving on.** Both channels read room temperature, within 5 °C of a reference thermometer.
+**Check before moving on.** All three channels read room temperature, within 5 °C of a reference thermometer.
 
 ### 3.21 Bought components
 
@@ -442,9 +452,48 @@ Buy to specification, not brand. Line numbers are those of the bill of materials
 - **Pipe (lines 6 and 7).** Plain (not galvanized) steel pipe, 160 outside diameter, 2 wall: 400 for the throat and 650 for the flue.
 - **Tap (line 9).** 1/2 in brass ball valve and nipple.
 - **Blankets (lines 11, 16 and 17).** 25 mm ceramic fibre blanket, 128 kg/m³, about 2.6 m² in all for the drum and lid; 25 mm mineral wool blanket, about 0.8 m², for the jacket; wire mesh and tie wire.
-- **Plinth (line 12).** Four 390 x 190 x 190 concrete blocks.
+- **Plinth (line 12).** Four 390 x 190 x 190 concrete blocks and a 600 x 900 sheet of 25 mm ceramic fibre board, 1260 °C grade.
 - **Logger (line 13).** As section 3.20.
 - **Fixings and consumables (line 14).** 4.8 steel rivets (about 80); nine M10 x 30 bolts and six M8 x 20 countersunk screws, with nyloc nuts and washers; two M8 U-bolts, legs 80 apart; one M6 wing screw and rivet nut; ceramic gasket rope; high-temperature sealant; tie wire; two stainless hose clips; high-temperature paint.
+- **Hot-surface labels (line 14).** Two ISO 7010 W017 hot-surface warning signs, 100 mm aluminium triangles with two holes. Wire one to the drum blanket's mesh and one to the jacket blanket, both at the front right where the operator stands (Figure 27). Check after each season that they are still there and readable.
+
+![Figure 27. The two hot-surface labels on the drum blanket and the jacket blanket](05-build-plan/joint-14.png)
+
+*Figure 27. The two hot-surface labels, at the front right of the drum blanket and of the jacket blanket.*
+
+### 3.22 Lifting aid
+
+![Figure 28. Making sketch of the lifting aid post, ground sleeve and footing](../cad/drawings/CCB-DWG-115.png)
+
+*Figure 28. Lifting aid post, ground sleeve and footing making sketch (CCB-DWG-115).*
+
+![Figure 29. Making sketch of the lifting aid arm and brace](../cad/drawings/CCB-DWG-116.png)
+
+*Figure 29. Lifting aid arm, brace and pulleys making sketch (CCB-DWG-116).*
+
+**What it is and what it is made from.** A post that turns in a sleeve set in the ground, with an arm on top and a hand winch, so that the drained heat-recovery unit (about 47 kg) is wound up, swung clear of the kiln and set down, and nobody carries it. Steel tube 88.9 x 3.2 and 101.6 x 3.6, angle 50 x 50 x 5 and 40 x 40 x 4, two 100 steel pulleys, a hand brake winch rated 270 kg, 5 mm steel wire rope, a hook with a safety latch, a 16 round bar and concrete. It is bolted; nothing on it is welded except the plate in the bottom of the ground sleeve, which can be a loose plate held by a bolt instead.
+
+**How to make it.**
+
+1. Footing: dig a hole 600 x 600 and 750 deep with its centre 1.2 m straight behind the kiln's centre. Stand the ground sleeve (730 of 101.6 tube with its bottom closed) in it, 30 proud of the ground and plumb, and fill the hole with concrete. Leave it at least three days before loading it.
+2. Post: cut 4.69 m of 88.9 tube; close the top end with a 3 mm plate. Drill two 17 holes straight across it, 20 and 715 below its top end, as on Figure 28.
+3. Arm: cut two lengths of 50 x 50 x 5 angle, 1500. Drill each as on Figure 29: a 17 hole for the post bolt, 200 from the back end, and 13 holes for the back pulley, the brace and the tip pulley.
+4. Brace: cut two lengths of 40 x 40 x 4 angle, 990, and drill a hole near each end; cut two 5 mm packing plates for the brace's lower end.
+5. Lift bar: cut 230 of 16 round bar.
+
+**How it fits the parts next to it.**
+
+![Figure 30. Joint 13: the arm on the post top](05-build-plan/joint-13.png)
+
+*Figure 30. The two arm angles are bolted through the post with one M16 bolt; the brace runs down to a second M16 bolt; the rope runs from the winch over the back pulley and along the arm to the tip pulley.*
+
+Two people stand the post in its sleeve (about 16 kg each). From a stepladder, bolt the two arm angles either side of the post top, then the brace angles with their packing plates, then the pulleys on their axles between the arm angles with spacer tubes. Bolt the winch to the post 1 m above the ground with two U-bolts on the side away from the arm, and reeve the rope from the winch over the back pulley, along the arm and over the tip pulley to the hook. With the arm turned toward the kiln, the hook hangs over the kiln's centre; parked, the arm points to the left, away from the flue.
+
+![Figure 31. Joint 12: the lift bar through the jacket sleeve's top socket](05-build-plan/joint-12.png)
+
+*Figure 31. With the flue lifted out, the lift bar goes through the two holes in the sleeve's top socket; the hook's shackle goes on its middle.*
+
+**Check before moving on.** The post turns by hand through a quarter turn; the winch holds a load with the handle let go; with the unit hanging 100 off the ground, the post leans no more than about 50 at its top.
 
 ## 4. Putting it together
 
@@ -454,7 +503,7 @@ In each picture the parts already fitted are grey and the part being fitted is i
 
 ![Step 1](05-build-plan/step-01.png)
 
-On firm, level, bare soil or paving at least 5 m from anything that can burn. Lay the four blocks as a pinwheel and the pan on top, centred.
+On firm, level, bare soil or paving at least 5 m from anything that can burn, 1.2 m in front of the lifting aid's post (section 3.22; pour its footing first so the concrete has set by step 15). Lay the four blocks as a pinwheel, lay the block thermocouple's tip on the back block, then the fibre board, groove down over the lead, and the pan on top, centred.
 
 ### Step 2: fit the port dampers and guides
 
@@ -538,7 +587,7 @@ One M10 bolt and nyloc nut through each leg and cleat, snug so the leg can pivot
 
 ![Step 15](05-build-plan/step-15.png)
 
-Two people, jacket empty (safety stop S4). Lift the unit over the kiln and lower it so the sleeve slides over the throat. **Hold point:** the gap between sleeve and throat is about 2 all round and every foot pad sits flat.
+Jacket empty and flue out (safety stop S4). Push the lift bar through the sleeve's top socket and hook the shackle onto its middle. Wind the unit up until its feet are above the top of the throat (about 1.55 m), swing the arm over the kiln, steadying the unit by a leg, and wind it down so the flared sleeve foot finds the throat and slides over it. Pull out the lift bar. **Hold point:** the gap between sleeve and throat is about 2 all round and every foot pad sits flat. To unload later, do the same the other way: wind up, swing the arm a quarter turn and set the unit down to the left of the kiln.
 
 ### Step 16: clips and rain cap onto the flue
 
@@ -556,7 +605,7 @@ Line the strip's hole up between the two flue holes and push the rod through all
 
 ![Step 18](05-build-plan/step-18.png)
 
-From a stable step ladder, with a helper, lower the flue until its clips rest on the sleeve rim; the baffle goes down inside the sleeve.
+From a stable step ladder, with a helper, lower the flue until its clips rest on the sleeve rim; the baffle goes down inside the sleeve. Then swing the lifting aid's arm back to its parked place, away from the flue.
 
 ### Step 19: logger and probes
 
@@ -573,15 +622,17 @@ These are the checks a TRL 4 test report would record; this plan only lists them
 | Check | Requirement | How | Pass when |
 | --- | --- | --- | --- |
 | Batch size | R1 | Pack the retort to 600 with bundled residue and weigh what went in | 10 kg or more air-dry |
-| Air paths open | R4 | Slide each damper and the band from open to closed; look through the throat's holes; measure the gap under the rain cap | Every damper and the band move by hand; all 30 holes clear; cap gap about 58 all round |
+| Air paths open | R4 | Slide each damper and the band from open to closed; look through the throat's holes; measure the gap under the rain cap | Every damper and the band move by hand; all 30 holes clear; at least 60 from the flue's top edge to the cone all round |
 | Gas path sealed | R4 | Retort lid bolted on its gasket; outer lid on its rope gasket and locking ring | No visible gap at either lid |
 | Jacket open and tight | R7 | Fill to 540 deep; leave overnight; look at the vent and the centre hole | No drip; vent and hole clear; nothing seals the top |
 | Tap | R7 | Open and close the tap with the jacket full | Water runs and stops cleanly |
-| Logger | R9 | Both probes in an ice bath and in boiling water against a reference thermometer | Within 5 °C at both points; a day's record on the card |
-| Lifts | R11 | Weigh the drained heat-recovery unit and the retort with a batch of char | Unit about 47 kg (24 kg each for two); retort with char about 16 kg |
-| Outlet height | R12 | Tape from the ground to the flue's top edge | 2.70 m or more |
+| Logger | R9 | The two class 1 probes and the block thermocouple in an ice bath and in boiling water against a reference thermometer | Within 5 °C at both points; a day's record on the card |
+| Lifts | R11 | Weigh the drained heat-recovery unit on the winch with a hanging scale, and the retort with a batch of char | Unit about 47 kg, lifted only by the winch; retort with char about 16 kg |
+| Lifting aid | R11 | Raise the drained unit 100 off the ground and hold it 5 minutes; then raise it 1.55 m and swing it a quarter turn and back | Winch holds; post top moves no more than about 50; the feet clear the throat; footing does not move |
+| Outlet height | R12 | Tape from the ground to the flue's top edge | 2.72 m or more |
 | Stand | R11 | Push on the jacket top sideways by hand | No movement at any joint; all three pads flat |
-| Block temperature | Safety (S3); no requirement | Surface thermometer on the blocks after the first burn | Recorded; no cracking |
+| Block temperature | Safety (S3); no requirement | Log the block thermocouple under the fibre board through the first burn | Recorded; no cracking. If a later burn without the board keeps the blocks under about 150 °C, the board may be left off later builds |
+| Hot-surface labels | Safety; no requirement | Look at the drum blanket and the jacket blanket from the front | Both labels in place and readable |
 
 ## 6. Safety stops
 
@@ -590,26 +641,26 @@ Stop at each point. Carry on only when everything listed is true.
 - **S1. Before cutting, drilling or heating either drum.** You know what the drum held, and it was not fuel, solvent, pesticide or anything flammable or toxic; it is empty, washed and open. Paint and liners are burned off outdoors, upwind, with nobody downwind.
 - **S2. Before the jacket is used.** It has held water overnight without leaking. The top is open, the vent nipple is clear, and no sealed lid, valve or plug is fitted anywhere.
 - **S3. Before the first fire.** The site is bare soil or paving at least 5 m from buildings, fences, dry vegetation and residue piles, not under trees or a roof, with no burning ban and little wind. A fire extinguisher or 50 L of water and a shovel are at hand. A 3 m circle is marked; children and animals stay outside it. Everyone near the kiln wears heat-resistant gloves, eye protection and closed shoes. The jacket is at least three-quarters full. All first checks of section 5 have passed except the ones that need a burn.
-- **S4. Before lifting the heat-recovery unit.** The jacket is drained, the flue is cool enough to hold with gloves, both probes are out, and two people lift together. Never move the jacket full (about 85 kg).
+- **S4. Before lifting the heat-recovery unit.** The jacket is drained, the flue is cool enough to hold with gloves, both probes are out, and the flue is lifted out. The unit is moved only with the lifting aid's winch, never carried; nobody stands or reaches under it while it hangs, and the winch handle is held until the brake holds. Never move the jacket full (about 85 kg).
 - **S5. While the kiln is hot.** Never open the retort or the outer lid: air reaching hot gas or char can flash. Never stand over the flue or downwind of the throat. Stop a batch that smokes heavily. Draw hot water slowly from the tap; never add cold water to a jacket that has boiled dry.
 - **S6. Before unloading.** The kiln has stood sealed overnight with every damper and the band closed; the shell is cool to the gloved hand. Tip the char onto bare ground and wet it before bagging.
 
 ## 7. Tools, skills and workspace
 
-**Tools.** Angle grinder with thin cutting and flap discs; jigsaw with metal blades; drill with bits from 4.9 to 12 and a step drill to 20; hand rivet tool for 4.8 rivets; hacksaw; bench vice; files; tin snips; scriber, steel rule, tape, square, protractor and a 0.5 m spirit level; a length of 160 pipe and a larger pipe as rolling formers; spanners and a socket set for M6 to M10; a long spanner and a clamped bar for twisting the baffle; countersink; tape measure to 3 m; a 50 kg luggage scale; a reference thermometer. A stable step ladder for the flue. The water jacket goes to a welder.
+**Tools.** Angle grinder with thin cutting and flap discs; jigsaw with metal blades; drill with bits from 4.9 to 12 and a step drill to 20; hand rivet tool for 4.8 rivets; hacksaw; bench vice; files; tin snips; scriber, steel rule, tape, square, protractor and a 0.5 m spirit level; a length of 160 pipe and a larger pipe as rolling formers; spanners and a socket set for M6 to M16; a long spanner and a clamped bar for twisting the baffle; countersink; tape measure to 3 m; a 50 kg luggage scale; a reference thermometer. A stable step ladder for the flue and for bolting the lifting aid's arm; a spade and a bucket or mixer for the footing; a hanging scale to 100 kg. The water jacket goes to a welder.
 
 **Skills.** Basic metalwork: marking out, cutting with a grinder and jigsaw, drilling, rolling thin sheet by hand, riveting and bolting. No certified trade is needed except the welder for the jacket. Running the kiln needs someone who has been shown how to light and close down a retort kiln safely.
 
-**Workspace.** An outdoor or well-ventilated workshop for cutting and grinding (sparks travel several metres); an outdoor area for burning paint off the drums; the kiln site of S3 for assembly, since the finished kiln is moved in its three lifts (drum and plinth stay; the lid unit and the heat-recovery unit lift off).
+**Workspace.** An outdoor or well-ventilated workshop for cutting and grinding (sparks travel several metres); an outdoor area for burning paint off the drums; the kiln site of S3 for assembly, since the finished kiln is moved in its three lifts (drum and plinth stay; the lid unit lifts off by hand and the heat-recovery unit by the lifting aid). Leave a clear space about 1.5 m across to the left of the kiln, where the unit is set down.
 
 **Personal protective equipment.** Eye protection and hearing protection for grinding; cut-resistant gloves for sheet and drum edges; a dust mask for cutting blankets; heat-resistant gloves, eye protection and closed shoes for every burn.
 
 ## 8. Where the numbers come from
 
-- Model and constructability checks: `cad/src/model.py` (`python cad/src/model.py --check`, 68 checks); STEP and STL exports in `cad/step/` and `cad/stl/`.
-- Pictures: `cad/src/build_plan_media.py`, using `.kit/build_views.py`; written to `docs/05-build-plan/` and `cad/drawings/CCB-DWG-101` to `CCB-DWG-114`.
-- General arrangement: `cad/drawings/CCB-DWG-001.pdf`, Rev P5.
-- Calculations: `docs/04-calcs/01-sizing.md` (CCB-CAL-001 v0.4) and `docs/04-calcs/sizing.py`; masses and tripod section 4, draft and air section 6, jacket section 7.
+- Model and constructability checks: `cad/src/model.py` (`python cad/src/model.py --check`, 100 checks); STEP and STL exports in `cad/step/` and `cad/stl/`.
+- Pictures: `cad/src/build_plan_media.py`, using `.kit/build_views.py`; written to `docs/05-build-plan/` and `cad/drawings/CCB-DWG-101` to `CCB-DWG-116`.
+- General arrangement: `cad/drawings/CCB-DWG-001.pdf`, Rev P6.
+- Calculations: `docs/04-calcs/01-sizing.md` (CCB-CAL-001 v0.6) and `docs/04-calcs/sizing.py`; masses, tripod and lifting aid section 4, draft and air section 6, jacket section 7.
 - Bill of materials: `bom/bom.csv` and `bom/bom-notes.md`.
 - Decisions: `docs/decisions/0003-design-for-construction.md` (CCB-DDR-003), with CCB-DDR-001 and CCB-DDR-002; register `docs/06-design-decisions.md` (CCB-DEC-001).
-- Requirements: `docs/03-requirements.md` (CCB-REQ-001 v0.6).
+- Requirements: `docs/03-requirements.md` (CCB-REQ-001 v0.9).

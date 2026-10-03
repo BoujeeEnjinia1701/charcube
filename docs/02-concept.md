@@ -3,7 +3,7 @@ doc_id: CCB-PRC-001
 title: CharCube design precis
 project: CharCube
 doc_type: Design precis
-version: "0.8"
+version: "0.9"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -41,6 +41,10 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: 'Decisions of 2026-10-02 carried in: lifting aid, fibre board under the drum floor, hot-surface labels, conical rain cap, partner selection rule and first candidate'
+- version: "0.9"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Approved follow-ups carried out: lifting aid designed and priced (item 18), fibre board and block thermocouple, sleeve flare, labels; every part priced ($546, R10 not met); outlet 2.72 m'
 ---
 
 # CharCube design precis
@@ -77,18 +81,19 @@ Table 1. Main components. Numbers match `bom/bom.csv`, Figure 4 and CCB-DWG-001.
 | 4 | Firebrick standoffs | Three half firebricks, 60 mm high, laid round the retort's edge clear of the gas holes | Leave room for fire under the retort |
 | 5 | Secondary air shroud | 230 mm sleeve, 150 mm high, around the throat base; closed top riveted to the throat, open bottom with a sliding band damper | Replaces the 25 mm pipe ring of TRL 2, which could not pass the air (CCB-CAL-001 section 6); decided by Amish, 2026-09-25 (CCB-DDR-002 item 11) |
 | 6 | Burner throat (afterburner) | 160 x 2 mm plain steel pipe, 400 mm long, two staggered rings of 15 air holes of 12 mm (30 in all) inside the shroud | The jacket sleeve slips over its top end; 30 holes offset the baffle pressure drop |
-| 7 | Flue pipe with rain cap | 160 x 2 mm plain (not galvanized) steel, 650 mm, its foot 50 mm inside the jacket sleeve, resting on the sleeve rim on three riveted clips; conical rain cap (decided by Amish, 2026-10-02) on three riveted legs, 60 mm above the outlet | Outlet 2.70 m above the ground |
-| 8 | Water jacket | Annular steel tank, 420 mm outside diameter x 600 mm, 2 mm walls, around an integral 168 mm flue sleeve; about 61 L at 540 mm depth; open top with a loose lid and 24 mm vent | The one welded, water-tight part; local fabricator |
+| 7 | Flue pipe with rain cap | 160 x 2 mm plain (not galvanized) steel, 650 mm, its foot 50 mm inside the jacket sleeve, resting on the sleeve rim on three riveted clips; conical rain cap (decided by Amish, 2026-10-02) on three riveted legs, at least 60 mm from the flue's top edge | Outlet 2.72 m above the ground |
+| 8 | Water jacket | Annular steel tank, 420 mm outside diameter x 600 mm, 2 mm walls, around an integral 168 mm flue sleeve whose foot is flared to about 190 mm; about 61 L at 540 mm depth; open top with a loose lid and 24 mm vent | The one welded, water-tight part; local fabricator |
 | 9 | Draw-off tap | 1/2 in brass ball valve with a short nipple | Drains the jacket before moving it |
 | 10 | Jacket support tripod | Three 40 x 40 x 4 mm angle legs, each bolted to a fin welded on the jacket and pinned to a bolted foot cleat and pad; feet on a 1.44 m circle | Carries the jacket and flue so the drum lid carries no water load |
 | 11 | Insulation blanket | 25 mm ceramic fibre blanket held by wire mesh, air ports left clear | Halves the shell loss (CCB-CAL-001 section 4) |
-| 12 | Plinth | Four concrete blocks laid as a pinwheel and a steel ash pan | Lifts the air ports clear of the ground and keeps embers off it |
-| 13 | Thermocouple logger | Two type K class 1 probes (retort core, in through the drum side; throat exit, below the jacket), two MAX31855 amplifiers, a small microcontroller and microSD card, USB power bank | Strapped beside a tripod leg, away from the heat |
+| 12 | Plinth | Four concrete blocks laid as a pinwheel, a 25 mm ceramic fibre board on them and a steel ash pan on the board | Lifts the air ports clear of the ground and keeps embers off it; the board shields the blocks from the heat (decided by Amish, 2026-10-02) |
+| 13 | Thermocouple logger | Two type K class 1 probes (retort core, in through the drum side; throat exit, below the jacket) and a bare-wire type K on a plinth block, three MAX31855 amplifiers, a small microcontroller and microSD card, USB power bank | Strapped beside a tripod leg, away from the heat |
 | 15 | Spiral baffle insert | 1.5 mm steel strip 150 mm wide, twisted half a turn per 300 mm, in the jacket sleeve, hung on a rod through the foot of the flue | Triples gas-side convection (assumption); lifts out with the flue for tar and soot cleaning; decided by Amish, 2026-09-25 (CCB-DDR-002 item 12) |
 | 16 | Jacket shell blanket | 25 mm mineral wool on the jacket side, held by wire; tap, vent and lid clear | Cuts the jacket shell loss; decided by Amish, 2026-09-25 (item 12) |
 | 17 | Lid and top band blanket | 25 mm ceramic fibre disc on the lid, clear of the shroud intake, with a skirt over the top band and locking ring | Saves 1.22 kW of shell loss; lifted off with the lid; decided by Amish, 2026-09-25 (item 13) |
+| 18 | Lifting aid | A post 4.0 m high turning in a ground sleeve 1.2 m behind the kiln, a bolted arm and brace of steel angle, two pulleys, a hand brake winch and a hook; a 16 mm bar through the jacket sleeve's top socket | Raises the drained heat-recovery unit 1.55 m and swings it clear, so nobody carries it; decided by Amish, 2026-10-02 |
 
-Item 14 (fasteners, gasket rope, high-temperature sealant) is in the BOM but not modelled.
+Of item 14 (fasteners, gasket rope, high-temperature sealant, hot-surface labels) only the two hot-surface labels are modelled.
 
 ![Cutaway](../media/cutaway.png)
 
@@ -117,9 +122,9 @@ Table 2. Batch, energy, carbon and cost.
 | Carbon stored for 100 years | 1.30 kg C, 4.8 kg CO₂ per batch (2.96 kg x 0.55 x 0.80) | |
 | Methane penalty | 2.0 kg CO₂e per batch at the retort field average (24 g CH₄ per kg char, GWP100 28) | R4 not verifiable |
 | Net removal | 2.8 kg CO₂e per batch (2.0 to 3.5); 0.70 t CO₂e and about 740 kg of char a year at 250 batches; about 3.0 t of residue kept out of open burning | |
-| Mass | About 97 kg without plinth and water; lift unit (tripod, drained jacket with baffle and blanket, flue) 47.4 kg for two people; retort with char 15.5 kg; full jacket 85 kg | R11 met |
-| Height | Flue outlet 2.70 m; footprint about 1.44 m across the tripod feet | R12 met |
-| Parts cost | $319 against $320 (lines 15 to 17 add $21); safety kit (about $40) listed separately | R10 met ($1 margin) |
+| Mass | About 97 kg without plinth and water; lift unit (tripod, drained jacket with baffle and blanket, flue) 47.2 kg, raised by the lifting aid; retort with char 15.5 kg; full jacket 85 kg | R11 met |
+| Height | Flue outlet 2.72 m; 2.84 m to the top of the rain cap; footprint about 1.44 m across the tripod feet; lifting aid post 4.0 m | R12 met |
+| Parts cost | Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target); the lifting aid is $160 of it; safety kit (about $40) listed separately | R10 not met |
 
 The main changes from TRL 2: the char carries its ash, so its mass and heating value are lower; the burn is set by conduction into the charge and is longer; a longer burn needs more wood; and the plain jacket sleeve transfers about a third of the heat assumed at TRL 2. The changes accepted on 2026-09-25 (CCB-DDR-002) recover most of that: the baffle and jacket blanket take hot water from 6.4 to 11.5 MJ, and the lid blanket takes wood from 5.8 to 3.7 kg, at a cost of $21 and a lower draft margin.
 
@@ -130,12 +135,12 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 - **Nested-drum retort rather than a flame-curtain kiln.** Decided by Amish, 2026-09-25. A Kon-Tiki cone costs less and needs no start-up wood, but it is open, its heat cannot be recovered and its yield on straw is lower.
 - **Annular water jacket on the flue rather than a copper coil.** Decided by Amish, 2026-09-25. It needs no pump or raised tank and cannot build pressure. CCB-CAL-001 showed it recovers only about 6.4 MJ per batch with a plain sleeve, so a spiral baffle insert and a jacket blanket were added (decided by Amish, 2026-09-25, CCB-DDR-002 item 12), giving about 11.5 MJ.
 - **Burner throat with preheated secondary air.** Decided by Amish, 2026-09-25. The TRL 3 sizing replaced the 25 mm pipe ring with an air shroud (decided by Amish, 2026-09-25, CCB-DDR-002 item 11).
-- **Jacket carried on a tripod, not on the drum lid.** Decided by Amish, 2026-09-25. The drained lift unit weighs 47.4 kg, 23.7 kg each for two people. The legs bolt to three fins welded on the jacket (CCB-DDR-003). A lifting aid, a swinging arm on a post or a hand winch, is to be designed for the first build (decided by Amish, 2026-10-02); users are asked through the partner how it should work.
+- **Jacket carried on a tripod, not on the drum lid.** Decided by Amish, 2026-09-25. The drained lift unit weighs 47.2 kg. The legs bolt to three fins welded on the jacket (CCB-DDR-003). The lifting aid (item 18, decided by Amish, 2026-10-02) is a swinging arm on a post with a hand winch; users are asked through the partner how it should work.
 - **Target feedstock.** Decided by Amish, 2026-09-25: bundled straw and mixed stalks and cobs first; a straw press is a separate project.
 - **Temperature logging as standard.** Decided by Amish, 2026-09-25. Class 1 probes meet the restated R9, ±5 °C to 700 °C and indicative above (CCB-DDR-002 item 15).
 - **Insulation blanket.** Decided by Amish, 2026-09-25: ceramic fibre for the prototype, now also on the lid and top band (CCB-DDR-002 item 13), which saves 1.22 kW.
 - **Burn time target.** Decided by Amish, 2026-09-25: R5 relaxed to 5 h (CCB-DDR-002 item 14).
-- **Value-engineering target.** Value-engineering target: $320 (a hypothetical control target, not a limit) for the kiln parts; the safety kit is required and listed separately (decided by Amish, 2026-09-25). With lines 15 to 17 the estimated cost of the kiln parts is $319, $1 under the target.
+- **Value-engineering target.** Value-engineering target: $320 (a hypothetical control target, not a limit) for the kiln parts; the safety kit is required and listed separately (decided by Amish, 2026-09-25). Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target), with every part priced (CCB-CAL-001 section 11).
 - **Name.** Decided by Amish, 2026-09-25: keep CharCube.
 
 ![Exploded view](../media/exploded.png)
@@ -152,7 +157,7 @@ Items 1 to 8 and 10 of the TRL 2 review (CCB-DDR-001) and items 11 to 16 of the 
 
 - **Used drums.** Use only open-head drums that held non-flammable, non-toxic products. Never cut, drill or grind a drum that held fuel, solvent or pesticide, and burn paint and liners off outdoors, upwind, before first use. Do not use galvanized pipe or drums: heated zinc gives off toxic fumes.
 - **Char handling.** Tip char out only after overnight cooling, onto bare ground, and quench or wet it before bagging. Dry char dust is a fire and inhalation hazard; wet it and wear a dust mask when crushing.
-- **Lifting.** Drain the jacket before moving it. The tripod, jacket and flue unit weighs about 47 kg empty and is lifted to about 1.5 m, so a lifting aid is to be designed for the first build (decided by Amish, 2026-10-02); until then it needs two people; a full jacket weighs about 85 kg and must never be moved; move it only when the flue is cool enough to handle with gloves.
+- **Lifting.** Drain the jacket before moving it. The tripod, jacket and flue unit weighs about 47 kg empty and must be raised about 1.55 m to clear the kiln, so it is moved only with the lifting aid's winch, with the flue lifted out first and nobody under the load; a full jacket weighs about 85 kg and must never be moved; move it only when the flue is cool enough to handle with gloves.
 - **Hot plinth.** A 25 mm ceramic fibre board lies between the ash pan and the concrete blocks from the first burn, with a thermocouple on a block, because concrete can crack or spall when heated (decided by Amish, 2026-10-02).
 - **Warning labels.** Durable hot-surface warning labels (ISO 7010 W017) go on the drum blanket and the jacket (decided by Amish, 2026-10-02).
 - **Sharp edges.** Cut drum edges and air ports must be deburred or folded.

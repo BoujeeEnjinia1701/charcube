@@ -8,7 +8,7 @@ Run from the repo root (one group per process keeps memory low):
 With no argument it draws everything. Every picture is drawn from cad/src/model.py
 (build_components), so the pictures and the model never disagree:
     docs/05-build-plan/overview.png        every component pulled apart, numbered in build order
-    cad/drawings/CCB-DWG-101 to 114        making sketches for the made components
+    cad/drawings/CCB-DWG-101 to 116        making sketches for the made components
     docs/05-build-plan/joint-NN.png        close-ups of the joints that need explaining
     docs/05-build-plan/step-NN.png         one picture per assembly step
 Uses .kit/build_views.py. BUILD PLAN ILLUSTRATION, PLAN NOT YET BUILT.
@@ -26,7 +26,7 @@ from model import PARAMS as P, levels, tripod_geometry  # noqa: E402
 
 OUT = ROOT / "docs" / "05-build-plan"
 DWG = ROOT / "cad" / "drawings"
-DATE = "2026-09-30"
+DATE = "2026-10-02"
 L = levels()
 T = tripod_geometry()
 _C = None
@@ -53,7 +53,20 @@ COL = {"blocks": "#9CA3AF", "pan": "#57534E", "drum": "#4B5563", "dampers": "#D9
        "lblanket": "#F5F5F4", "jacket": "#0F766E", "fins": "#64748B", "jlid": "#14B8A6", "vent": "#1F2937",
        "tap": "#D4A017", "jblanket": "#FDE68A", "leg": "#A16207", "cleat": "#713F12", "pad": "#44403C",
        "bolt": "#111827", "tri_leg": "#A16207", "tri_cleat": "#713F12", "tri_pad": "#44403C", "tri_bolts": "#111827", "flue": "#6B7280", "clips": "#7C3AED", "cap_legs": "#6D28D9", "cap": "#374151",
-       "baffle": "#78716C", "rod": "#DC2626", "probes": "#7C3AED", "logger": "#6D28D9"}
+       "baffle": "#78716C", "rod": "#DC2626", "probes": "#7C3AED", "logger": "#6D28D9",
+       "board": "#FDE7C4", "btc": "#DC2626", "labels": "#F2C230", "footing": "#A8A29E", "gsleeve": "#57534E",
+       "post": "#334155", "arm": "#475569", "brace": "#94A3B8", "aid_bolts": "#111827", "pulleys": "#0EA5E9",
+       "winch": "#B91C1C", "rope": "#1F2937", "hook": "#111827", "bar": "#DC2626"}
+AID_POST = ("footing", "gsleeve", "post")
+AID_ARM = ("arm", "brace", "aid_bolts", "pulleys", "winch", "rope", "hook")
+
+
+def aid_part(name, keys, arm_deg, color=None, explode=(0, 0, 0)):
+    """Lifting-aid parts with the arm turned to arm_deg (the model has it parked)."""
+    import build123d as b
+    loc = m.lifting_aid_local()
+    sh = b.Compound(children=[m.aid_place(P, loc[k][1], arm_deg=arm_deg) for k in keys])
+    return Part(name, sh, color or COL[keys[0]], None, tuple(explode), 1.0)
 
 
 def part(name, keys, color=None, explode=(0, 0, 0), alpha=1.0):
@@ -102,6 +115,8 @@ def qpart(name, keys, r, z0, z1, color=None):
 def groups():
     return [
         ("Concrete blocks (4)", ("blocks",)),
+        ("Block thermocouple", ("btc",)),
+        ("Fibre board", ("board",)),
         ("Ash pan", ("pan",)),
         ("Outer drum, cut", ("drum",)),
         ("Port dampers and guides", ("dampers", "guides")),
@@ -119,22 +134,28 @@ def groups():
         ("Jacket blanket", ("jblanket",)),
         ("Tripod legs (3)", ("tri_leg",)),
         ("Foot cleats and pads (3)", ("tri_cleat", "tri_pad")),
+        ("Lifting aid: footing, sleeve and post", AID_POST),
+        ("Lifting aid: arm, brace, pulleys, winch, rope", AID_ARM),
         ("Flue with clips and rain cap", ("flue", "clips", "cap_legs", "cap")),
         ("Spiral baffle and rod", ("baffle", "rod")),
         ("Logger and probes", ("logger", "probes")),
+        ("Hot-surface labels (2)", ("labels",)),
     ]
 
 
 # ----------------------------------------------------------------- overview
 def overview():
     off = {   # three columns: blankets on the left, the kiln stack in the middle, loose parts on the right
-        "Concrete blocks (4)": (0, 0, -450), "Ash pan": (0, 0, -250), "Outer drum, cut": (0, 0, 0),
+        "Concrete blocks (4)": (0, 0, -650), "Block thermocouple": (1000, 0, -600), "Fibre board": (0, 0, -450),
+        "Ash pan": (0, 0, -250), "Outer drum, cut": (0, 0, 0),
         "Port dampers and guides": (-600, -1100, 300), "Drum blanket": (-1100, 0, 0), "Firebrick standoffs (3)": (1000, 0, -150),
         "Retort, lid and handles": (1000, 0, 150), "Outer lid, cut": (0, 0, 450), "Throat collar": (0, 0, 600),
         "Burner throat": (0, 0, 800), "Air shroud and band damper": (1000, 0, 750), "Lid blanket": (-1100, 0, 450),
         "Water jacket with fins": (0, 0, 1050), "Tap": (1000, 0, 1050), "Jacket lid and vent nipple": (0, 0, 1350),
         "Jacket blanket": (-1100, 0, 1050), "Tripod legs (3)": (2100, 0, 0), "Foot cleats and pads (3)": (2100, 0, -250),
         "Flue with clips and rain cap": (0, 0, 1650), "Spiral baffle and rod": (1000, 0, 1350), "Logger and probes": (2100, 0, 1900),
+        "Hot-surface labels (2)": (-1100, -400, 300),
+        "Lifting aid: footing, sleeve and post": (3500, -1200, -400), "Lifting aid: arm, brace, pulleys, winch, rope": (3500, -1200, 0),
     }
     parts = [part(n, k, explode=off[n]) for n, k in groups()]
     return bv.overview(parts, OUT / "overview.png", "CharCube prototype: every component, pulled apart",
@@ -153,18 +174,25 @@ def sheets(which=None):
     import build123d as b
     zl = L["z_lid"]
     grey = lambda name, keys: part(name, keys, "#D1D5DB")   # noqa: E731
+    cg = m.cap_geometry()
+    TAB_UP = cg["under"](P["FLUE_D"] / 2 + 30)
+    LEG_CAP = TAB_UP + 60 + 30
     sh = {}
 
-    sh[101] = lambda: _sheet(101, part("Ash pan", "pan"), [grey("Blocks", "blocks"), grey("Drum", "drum")],
-        "CharCube ash pan: making sketch", "Mild steel plate 3 mm",
-        ["Cut a 760 x 600 mm rectangle from 3 mm mild steel plate.",
-         "Grind the edges and round the four corners to about 10 mm.",
-         "No holes. Mark a 572 mm circle in the middle with a centre line",
-         "  each way: the drum stands on this circle.",
-         "Fit: lies flat on the four blocks (580 mm square). The pan is wider",
-         "  than the blocks by 90 mm each side, so embers from the ports land",
-         "  on steel, not soil.",
-         "Check: rests flat on the blocks without rocking."], inset=(25, -60))
+    sh[101] = lambda: _sheet(101, part("Ash pan, fibre board and block thermocouple", ("pan", "board", "btc"), "#57534E"),
+        [grey("Blocks", "blocks"), grey("Drum", "drum")],
+        "CharCube plinth: ash pan and fibre board: making sketch", "Mild steel plate 3 mm; ceramic fibre board 25 mm",
+        ["Pan: cut 760 x 600 mm from 3 mm mild steel plate; grind the edges",
+         "  and round the corners to about 10 mm. Mark a 572 mm circle in",
+         "  the middle with a centre line each way: the drum stands on it.",
+         "Board: cut a 600 x 600 mm square from a 25 mm ceramic fibre board",
+         "  sheet (1260 deg C grade) with a fine saw; wear a dust mask.",
+         "  Cut a groove 4 wide x 4 deep in its underside, from 150 mm",
+         "  behind the centre, 50 mm left of it, straight out to the back edge.",
+         "Block thermocouple: lay its tip on the back block in line with the",
+         "  groove, 150 mm behind the centre; the lead runs out at the back.",
+         "Fit: blocks, then board centred on them, then the pan on the board.",
+         "Check: the pan rests flat without rocking; the lead is not pinched."], inset=(25, -60))
 
     sh[102] = lambda: _sheet(102, part("Outer drum, cut", "drum"), [grey("Pan", "pan"), grey("Blocks", "blocks")],
         "CharCube outer drum (200 L): cutting sketch", "Used 200 L open-head steel drum, 1.2 mm",
@@ -265,7 +293,11 @@ def sheets(which=None):
         ["For a welder. Sleeve: 700 mm of 168 x 2 mm pipe. Shell: 2 mm sheet",
          "  rolled to 420 mm outside, 600 mm tall. Bottom: 2 mm ring, 420 mm",
          "  outside, 168 mm hole. Weld water-tight; the sleeve stands 50 mm",
-         "  out of the top and the bottom (the two sockets).",
+         "  out of the top and the bottom (the two sockets). Flare the bottom",
+         "  20 mm of the sleeve to about 190 mm across (a cone) so it guides",
+         "  itself onto the throat. Two 18 mm holes across the top socket,",
+         "  35 mm above the shell top, for the lift bar. The sleeve weld",
+         "  carries the whole unit when it is lifted: weld it all round.",
          "Fins: three 6 mm plates 85 x 140 mm, welded radially to the shell,",
          "  one at the front, one back right, one back left (120 degrees",
          "  apart), 60 mm up the shell and 80 mm below it.",
@@ -339,15 +371,17 @@ def sheets(which=None):
          "Check: drops into a 164 mm bore to the clips without forcing."], inset=(20, -60))
 
     sh[113] = lambda: _sheet(113, part("Rain cap and legs", ("cap", "cap_legs")), [grey("Flue", ("flue", "clips"))],
-        "CharCube rain cap and its legs: making sketch", "Mild steel sheet 3 mm; flat bar 20 x 3 mm",
-        ["Cap: a 260 mm square of 3 mm sheet; round the corners.",
-         "Legs: three 145 mm lengths of 20 x 3 mm flat bar, each bent 90",
-         "  degrees 30 mm from one end to make a foot.",
+        "CharCube conical rain cap and its legs: making sketch", "Mild steel sheet 1.5 mm; flat bar 20 x 3 mm",
+        ["Cap: cut a 300 mm disc from 1.5 mm sheet (150 mm radius). Cut out",
+         "  a 48 degree wedge to the centre, roll the rest into a cone 260 mm",
+         "  across with a 30 degree slope, and rivet the overlap (three rivets).",
+         f"Legs: three {LEG_CAP:.0f} mm lengths of 20 x 3 mm flat bar, each bent",
+         "  90 degrees 30 mm from one end to make a foot.",
          "Fit: rivet each leg's long part to the outside of the flue top,",
          "  120 degrees apart, two 4.8 mm rivets, so the bent feet stand",
-         "  56 mm above the flue's top edge. Rivet the cap onto the feet.",
-         "The cap's underside sits about 58 mm above the outlet: never",
-         "  less, or it chokes the draft.",
+         f"  {TAB_UP:.0f} mm above the flue's top edge. Rivet the cap to the feet.",
+         "The shortest gap from the flue's top edge to the cap is 60 mm:",
+         "  never less, or it chokes the draft.",
          "Check: the gap under the cap is the same all round."], inset=(25, -60))
 
     sh[114] = lambda: _sheet(114, part("Spiral baffle and rod", ("baffle", "rod")), [grey("Flue", ("flue", "clips")), grey("Jacket", "jacket")],
@@ -363,6 +397,40 @@ def sheets(which=None):
          "  strip hangs 10 mm above the throat top with 3 mm clear of the",
          "  sleeve; it lifts out with the flue.",
          "Check: the twisted strip passes through a 160 mm ring."], inset=(15, -60))
+
+    loc = m.lifting_aid_local()
+    za = L["z_arm"]
+    ab = P["ARM_ANG"][0]
+    sh[115] = lambda: _sheet(115, Part("Post, ground sleeve and footing", b.Compound(children=[loc[k][1] for k in AID_POST]),
+                                       COL["post"], None, (0, 0, 0), 1),
+        [Part("Arm and brace", b.Compound(children=[loc[k][1] for k in ("arm", "brace")]), "#D1D5DB", None, (0, 0, 0), 1)],
+        "CharCube lifting aid: post, ground sleeve and footing", "Steel tube 88.9 x 3.2 and 101.6 x 3.6 mm; concrete",
+        ["Footing: dig a hole 600 x 600 x 750 deep, 1.2 m straight behind the",
+         "  kiln's centre. Ground sleeve: 730 mm of 101.6 x 3.6 tube with a",
+         "  6 mm plate in its bottom end (a welder tacks it, or a bolt across",
+         "  the tube holds a loose plate). Stand it 30 mm proud and plumb;",
+         "  fill with concrete; wait at least three days.",
+         f"Post: {(za + 37 + 694) / 1000:.2f} m of 88.9 x 3.2 tube; a 3 mm cap plate",
+         "  in the top end. Two 17 mm holes across it: 20 mm and",
+         f"  {P['BRACE_DZ'] - ab / 2 + 40:.0f} mm below the post's top end (CCB-DWG-116).",
+         "Fit: two people stand the post in the sleeve; it turns by hand.",
+         "Check: plumb both ways; the post turns freely through 90 degrees."], inset=(20, -60))
+    arm_set = b.Compound(children=[loc[k][1] for k in ("arm", "brace", "aid_bolts", "pulleys", "rope", "hook")])
+    sh[116] = lambda: _sheet(116, Part("Arm, brace, pulleys and rope", arm_set, COL["arm"], None, (0, 0, 0), 1),
+        [Part("Post (top)", win(loc["post"][1], -120, 120, -120, 120, za - P["BRACE_DZ"] - 100, za + 100), "#D1D5DB", None, (0, 0, 0), 1)],
+        "CharCube lifting aid: arm, brace and pulleys (bolted)", "Steel angle 50 x 50 x 5 and 40 x 40 x 4 mm; bolts",
+        [f"Arm: two {P['ARM_L'] + P['ARM_TAIL']:.0f} mm lengths of 50 x 50 x 5 angle, one each side of",
+         "  the post, upright faces on the post, flat faces on top, outward.",
+         f"  A 17 mm hole {P['ARM_TAIL']:.0f} mm from the back end, 20 mm up: M16 bolt",
+         "  through both angles and the post. Holes 13 mm,",
+         f"  25 mm up, at {P['ARM_TAIL'] - 100:.0f}, {P['ARM_TAIL'] + P['BRACE_X']:.0f} and "
+         f"{P['ARM_TAIL'] + P['POST_R'] - 52:.0f} mm: back pulley, brace, tip pulley.",
+         "Brace: two 990 mm lengths of 40 x 40 x 4 angle at 45 degrees,",
+         "  M12 to the arm, M16 through the post with a 5 mm packing plate.",
+         "Pulleys: 100 mm steel sheaves on M12 axles with spacer tubes.",
+         "Winch: brake winch rated 270 kg, two U-bolts round the post, 1 m up.",
+         "Rope: 5 mm steel wire from the winch over both pulleys; hook with latch.",
+         "Check: with no load the hook hangs 1.2 m out from the post."], inset=(20, -40))
 
     out = []
     for n in sorted(sh):
@@ -388,10 +456,12 @@ def joints(which=None):
     blk = [m._bx(-q_, m_, m_, q_, 0, h_), m._bx(m_, q_, -m_, q_, 0, h_), m._bx(-m_, q_, -q_, -m_, 0, h_), m._bx(-q_, -m_, -q_, m_, 0, h_)]
     J[1] = lambda box=box: j(1, [Part(f"Block {i + 1} of the pinwheel", blk[i], ("#9CA3AF", "#6B7280")[i % 2], None, (0, 0, 0), 1.0)
                                  for i in range(4)] + [
-                         wpart("Ash pan (front half cut away)", "pan", (-420, 420, 0, 420, -10, z0 + 40)),
-                         wpart("Outer drum, bottom 40 mm (front half cut away)", "drum", (-420, 420, 0, 420, z0 + 1.3, z0 + 40))],
-                     "Joint 1: drum, ash pan and block plinth",
-                     "Four blocks laid as a pinwheel round a 200 mm square hole; the drum's rim stands over the blocks",
+                         wpart("Block thermocouple, tip on the back block", "btc", (-420, 420, -420, 420, -10, z0 + 40)),
+                         wpart("Fibre board, 25 mm (cut away)", "board", (0, 420, 0, 420, -10, z0 + 40)),
+                         wpart("Ash pan (cut away)", "pan", (0, 420, 0, 420, -10, z0 + 40)),
+                         wpart("Outer drum, bottom 40 mm (cut away)", "drum", (0, 420, 0, 420, z0 + 1.3, z0 + 40))],
+                     "Joint 1: drum, ash pan, fibre board and block plinth",
+                     "Pinwheel of blocks; 25 mm fibre board on them shields the blocks; pan and drum on the board (back right quarter shown)",
                      elev=40, azim=-65)
     a = math.radians(45)
     cx, cy = ro * math.cos(a), ro * math.sin(a)
@@ -423,7 +493,7 @@ def joints(which=None):
                                  qpart("Spiral baffle, bottom end", "baffle", 130, zj - 120, zj + 70),
                                  qpart("Throat probe", "probes", 130, zj - 120, zj + 70)],
                      "Joint 5: jacket sleeve over the throat (front quarter cut away)",
-                     "A 50 mm slip joint with 2 mm clear all round; the baffle hangs 10 mm above the throat top",
+                     "A 50 mm slip joint, 2 mm clear all round; the flared sleeve foot guides it on; baffle 10 mm above the throat",
                      elev=15, azim=-135)
     th = math.radians(P["LEG_ANGLES"][0])
     fx, fy = 270 * math.cos(th), 270 * math.sin(th)
@@ -449,11 +519,11 @@ def joints(which=None):
                      "Joint 8: flue foot in the sleeve socket (front quarter cut away)",
                      "The clips carry the flue on the sleeve rim; the rod through the flue foot carries the baffle",
                      elev=15, azim=-135)
-    box = (-150, 150, -150, 150, L["z_out"] - 90, L["z_cap"] + 10)
+    box = (-150, 150, -150, 150, L["z_out"] - 90, L["z_cap_top"] + 10)
     J[9] = lambda box=box: j(9, [wpart("Flue top", "flue", box), wpart("Cap legs, riveted to the flue", "cap_legs", box),
-                         wpart("Rain cap", "cap", box)],
-                     "Joint 9: rain cap on its three legs",
-                     "The cap sits 60 mm above the outlet", elev=15, azim=-60)
+                         wpart("Conical rain cap", "cap", box)],
+                     "Joint 9: conical rain cap on its three legs",
+                     "At least 60 mm from the flue's top edge to the cap all round", elev=15, azim=-60)
     zc = L["z_core"]
     box = (0, 80, 150, 620, zc - 70, zc + 70)
     J[10] = lambda box=box: j(10, [wpart("Retort wall with probe slot", "retort", box), wpart("Outer drum wall", "drum", box),
@@ -465,6 +535,26 @@ def joints(which=None):
                            wpart("Vent nipple and locknuts", "vent", box), wpart("Jacket blanket", "jblanket", box)],
                       "Joint 11: jacket loose lid and vent", "The lid rests on the rim; it is never fixed or sealed",
                       elev=25, azim=-60)
+    import build123d as b
+    bar = Part("Lift bar, 16 mm, through the two holes", m.lift_bar(), COL["bar"], None, (0, 0, 0), 1.0)
+    J[12] = lambda: j(12, [qpart("Jacket sleeve, top socket (flue lifted out)", "jacket", 130, zjt - 40, zjt + 60),
+                           qpart("Loose lid", "jlid", 130, zjt - 40, zjt + 60, color="#99F6E4"), bar],
+                      "Joint 12: lift bar through the sleeve socket (front quarter cut away)",
+                      "Flue out first; the hook's shackle goes on the middle of the bar", elev=25, azim=-135)
+    loc = m.lifting_aid_local()
+    za = L["z_arm"]
+    wb = (-130, 130, 450, 1420, za - 320, za + 140)
+    J[13] = lambda: j(13, [Part(n_, win(m.aid_place(P, loc[k][1], arm_deg=270.0), *wb),
+                                COL[k], None, (0, 0, 0), 1.0)
+                           for n_, k in (("Post top", "post"), ("Arm, two angles", "arm"), ("Brace (top end)", "brace"),
+                                         ("M16 bolt through the post; axles", "aid_bolts"), ("Back pulley", "pulleys"),
+                                         ("Rope to the winch", "rope"))],
+                      "Joint 13: lifting arm on the post top", "Both angles bolted through the post; the rope runs over the back pulley",
+                      elev=15, azim=-60)
+    J[14] = lambda: j(14, [part("Drum blanket", "blanket"), part("Jacket blanket", "jblanket"),
+                           part("Hot-surface labels (ISO 7010 W017)", "labels")],
+                      "Joint 14: hot-surface labels on the blankets", "Wired to the blanket mesh at the front right, where the operator stands",
+                      elev=12, azim=-40)
     out = []
     for n in sorted(J):
         if which and n not in which:
@@ -484,7 +574,7 @@ def steps(which=None):
     bl_, bw_ = P["BLOCK"]
     q_, m_, h_ = (bl_ + bw_) / 2, (bl_ - bw_) / 2, P["BASE_H"]
     blk = [m._bx(-q_, m_, m_, q_, 0, h_), m._bx(m_, q_, -m_, q_, 0, h_), m._bx(-m_, q_, -q_, -m_, 0, h_), m._bx(-q_, -m_, -q_, m_, 0, h_)]
-    plinth = [g("Concrete blocks (4)"), g("Ash pan")]
+    plinth = [g("Concrete blocks (4)"), g("Block thermocouple"), g("Fibre board"), g("Ash pan")]
     drum = plinth + [g("Outer drum, cut"), g("Port dampers and guides"), g("Drum blanket")]
     kiln_open = drum + [g("Firebrick standoffs (3)"), g("Retort, lid and handles")]
     lid_unit = ("Outer lid, cut", "Throat collar", "Burner throat", "Air shroud and band damper", "Lid blanket")
@@ -495,8 +585,11 @@ def steps(which=None):
     flue_all = ("Flue with clips and rain cap", "Spiral baffle and rod")
     sp = {
         1: (lambda: ([], [Part(f"Block {i + 1}", blk[i], ("#9CA3AF", "#6B7280")[i % 2], None, (0, 0, 0), 1.0)
-                          for i in range(4)] + [part("Ash pan", "pan", explode=(0, 0, 450))]),
-            "lay the plinth", "Four blocks as a pinwheel, 580 mm square, on firm level ground; the pan on top, centred", dict(elev=42, azim=-55)),
+                          for i in range(4)] + [part("Block thermocouple", "btc", explode=(0, 0, 0)),
+                                                 part("Fibre board", "board", explode=(0, 0, 300)),
+                                                 part("Ash pan", "pan", explode=(0, 0, 600))]),
+            "lay the plinth", "Blocks as a pinwheel on firm level ground; thermocouple on the back block; board, then pan, centred",
+            dict(elev=42, azim=-55)),
         2: (lambda: ([part("Outer drum, cut", "drum")], [part("Port dampers", "dampers", explode=(0, 0, -150)),
                                                          part("Guide strips", "guides", explode=(0, -250, 0))]),
             "fit the port dampers and guides", "Two rivets per guide through its joggled ends; check each damper slides",
@@ -541,10 +634,12 @@ def steps(which=None):
                       [part("Foot cleats and pads", ("tri_cleat", "tri_pad"), explode=(0, 0, -250))]),
              "foot cleats and pads onto the legs", "Pads screwed to the cleats first; one M10 pin bolt per foot, snug",
              dict(elev=15, azim=-55)),
-        15: (lambda: (kiln, [part("Heat-recovery unit, drained", ("jacket", "fins", "tap", "jlid", "vent", "jblanket", "tri_leg", "tri_cleat", "tri_pad"),
-                                  explode=(0, 0, 700))]),
-             "heat-recovery unit over the kiln", "Two people; lower it so the sleeve slides over the throat; check the 2 mm gap all round",
-             dict(elev=15, azim=-55)),
+        15: (lambda: (kiln + [aid_part("Lifting aid post", AID_POST, 270.0), aid_part("Arm turned over the kiln", AID_ARM, 270.0)],
+                      [part("Heat-recovery unit, drained", ("jacket", "fins", "tap", "jlid", "vent", "jblanket", "tri_leg", "tri_cleat", "tri_pad"),
+                            explode=(0, 0, P["LIFT"])),
+                       Part("Lift bar", m.lift_bar(), COL["bar"], None, (0, 0, P["LIFT"]), 1.0)]),
+             "heat-recovery unit over the kiln", "Winch it up, swing the arm over the kiln, lower until the sleeve slides over the throat",
+             dict(elev=12, azim=-35)),
         16: (lambda: ([part("Flue pipe", "flue")], [part("Stop clips", "clips", explode=(0, -250, 0)),
                                                     part("Rain cap legs", "cap_legs", explode=(0, -250, 0)),
                                                     part("Rain cap", "cap", explode=(0, 0, 250))]),

@@ -11,6 +11,9 @@ a paper estimate for TRL 3; nothing is measured.
 v0.2 (DDR-002, 2026-09-25): spiral baffle insert and jacket blanket (item 12),
 lid and top band blanket (item 13), R5 relaxed to 5 h (item 14), R9 restated
 to 700 °C (item 15).
+v0.6 (2026-10-02, decisions on CCB-DDR-003): fibre board under the pan, conical
+rain cap, sleeve flare, lifting aid loads (section 6b), cost against the
+value-engineering target with every part priced.
 """
 import csv
 import math
@@ -19,7 +22,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "cad/src"))
-from model import PARAMS as P, levels, tripod_geometry  # noqa: E402
+from model import PARAMS as P, cap_geometry, levels, tripod_geometry  # noqa: E402
 
 L = levels()
 SIGMA = 5.670e-8
@@ -239,7 +242,9 @@ m_jkt = RHO_STEEL * (P["JKT_T"] * mm * (cyl_area(P["JKT_D"] * mm, P["JKT_H"] * m
                      + 1.5 * mm * disc(P["JKT_D"] * mm, P["JLID_HOLE_D"] * mm)                                     # loose lid
                      + 3 * (P["FIN"][1] - P["FIN"][0]) * (P["FIN"][3] - P["FIN"][2]) * P["FIN"][4] * mm ** 3) + 0.3  # fins (DDR-003), vent
 m_tap = 0.6
-m_flue = RHO_STEEL * P["FLUE_T"] * mm * cyl_area(P["FLUE_D"] * mm, P["FLUE_ABOVE"] * mm) + 1.0 + 0.3      # 650 mm pipe (DDR-003), cap; clips and cap legs
+CAPG = cap_geometry()
+m_cap = RHO_STEEL * P["CAP_T"] * mm * math.pi * (P["CAP_D"] / 2 * mm) * CAPG["slant"] * mm       # conical cap (2026-10-02)
+m_flue = RHO_STEEL * P["FLUE_T"] * mm * cyl_area(P["FLUE_D"] * mm, P["FLUE_ABOVE"] * mm) + m_cap + 0.3    # 650 mm pipe (DDR-003); clips and cap legs
 TRI = tripod_geometry()                     # DDR-003: legs bolted to fins welded on the jacket, pinned at bolted foot cleats
 leg_cut = TRI["len"] * mm                   # cut length of each 40 x 40 x 4 angle leg
 leg = (TRI["s"]["b2"] - P["FOOT_BOLT_Z"] / TRI["d"][1]) * mm   # free length, foot bolt to lower fin bolt
@@ -254,7 +259,7 @@ for lab, m in [("outer drum with hoops and ring", m_outer), ("outer lid with col
                ("spiral baffle insert", m_baffle), ("jacket shell blanket", m_jins), ("flue with cap", m_flue),
                ("tripod", m_tripod), ("tap", m_tap)]:
     pr(lab, m, "kg", "{:.1f}")
-m_total = m_outer + m_lid + m_ret + m_thr + m_shr + m_bricks + m_blanket + m_lidins + m_unit + 1.5   # logger, hardware
+m_total = m_outer + m_lid + m_ret + m_thr + m_shr + m_bricks + m_blanket + m_lidins + m_unit + 1.6   # logger, hardware, labels
 pr("kiln total without plinth and water", m_total, "kg", "{:.0f}")
 pr("water in jacket at WATER_H", v_water * 1000, "L", "{:.1f}")
 pr("jacket full", m_jkt + m_water, "kg", "{:.0f}")
@@ -274,6 +279,52 @@ cos_leg = TRI["d"][1]
 p_leg = (m_jkt + m_water + m_flue + m_tap + m_baffle + m_jins) * G / 3 / cos_leg
 pr("tripod leg: length, slenderness", f"{leg:.2f} m, {slender:.0f}")
 pr("tripod leg: load full / Euler load / factor", f"{p_leg:.0f} N / {p_cr / 1000:.1f} kN / {p_cr / p_leg:.0f}")
+m_board = 320 * P["BOARD"][0] * P["BOARD"][1] * P["BOARD"][2] * mm ** 3      # ceramic fibre board, about 320 kg/m3
+pr("conical rain cap; fibre board under the pan (plinth, not lifted)", f"{m_cap:.2f} kg; {m_board:.1f} kg")
+
+# ---------------------------------------------------------------- 6b. lifting aid (R11), decided 2026-10-02
+head("6b. Lifting aid for the heat-recovery unit (R11)")
+DYN = 1.5                                   # dynamic factor on the hook load (hand winch, jerks and swing)
+m_hook = m_unit + 0.6                       # unit plus lift bar and shackle
+F_hook = DYN * m_hook * G
+x_hang = P["POST_R"] / 1000                 # rope hangs over the kiln axis, 1.2 m from the post
+x_back = 0.100
+d_po, t_po = P["POST"][0] * mm, P["POST"][1] * mm
+I_po = math.pi / 64 * (d_po ** 4 - (d_po - 2 * t_po) ** 4)
+Z_po = I_po / (d_po / 2)
+h_post = (L["z_arm"] + 40) * mm             # post top above ground
+m_arm = 2 * (P["ARM_L"] + P["ARM_TAIL"]) * mm * 3.77 + 2 * 1.0 * 2.42 + 1.5 + 5.0   # angles, brace, pulleys and bolts, winch
+m_post = (h_post + P["GSLEEVE"][2] * mm) * 6.76                                   # 88.9 x 3.2 tube at 6.76 kg/m
+M_g = F_hook * x_hang + m_arm * G * 0.55
+sig_po = M_g / Z_po / 1e6
+defl = M_g * h_post ** 2 / (2 * 210e9 * I_po) * 1000
+pr("hook load: unit and bar / with dynamic factor 1.5", f"{m_hook:.1f} kg / {F_hook:.0f} N")
+pr("post: height above ground, mass; arm, brace, pulleys and winch", f"{h_post:.2f} m, {m_post:.0f} kg; {m_arm:.0f} kg")
+pr("moment at ground / post stress / factor on 235 MPa yield", f"{M_g:.0f} N m / {sig_po:.0f} MPa / {235 / sig_po:.1f}")
+pr("post top deflection at full load", defl, "mm", "{:.0f}")
+# arm: the hanging load and the back pulley's pull (rope from the winch) about the arm bolt at the post
+M_arm_bolt = F_hook * (x_hang - 0.0025) - F_hook * x_back
+dz_b = P["BRACE_DZ"] * mm
+xb = P["BRACE_X"] * mm
+F_brace = M_arm_bolt / xb * math.hypot(xb, dz_b) / dz_b
+L_br = math.hypot(xb, dz_b)
+P_br = math.pi ** 2 * 210e9 * A_ang * r_min ** 2 / L_br ** 2
+M_arm = F_hook * (x_hang - xb)
+sig_arm = M_arm / (2 * 3.05e-6) / 1e6       # two 50 x 50 x 5 angles, elastic modulus about 3.05 cm3 each
+pr("brace force (two 40 x 40 x 4 angles) / Euler load each / factor", f"{F_brace:.0f} N / {P_br / 1000:.1f} kN / {2 * P_br / F_brace:.0f}")
+pr("arm moment at the brace / stress / factor", f"{M_arm:.0f} N m / {sig_arm:.0f} MPa / {235 / sig_arm:.1f}")
+d_bar = P["LIFT_BAR"][0] * mm
+sig_bar = F_hook * (P["SLEEVE_D"] * mm) / 4 / (math.pi * d_bar ** 3 / 32) / 1e6
+pr("lift bar: 16 mm, span 168 mm, stress / factor", f"{sig_bar:.0f} MPa / {235 / sig_bar:.1f}")
+pr("winch 270 kg rating / rope 5 mm, about 15 kN breaking: factors", f"{270 * G / F_hook:.1f} / {15000 / F_hook:.0f}")
+fw, fd = P["FOOTING"][0] * mm, P["FOOTING"][1] * mm
+m_foot = 2300 * fw * fw * fd
+M_res = (m_foot + m_post + m_arm) * G * fw / 2
+pr("footing 600 x 600 x 750: mass / resisting moment by weight alone / factor", f"{m_foot:.0f} kg / {M_res:.0f} N m / {M_res / M_g:.1f}")
+lift_need = P["LIFT"]
+pr("hook travel: unit raised until its feet clear the throat top", lift_need, "mm", "{:.0f}")
+pr("heaviest hand lift with the aid: retort with char / one arm angle / post (two people)",
+   f"{(m_ret + m_char):.1f} / {(P['ARM_L'] + P['ARM_TAIL']) * mm * 3.77:.1f} / {m_post / 2:.1f} kg each")
 
 # ---------------------------------------------------------------- 7. energy balance and start-up wood (R8)
 head("7. Energy balance per batch and start-up wood (R8)")
@@ -510,6 +561,9 @@ BUDGET = next(float(l.split(":")[1].split("#")[0]) for l in (ROOT / "project.yam
 pr("budget_usd / margin", f"${BUDGET:.0f} / ${BUDGET - total:.0f}")
 added = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows if r["item"].split()[0] in ("15", "16", "17"))
 pr("of which DDR-002 lines 15 to 17", f"${added:.0f}")
+aid = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows if r["item"].split()[0] == "18")
+pr("of which the lifting aid (line 18)", f"${aid:.0f}")
+pr("value-engineering result", f"target ${BUDGET:.0f}; estimate ${total:.0f} (${abs(total - BUDGET):.0f} {'over' if total > BUDGET else 'under'})")
 galv = [r["item"] for r in rows if "galvanized" in (r["spec"] + r["notes"]).lower() and "not galvanized" not in (r["spec"] + r["notes"]).lower()]
 pr("BOM lines calling for galvanized parts", len(galv), "", "{:d}")
 
@@ -526,8 +580,8 @@ rq = [
     ("R7", "Water circuit open to air, no sealing valve, tap at base, jacket on tripod", "open vent and loose lid; tripod-carried", "by design", "met"),
     ("R8", "5 kg or less of dry wood per batch", f"{C['m_wood']:.1f} kg ({F['m_wood']:.1f} to {U['m_wood']:.1f}); light-up alone {C['m_wood_min']:.1f} kg", "<= 5 kg", "not met" if C["m_wood"] > 5 else ("at risk" if U["m_wood"] > 5 else "met")),
     ("R9", "2 x type K, ±5 °C to 700 °C and indicative to 1,000 °C (restated, DDR-002), 10 s, 24 h on a power bank", f"±{math.hypot(0.004 * 700, 2):.1f} °C to 700 °C with class 1 probes; {e_log:.0f} of {10 * 3.7 * 0.85:.0f} Wh", "±5 °C to 700 °C", "met"),
-    ("R10", f"Parts ${BUDGET:.0f} or less (top-up, DDR-002 item 17); safety kit listed separately (decided)", f"${total:.0f} (lines 15 to 17 add ${added:.0f})", f"<= ${BUDGET:.0f}", "met" if total <= BUDGET else "not met"),
-    ("R11", "Hand tools, one welded part, no lift above 25 kg per person", f"unit {m_unit:.1f} kg for two ({m_unit / 2:.1f} kg each); retort with char {m_ret_full:.1f} kg", "<= 25 kg", "met" if m_unit / 2 <= 25 and m_ret_full <= 25 else "not met"),
+    ("R10", f"Parts ${BUDGET:.0f} or less (value-engineering target); safety kit listed separately (decided)", f"${total:.0f}, every part priced (lifting aid ${aid:.0f}); ${total - BUDGET:.0f} over the target", f"<= ${BUDGET:.0f}", "met" if total <= BUDGET else "not met"),
+    ("R11", "Hand tools, one welded part, no lift above 25 kg per person", f"unit {m_unit:.1f} kg raised by the winch of the bolted lifting aid (post moment factor {235 / sig_po:.1f}); heaviest hand lift: retort with char {m_ret_full:.1f} kg", "<= 25 kg", "met" if m_ret_full <= 25 and m_post / 2 <= 25 and 235 / sig_po >= 2 else "not met"),
     ("R12", "Outlet 2.5 m or more; 5 m clearance; no galvanized hot parts", f"outlet {L['z_out'] / 1000:.2f} m; {len(galv)} galvanized lines", ">= 2.5 m", "met" if L["z_out"] >= 2500 and not galv else "not met"),
 ]
 for r in rq:

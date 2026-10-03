@@ -368,3 +368,64 @@ Authority: Amish, 2026-10-02: "i approve your recommendations for all 555 open d
 - Value engineering is not like for like: the USD 319 estimate leaves the parts added for construction unpriced (about USD 5 to 10), and items 2, 4 and 7 as recommended add more. Price them before reading the result against the USD 320 target.
 - R11 (no lift above 25 kg per person) ignores lift height and the reduced capacity of team lifts; the 47 kg unit lifted to about 1.5 m meets the letter of R11 but not common manual-handling guidance.
 - The register still describes the rain cap as resting on 'posts'; the design for construction replaced them with three riveted flat-bar legs.
+
+## Session 2026-10-02: Approved follow-ups carried out
+
+Authority: Amish, 2026-10-02: "497 follow-up actions that need CAD, drawing, picture, BOM or calculation work ... APPROVED CHANGES, COMPLETE THESE", and "Photoreal renders are out of date in most repos ... COMPLETE THESE" (render scenes prepared here; photoreal images, `media/card.png` and `media/social-preview.png` are made on Amish's Mac). `trl` and `trl_target` stay at 3. No commit or push.
+
+### Follow-ups
+
+1. Decision 2 (model): done. A 600 x 600 x 25 mm ceramic fibre board now lies between the blocks and the pan, with a groove in its underside for the block thermocouple. The kiln rises 25 mm: drum floor 218 mm, air ports clear of the board by 13 mm, flue outlet 2.72 m (was 2.70 m), kiln 2.84 m to the top of the cap; all contacts re-checked. CCB-DWG-001 (Rev P6) and the plinth making sketch CCB-DWG-101 regenerated.
+2. Decision 2 (pictures): done. Build plan section 3.1, Figures 2 and 3 (joint 1), step 1 and the first checks (block temperature from the block thermocouple, logger check on three channels).
+3. Decision 2 (BOM): done. Line 12 $12 to $40 (board $28); line 13 $32 to $42 (bare-wire type K and a third amplifier, $10).
+4. Decision 3 (model): done. The bottom 20 mm of the jacket sleeve is a cone flaring to 190 mm; CCB-DWG-108, joint 5 and build plan section 3.11 (and step 15) updated. Two 18 mm lift-bar holes added to the top socket for item 5.
+5. Decision 4 (model): done. Lifting aid designed and modelled (BOM line 18): a post of 88.9 x 3.2 mm tube, 4.0 m above the ground, turning in a ground sleeve in a 600 x 600 x 750 mm footing 1.2 m behind the kiln; a bolted arm of two 50 x 50 x 5 mm angles with a 40 x 40 x 4 mm brace; two pulleys, a 270 kg hand brake winch, 5 mm steel wire rope and a hook; a 16 mm lift bar through the sleeve socket. It raises the drained unit 1.55 m (feet above the throat top), so the unit clears the kiln on any path, and swings it a quarter turn to set it down. New making sketches CCB-DWG-115 and CCB-DWG-116; shown on CCB-DWG-001.
+6. Decision 4 (pictures): done. Build plan new section 3.22 (Figures 28 to 31, joints 12 and 13), notes in sections 3.15 and 3.16, step 15 picture and text, step 18, safety stop S4, first checks, tools and workspace.
+7. Decision 4 (BOM): done. Line 18, $160, priced item by item in its notes.
+8. Decision 4 (calcs): done. CCB-CAL-001 section 4, Table 4a: post stress factor 4.3 on yield, top deflection about 46 mm, arm factor 4.1, brace buckling factor 51, lift bar factor 3.2, winch and rope factors 3.8 and 21, footing overturning factor 2.1 by weight alone. R11 re-judged: met, nobody carries the unit; heaviest hand lift the retort with char, 15.5 kg (setting up: post about 16 kg each for two). R10 re-judged: not met.
+9. Decision 6 (model): done. Conical cap (260 mm, 30 degree slope, 1.5 mm sheet) on the three flat-bar legs, at least 60 mm from the flue lip; CCB-DWG-001, CCB-DWG-112, CCB-DWG-113, joint 9, build plan section 3.18 and BOM line 7 updated.
+10. Decision 7 (BOM): done. Line 14 $15 to $26 (two 100 mm aluminium W017 labels, $8, and $3 of fasteners added for construction); labels modelled at the front right of both blankets and shown in build plan section 3.21 (Figure 27, joint 14).
+11. Decision 1 (calcs): done. Every BOM line priced with its basis; CCB-CAL-001 section 11 restated: Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target). Parts added for construction $17; 2026-10-02 additions $186 (lifting aid $160). `budget_usd` unchanged.
+
+### Requirement status changes
+
+- R10: met to **not met** ($546 against $320).
+- R11: stays met, re-judged on the lifting aid (was 23.7 kg each for two people).
+- No other change: met 5 (R1, R7, R9, R11, R12), at risk 5 (R2, R3, R5, R6, R8), not verifiable 1 (R4), not met 1 (R10). Outlet 2.72 m; tripod leg factor 56; heat to water and draft unchanged (11.5 MJ; margin 2.4).
+
+### Cost and mass
+
+Estimated cost $546 (18 lines). Kiln 97 kg without plinth and water; heat-recovery unit 47.2 kg (was 47.4 kg, lighter cap); fibre board 2.9 kg; lifting aid post 32 kg and arm, brace, pulleys and winch 23 kg, plus a 621 kg concrete footing.
+
+### Documents changed (new versions)
+
+- `cad/src/model.py`: fibre board, block thermocouple, sleeve flare and lift-bar holes, conical cap, labels, lifting aid; 100 of 100 constructability checks pass (was 68). STEP and STL regenerated, with a new `charcube-lifting-aid` unit.
+- `bom/bom.csv` (18 lines, $546) and `bom/bom-notes.md`.
+- `docs/04-calcs/sizing.py` and `results.csv`; `docs/04-calcs/01-sizing.md` CCB-CAL-001 v0.6.
+- `docs/03-requirements.md` CCB-REQ-001 v0.9; `docs/02-concept.md` CCB-PRC-001 v0.9; `docs/06-design-decisions.md` CCB-DEC-001 v0.4 (Value engineering section); `docs/05-build-plan.md` CCB-BLD-001 v0.2; `README.md`.
+- Drawings and pictures: CCB-DWG-001 Rev P6 (now 1:50, footing left off); concept media CCB-DWG-010 Rev P5 (`media/hero.png`, `concept-blueprint`, `cutaway.png`, `exploded.png`, `flow.png`, `model.glb`); build plan overview, all 19 step pictures, joints 1, 5, 9, 12 (new), 13 (new), 14 (new); making sketches CCB-DWG-101, 108, 112, 113, 115 (new), 116 (new).
+- `cad/src/product_model.py`: brought to the constructable design (fins, bolted legs and pads, clips, conical cap on legs, pinwheel plinth with board, flared sleeve, logger and probes from the model) with every main dimension from `model.py`; the lifting aid is a new `site` group with a new `site` view (hero, exploded and detail kept). Render scenes exported to `/home/claude/renders/charcube` (hero, exploded, detail, site; `.npz` and `.json` each, and `charcube__jobs.json`).
+- `drawing.py --check-text`: no hits.
+
+### Not done
+
+- Asking users through the partner how the lifting aid should work (decision 4): not done: outreach by Amish.
+- Photoreal renders, `media/card.png` and `media/social-preview.png`: not done here by instruction; made on Amish's Mac from the exported scenes.
+
+### Cross-repo actions
+
+None.
+
+### Proposed, awaiting Amish
+
+- Whether the lifting aid ($160) counts against the kiln parts target or is site equipment listed beside the safety kit (it can serve several kilns). Recommendation: list it as site equipment; the kiln estimate would then be $386, still $66 over.
+- Cheaper alternative to try: a winch hung from an existing strong beam or tree where a site has one.
+
+### Safety
+
+- The unit hangs 1.55 m up while it is swung: S4 now requires the winch only, the flue out first, and nobody under the load. The post's top moves about 46 mm under full load; the first check holds the unit 100 mm up for 5 minutes before a full lift.
+- The arm is parked away from the flue during burns.
+
+## 2026-10-02: photoreal renders redone on the constructable design
+
+Rendered with Blender Cycles on Amish's Mac from the updated appearance model; captioned with `.kit/photo_caption.py`; `media/card.png` and `media/social-preview.png` regenerated with `.kit/cards.py`. Views: hero, exploded, site, detail. image_qc passes. Appearance deviations are those logged above as proposed, awaiting Amish.

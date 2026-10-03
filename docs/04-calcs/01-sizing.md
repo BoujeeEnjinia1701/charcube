@@ -3,9 +3,9 @@ doc_id: CCB-CAL-001
 title: CharCube sizing and first-principles checks
 project: CharCube
 doc_type: Calculation note
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,11 +29,15 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.6"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: Approved 2026-10-02 decisions carried in (fibre board, sleeve flare, conical cap, labels, lifting aid); lifting aid loads added; every part priced; R10 now not met
 ---
 
 # CharCube sizing and first-principles checks
 
-On paper the nested-drum retort works as a kiln, and with the changes Amish accepted on 2026-09-25 (CCB-DDR-002) it now also works as a water heater. Six of the twelve requirements are met, five are at risk and one cannot be verified at TRL 3. R10 is within the $320 value-engineering target: the spiral baffle insert, jacket blanket and lid blanket take the estimated cost of the kiln parts to $319, $1 under the target. The baffle and jacket blanket raise the heat into the water from 6.4 MJ to about 11.5 MJ (R6 at risk), the lid blanket cuts the wood from 5.8 kg to about 3.7 kg (R8 at risk), and R5 was relaxed to 5 h (at risk). The 25 mm secondary air ring of TRL 2 would have starved the burner throat; the model uses an air shroud with 30 air holes.
+On paper the nested-drum retort works as a kiln, and with the changes Amish accepted on 2026-09-25 (CCB-DDR-002) it also works as a water heater. Five of the twelve requirements are met, five are at risk, one cannot be verified at TRL 3 and one is not met. R10 is not met: with every part priced, including the parts added for construction and the additions Amish decided on 2026-10-02 (fibre board, block thermocouple, hot-surface labels and the lifting aid), the estimated cost is $546 against the $320 value-engineering target. The baffle and jacket blanket raise the heat into the water from 6.4 MJ to about 11.5 MJ (R6 at risk), the lid blanket cuts the wood from 5.8 kg to about 3.7 kg (R8 at risk), and R5 was relaxed to 5 h (at risk). The 25 mm secondary air ring of TRL 2 would have starved the burner throat; the model uses an air shroud with 30 air holes. The lifting aid (section 4) means nobody lifts the 47 kg heat-recovery unit by hand, so R11 is met with a wide margin.
 
 Every number in this note is printed by `docs/04-calcs/sizing.py` (run from the repo root: `python docs/04-calcs/sizing.py`), which also writes `docs/04-calcs/results.csv`. The script reads the geometry from `PARAMS` in `cad/src/model.py` and the prices from `bom/bom.csv`, so the model, the drawing CCB-DWG-001 and this note agree. All values are first-principles estimates; nothing here is measured.
 
@@ -109,15 +113,31 @@ Without the side blanket the side would run at about 311 °C and lose 11.3 kW, s
 | Firebricks (3); side blanket; lid blanket | 2.6 kg; 4.3 kg; 1.0 kg |
 | Water jacket, empty, with fins and loose lid | 23.3 kg |
 | Spiral baffle insert; jacket shell blanket | 1.2 kg; 2.2 kg |
-| Flue with clips and cap; tripod legs, cleats and pads; tap | 6.4 kg; 13.7 kg; 0.6 kg |
+| Flue with clips and conical cap; tripod legs, cleats and pads; tap | 6.2 kg; 13.9 kg; 0.6 kg |
 | **Kiln without plinth and water** | **97 kg** |
-| Heat-recovery lift unit (tripod, drained jacket with baffle and blanket, flue, tap) | 47.4 kg: 23.7 kg each for two people |
+| Heat-recovery lift unit (tripod, drained jacket with baffle and blanket, flue, tap) | 47.2 kg, raised by the lifting aid's winch |
+| Fibre board under the pan (plinth, stays in place) | 2.9 kg |
 | Retort with char | 15.5 kg: one person |
 | Jacket full (61.4 L at 540 mm depth) | 85 kg, never moved full |
 
-R11 is **met**: no lift exceeds 25 kg per person, but only if the jacket is drained and two people lift the unit, and the margin is now 1.3 kg per person. The only welded part is the jacket, with its three leg fins; the collar, shroud, baffle and tripod are riveted, bolted or folded (CCB-DDR-003). Each tripod leg (40 x 40 x 4 mm angle bolted to a jacket fin and pinned at a foot cleat, 1.43 m between the foot pin and the lower fin bolt, slenderness 184) carries about 327 N with a full jacket against an Euler load of 18.9 kN, a factor of about 58.
+R11 is **met**. Since Amish's decision of 2026-10-02 the drained heat-recovery unit is raised and moved by the lifting aid, so nobody carries it; the heaviest hand lift in use is the retort with char, 15.5 kg, and the heaviest when setting up is the lifting aid's post, about 16 kg each for two people. The only welded part of the kiln is the jacket, with its three leg fins; the collar, shroud, baffle, tripod and lifting aid are riveted, bolted or folded (CCB-DDR-003). Each tripod leg (40 x 40 x 4 mm angle bolted to a jacket fin and pinned at a foot cleat, 1.46 m between the foot pin and the lower fin bolt, slenderness 187) carries about 325 N with a full jacket against an Euler load of 18.3 kN, a factor of about 56. The 25 mm fibre board under the pan raises the whole kiln by 25 mm; the air ports, draft and every clearance were re-checked in the model.
 
-R12 is **met**: the flue outlet is 2.70 m above the ground and no BOM line calls for galvanized parts. The 5 m clearance is an operating rule (CCB-PRC-001, Safety).
+**Lifting aid (decided by Amish, 2026-10-02).** A post of 88.9 x 3.2 mm tube, 4.0 m above the ground, turns in a ground sleeve set in a concrete footing 1.2 m behind the kiln. Two 50 x 50 x 5 mm angles bolted either side of its top make the arm, braced by two 40 x 40 x 4 mm angles; a hand brake winch on the post winds a 5 mm steel wire rope over two pulleys to a hook 1.2 m out, over the kiln's axis. With the flue lifted out, a 16 mm bar goes through two holes in the jacket sleeve's top socket and the hook takes it by a shackle. The winch raises the unit 1.55 m, until its feet are above the top of the burner throat, so it clears the kiln whichever way it turns on the hook; the arm then swings it 90 degrees and sets it down clear of the kiln. Everything is bolted.
+
+*Table 4a. Lifting aid loads (hook load with a dynamic factor of 1.5).*
+
+| Check | Result |
+| --- | --- |
+| Hook load: drained unit, lift bar and shackle | 47.8 kg; 704 N with the factor |
+| Bending at the ground in the post | 967 N m; 54 MPa, a factor of 4.3 on yield; top deflection about 46 mm |
+| Arm (two 50 x 50 x 5 angles) at the brace | 352 N m; 58 MPa, a factor of 4.1 |
+| Brace (two 40 x 40 x 4 angles) | 1,561 N against an Euler load of 39.6 kN each |
+| Lift bar, 16 mm across the 168 mm sleeve | 74 MPa, a factor of 3.2 |
+| Winch rated 270 kg; 5 mm steel wire rope (about 15 kN breaking) | Factors of 3.8 and 21 |
+| Footing 600 x 600 x 750 mm (621 kg) against overturning, by its weight alone | 1,988 N m against 967 N m, a factor of 2.1 |
+| Heaviest hand lifts | Retort with char 15.5 kg; post 16 kg each for two; one arm angle 5.7 kg |
+
+R12 is **met**: the flue outlet is 2.72 m above the ground and no BOM line calls for galvanized parts. The 5 m clearance is an operating rule (CCB-PRC-001, Safety); the lifting aid's arm is swung away from the flue while the kiln burns.
 
 ## 5. Energy balance and start-up wood (R8)
 
@@ -199,26 +219,28 @@ A type K class 2 probe is good to ±5.2 °C at 700 °C; with the MAX31855 amplif
 
 ## 11. Cost (R10)
 
-Value-engineering target: $320 (a hypothetical control target, not a limit). The 17 BOM lines give an estimated cost of **$319**, $1 under the target. Lines 15 to 17 (baffle insert $7, jacket blanket $8, lid blanket $6; $21 in all) were added by Amish's decisions on items 12 and 13 (CCB-DDR-002). The safety kit (about $40) is required and listed separately in `bom/bom-notes.md`, outside the kiln parts target (CCB-DDR-001 item 2). The script reads the target from `project.yaml`. R10 is **within the value-engineering target**, by only $1.
+Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target).
+
+The 18 BOM lines are now all priced, each with its basis in the line's notes (2026-10-02). The parts added for construction (guide strips, U-bolts, clips and cap legs, fins, foot cleats and pads, extra fasteners, hanger rod) add $17 to the earlier $319. The additions Amish decided on 2026-10-02 add $186: the fibre board $28, the block thermocouple and its amplifier $10, the two hot-surface labels $8 and the lifting aid $160 (line 18, about $53 of tube, $30 for the winch and $25 for the footing among it). Lines 15 to 17 (baffle insert $8, jacket blanket $8, lid blanket $6) came from items 12 and 13 of CCB-DDR-002. The safety kit (about $40) is required and listed separately in `bom/bom-notes.md`, outside the kiln parts target (CCB-DDR-001 item 2). The script reads the target from `project.yaml`, which is unchanged. R10 is **not met**. Without the lifting aid the estimate would be $386, still $66 over.
 
 ## 12. Results against requirements
 
-*Table 9. Every requirement in CCB-REQ-001 v0.4. Also written to `docs/04-calcs/results.csv`.*
+*Table 9. Every requirement in CCB-REQ-001 v0.9. Also written to `docs/04-calcs/results.csv`.*
 
 | ID | Requirement (short) | Value (central, range) | Target | Status |
 | --- | --- | --- | --- | --- |
+| R10 | Kiln parts cost | $546, every part priced (lifting aid $160) | $320 or less (target) | Not met ($226 over) |
 | R2 | Char yield | 28 % (20 to 35 %); 2.96 kg | 25 % or more | At risk |
 | R3 | Core 450 °C for 30 min | Core at 450 °C 4.0 h after lighting (2.9 to 6.5 h) if the annulus is held at 650 °C | 450 °C, 30 min | At risk |
 | R5 | Light to end of flaming; unload | Burn 4.5 h (3.4 to 7.0 h); unload after about 8 h | 5 h or less (relaxed); 16 h or less | At risk |
 | R6 | Heat into water per batch | 11.5 MJ (9.0 to 19.1 MJ) with baffle and jacket blanket | 10 MJ or more | At risk |
 | R8 | Start-up wood per batch | 3.7 kg (1.7 to 9.8 kg); light-up alone 1.7 kg | 5 kg or less | At risk |
 | R4 | Burn the gas; smoke; methane | Route closed by design; draft margin 2.4; air holes sized | Methane below 24 g/kg | Not verifiable at TRL 3 |
-| R10 | Kiln parts cost | $319 (lines 15 to 17 add $21) | $320 or less (target) | Within the value-engineering target |
 | R1 | Batch size, decided feedstock | 12.0 kg packed (loose straw 4.0 kg, excluded) | 10 kg or more | Met |
 | R7 | Open water circuit | Open vent, loose lid, tap at base, tripod-carried | By design | Met |
 | R9 | Logger accuracy and endurance | ±3.4 °C to 700 °C with class 1 probes; 6 of 31 Wh | ±5 °C to 700 °C (restated) | Met |
-| R11 | Crew and lifts | 23.7 kg each for two; retort with char 15.5 kg | 25 kg per person or less | Met |
-| R12 | Outlet height; no galvanized hot parts | 2.70 m; none | 2.5 m or more | Met |
+| R11 | Crew and lifts | Unit raised by the lifting aid's winch; heaviest hand lift the retort with char, 15.5 kg | 25 kg per person or less | Met |
+| R12 | Outlet height; no galvanized hot parts | 2.72 m; none | 2.5 m or more | Met |
 
 ## 13. Limits of this note
 
@@ -226,6 +248,7 @@ Value-engineering target: $320 (a hypothetical control target, not a limit). The
 - The baffle insert's heat transfer gain (x3) and pressure loss (4 velocity heads) are assumptions; fouling will reduce the gain over a season.
 - Surface coefficients assume still air. Wind raises the shell loss and the wood demand.
 - The methane figure is a literature average, not a prediction for this design.
+- The lifting aid is checked by hand formulas with a dynamic factor of 1.5. The footing check ignores the soil's support, and the winch and rope ratings are catalogue figures to confirm at purchase.
 - Nothing here has been measured. Checking these numbers against logged batches is TRL 4 work, which is on hold by Amish's instruction.
 
 > **Safety:** These are paper estimates for a fire that produces flammable, toxic gas and hot water. The surface temperatures in Table 3 (120 to 257 °C on the shell, higher on the flue) burn skin on contact. With the baffle and jacket blanket a long batch brings the water within about 1.5 MJ of boiling, so the water jacket must stay open-vented and at least three-quarters full. See CCB-PRC-001, Safety.

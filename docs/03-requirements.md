@@ -3,7 +3,7 @@ doc_id: CCB-REQ-001
 title: CharCube requirements
 project: CharCube
 doc_type: Requirements
-version: "0.8"
+version: "0.9"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -41,6 +41,10 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: 'Decision of 2026-10-02: lifting aid for the heat-recovery unit noted under R11'
+- version: "0.9"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: 'Approved 2026-10-02 follow-ups carried out: every part priced, R10 now not met ($546 against $320); R11 re-judged with the lifting aid (met); outlet 2.72 m; block thermocouple noted under R9'
 ---
 
 # CharCube requirements
@@ -57,20 +61,20 @@ These are first-pass requirements for the concept. Targets are proposals for rev
 | R6 | Recover heat as hot water | 10 MJ or more into water per batch (60 L raised by 40 K) | Heat transfer; later measured water temperature | At risk: 11.5 MJ (9.0 to 19.1 MJ) with the spiral baffle insert and jacket blanket, about 45 K rise |
 | R7 | Keep the water circuit safe | Jacket open to the air at all times; no valve or cap that can seal it; water drawn from a tap at the base; jacket kept away from the lid by a separate support | Design review and safety checklist | Met by design |
 | R8 | Use little start-up fuel | 5 kg or less of dry wood per batch | Energy balance; later weighed batches | At risk: 3.7 kg with the lid blanket (1.7 to 9.8 kg); light-up alone 1.7 kg |
-| R9 | Record each batch | Two type K channels (retort core, throat exit), class 1 probes, **±5 °C or better from 0 to 700 °C and indicative from 700 to 1,000 °C** (restated, CCB-DDR-002 item 15), logged every 10 s to removable storage, 24 h on a USB power bank | Component data; design review | Met: ±3.4 °C to 700 °C with class 1 probes; energy 6 of 31 Wh |
-| R10 | Keep the estimated cost within the value-engineering target | Kiln parts **$320** or less (a hypothetical control target, not a limit). **The safety kit (extinguisher or water and shovel, gloves, eye protection, dust mask, about $40) is required and listed separately, outside the kiln parts target**; this requirement and `bom/bom-notes.md` are where the safety kit is stated (CCB-DDR-002 item 16) | Priced BOM | Within the value-engineering target: $319, $1 under; the decided baffle insert, jacket blanket and lid blanket add $21 |
-| R11 | Be built and handled by a small crew | Built with hand tools, drill and angle grinder, with at most one welded part (the water jacket); no single lift above 25 kg per person | Masses from the model; design review | Met: lift unit 47.4 kg for two people (23.7 kg each); retort with char 15.5 kg |
-| R12 | Operate safely outdoors | Flue outlet 2.5 m or more above the ground; 5 m clear radius from structures and dry vegetation; no galvanized parts in the hot path | Model and BOM; safety checklist | Met: outlet 2.70 m; no galvanized lines |
+| R9 | Record each batch | Two type K channels (retort core, throat exit), class 1 probes, **±5 °C or better from 0 to 700 °C and indicative from 700 to 1,000 °C** (restated, CCB-DDR-002 item 15), logged every 10 s to removable storage, 24 h on a USB power bank | Component data; design review | Met: ±3.4 °C to 700 °C with class 1 probes; energy 6 of 31 Wh. A third, bare-wire type K channel on a plinth block (decided 2026-10-02) is a first-burn check, not part of R9 |
+| R10 | Keep the estimated cost within the value-engineering target | Kiln parts **$320** or less (a hypothetical control target, not a limit). **The safety kit (extinguisher or water and shovel, gloves, eye protection, dust mask, about $40) is required and listed separately, outside the kiln parts target**; this requirement and `bom/bom-notes.md` are where the safety kit is stated (CCB-DDR-002 item 16) | Priced BOM | Not met: Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target) |
+| R11 | Be built and handled by a small crew | Built with hand tools, drill and angle grinder, with at most one welded part (the water jacket); no single lift above 25 kg per person | Masses from the model; design review | Met: the 47.2 kg unit is raised by the bolted lifting aid's winch; heaviest hand lift the retort with char, 15.5 kg |
+| R12 | Operate safely outdoors | Flue outlet 2.5 m or more above the ground; 5 m clear radius from structures and dry vegetation; no galvanized parts in the hot path | Model and BOM; safety checklist | Met: outlet 2.72 m; no galvanized lines |
 
 ## Requirements at risk or outside their targets
 
-- **R10 within the value-engineering target by $1.** Value-engineering target: $320 (a hypothetical control target, not a limit). Estimated cost of the kiln parts: $319 ($1 under the target) after adding the decided spiral baffle insert and jacket blanket ($15, CCB-DDR-002 item 12) and lid blanket ($6, item 13). A price rise would take the estimate over the target; the real cost is what gets accrued, and the target is there to keep the design under a value-engineering lens.
+- **R10 not met.** Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target). The parts added for construction add $17 and the additions decided on 2026-10-02 add $186, of which the lifting aid is $160 (CCB-CAL-001 section 11). Without the lifting aid the estimate would be $386. The target is a hypothetical control target, not a limit; it keeps the design under a value-engineering lens.
 - **R5 at risk.** The central burn (about 4.5 h) meets the relaxed 5 h target, but a poorly conducting charge could take about 7 h.
 - **R6 at risk.** The baffle insert and jacket blanket lift the central estimate to 11.5 MJ, but a short burn gives about 9.0 MJ, and the convection gain of the insert is an assumption until measured.
 - **R8 at risk.** The lid blanket brings the central wood demand to 3.7 kg, but a long burn could need about 9.8 kg.
 - **R2 and R3 at risk.** Yield and core temperature depend on feedstock and operation.
 - **R4** cannot be shown without emission measurement.
-- **R11** is met only with the jacket drained and two people lifting the tripod unit (23.7 kg each, close to the 25 kg limit). R11 does not count the 1.5 m lift height, so a lifting aid (a swinging arm on a post or a hand winch) is to be designed for the first build (decided by Amish, 2026-10-02).
+- **R11** is met with the lifting aid decided by Amish on 2026-10-02: a bolted swinging arm on a post with a hand winch raises the drained 47 kg unit 1.55 m and swings it clear, so nobody carries it. The jacket must still be drained first.
 
 ## Assumptions
 

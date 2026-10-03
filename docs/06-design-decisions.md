@@ -3,7 +3,7 @@ doc_id: CCB-DEC-001
 title: CharCube design decisions register
 project: CharCube
 doc_type: Design decisions register
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -21,6 +21,10 @@ revisions:
     date: '2026-10-02'
     author: Amish Chadha
     change: 'Amish approved the recommendations for all seven open decisions (2026-10-02); CCB-DDR-003 accepted; moved to decisions made; value-engineering note on the decided additions'
+  - version: "0.4"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: 'Approved follow-ups carried out: every part priced; value-engineering result restated'
 ---
 
 # CharCube design decisions register
@@ -45,11 +49,12 @@ None. All open decisions were decided on 2026-10-02.
 
 ## Value engineering
 
-Value-engineering target: USD 320 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 319 as priced (USD 1 under the target); the parts added for construction (U-bolts, fins, foot cleats and pads, guide strips, clips, rod, bolts) are not yet priced and probably add USD 5 to 10, which would put the estimate USD 4 to 9 over the target.
+Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target).
 
-- **Main cost drivers:** the ceramic fibre blankets, the welded water jacket with its spiral baffle insert, the two drums, and the concrete plinth blocks and firebricks (see `bom/bom.csv`).
-- **Decided additions not yet priced (2026-10-02):** the 25 mm ceramic fibre board under the drum floor (decision on CCB-DDR-003, A2), the lifting aid for the heat-recovery unit and the hot-surface warning labels. With the unpriced parts added for construction they will take the estimate further over the target; price them before reading the result against it.
-- **Savings worth trying:** a cheaper logger box; a clay and ash render in place of the side blanket (about USD 25, from the TRL 2 review); and re-pricing the added small parts at purchase.
+Every BOM line is priced, with its basis in the line's notes (2026-10-02). The parts added for construction add USD 17 to the earlier USD 319; the additions decided on 2026-10-02 add USD 186: the fibre board USD 28, the block thermocouple USD 10, the hot-surface labels USD 8 and the lifting aid USD 160 (CCB-CAL-001 section 11).
+
+- **Main cost drivers:** the lifting aid (USD 160), the welded water jacket with its spiral baffle insert, the logger, the plinth with its fibre board, the ceramic fibre blankets and the two drums (see `bom/bom.csv`).
+- **Savings worth trying:** sharing one lifting aid among several kilns on a site, or hanging the winch from an existing strong beam or tree where there is one (most of USD 160); leaving the fibre board off later builds if a measured burn without it keeps the blocks under about 150 °C (USD 28, as decided); a cheaper logger box; a clay and ash render in place of the side blanket (about USD 25, from the TRL 2 review); and re-pricing the small parts at purchase.
 
 ## Decisions made
 

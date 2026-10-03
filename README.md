@@ -2,7 +2,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![DOI](https://zenodo.org/badge/1386351149.svg)](https://zenodo.org/badge/latestdoi/1386351149) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/charcube/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/charcube/actions/workflows/reuse.yml) [![Archived in Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/BoujeeEnjinia1701/charcube/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/BoujeeEnjinia1701/charcube)
 
-**Area:** CleanTech · **TRL:** 3 of 9 (proof of concept on paper; TRL 4 on hold) · **Value-engineering target:** $320 USD (hypothetical control target; estimated cost of the kiln parts $319, $1 under; safety kit listed separately) · **Difficulty:** 2 of 5
+**Area:** CleanTech · **TRL:** 3 of 9 (proof of concept on paper; TRL 4 on hold) · **Value-engineering target:** $320 USD (hypothetical control target; estimated cost of the constructable design $546, $226 over, of which the lifting aid is $160; safety kit listed separately) · **Difficulty:** 2 of 5
 
 Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
 
@@ -58,7 +58,7 @@ Crop residue gets burned in the open, releasing carbon and smoke. India alone bu
 
 Batch retort kiln that turns biomass into biochar, with a secondary burner that cleans up the syngas and a jacket that recovers heat for hot water.
 
-A 114 L steel drum packed with 12.0 kg of bundled residue sits inside a 200 L drum. Gas from the heated residue burns in the gap between the drums and again in a burner throat fed by an air shroud, then passes a spiral baffle inside an open-vented, blanketed jacket that holds about 61 L of water. The TRL 3 calculations (CCB-CAL-001 v0.3, central estimates) give about 3.0 kg of biochar per batch in a burn of about 4.5 h with about 3.7 kg of wood, and about 11.5 MJ of hot water, for $319 in kiln parts. Estimated cost is within the $320 value-engineering target (a hypothetical control target, not a limit) by $1, before the parts added for construction are priced, and burn time, hot water and start-up wood are at risk. Nothing is measured yet.
+A 114 L steel drum packed with 12.0 kg of bundled residue sits inside a 200 L drum. Gas from the heated residue burns in the gap between the drums and again in a burner throat fed by an air shroud, then passes a spiral baffle inside an open-vented, blanketed jacket that holds about 61 L of water. The TRL 3 calculations (CCB-CAL-001 v0.6, central estimates) give about 3.0 kg of biochar per batch in a burn of about 4.5 h with about 3.7 kg of wood, and about 11.5 MJ of hot water. A bolted swinging arm on a post with a hand winch lifts the drained 47 kg heat-recovery unit off the kiln for loading. Value-engineering target: USD 320. Estimated cost of the constructable design: USD 546 (USD 226 over the target), with every part priced; burn time, hot water and start-up wood are at risk. Nothing is measured yet.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
@@ -66,16 +66,17 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
 - Nested steel drum pair: 200 L outer drum and 114 L inner retort
 - Burner throat with secondary air shroud (30 air holes)
-- Flue pipe with rain cap
+- Flue pipe with conical rain cap
 - Open-vented water jacket around the flue (replaces the copper coil in the first sketch; decided by Amish, 2026-09-25), with a spiral baffle insert and a mineral wool blanket (decided by Amish, 2026-09-25)
 - Ceramic fibre blankets on the outer drum, lid and top band
-- Two-channel thermocouple logger
+- Thermocouple logger: retort core, throat exit and a plinth block
+- Lifting aid: a swinging arm on a post with a hand winch, for the heat-recovery unit
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv). The parametric model is [cad/src/model.py](cad/src/model.py), with STEP and STL exports in `cad/step/` and `cad/stl/`.
 
 ## Building the prototype
 
-The [prototype build plan](docs/05-build-plan.md) (CCB-BLD-001) shows how to make and fit every one of the 21 components, in build order, with a making sketch for each made part, close-ups of the joints and a picture for every assembly step. Most of the work is cutting, drilling, rolling and riveting two used drums, plain pipe and sheet; the water jacket is the one welded part. Writing the plan made the design buildable: the jacket now stands on angle legs bolted to fins on its shell, the throat stands in a riveted collar, and the flue rests on the jacket on three clips (CCB-DDR-003, open for review). It is a plan, not yet built; building and testing to it is TRL 4 work, which is on hold.
+The [prototype build plan](docs/05-build-plan.md) (CCB-BLD-001) shows how to make and fit every one of the 26 components, in build order, with a making sketch for each made part, close-ups of the joints and a picture for every assembly step. Most of the work is cutting, drilling, rolling and riveting two used drums, plain pipe and sheet; the water jacket is the one welded part. Writing the plan made the design buildable: the jacket now stands on angle legs bolted to fins on its shell, the throat stands in a riveted collar, and the flue rests on the jacket on three clips (CCB-DDR-003, open for review). It is a plan, not yet built; building and testing to it is TRL 4 work, which is on hold.
 
 ![CharCube prototype: every component, pulled apart and numbered in build order](docs/05-build-plan/overview.png)
 
